@@ -24,10 +24,6 @@ const ListTodos = () => {
 
   }, []);
 
-
-
-
-
   return (
     <Fragment>
       <table class="table mt-5 text-center">
@@ -53,16 +49,11 @@ const ListTodos = () => {
               <td>edit</td>
               <td>delete</td>
             </tr>
-
-
           ))}
-
-
         </tbody>
       </table>
     </Fragment>
   )
-
 }
 
 export default ListTodos;
