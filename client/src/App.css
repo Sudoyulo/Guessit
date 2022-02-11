@@ -1,4 +1,15 @@
 
+#root {
+  display: flex;
+}
+
+body {
+  background-color: lightgray;
+  height: 90vw;
+  display: flex;
+  justify-content: center;
+}
+
 .gameNav {
   display: flex;
   justify-content: center;
