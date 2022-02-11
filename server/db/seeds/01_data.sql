@@ -1,0 +1,1 @@
+-- insert into table. initial data like games and players
