@@ -19,8 +19,6 @@ function App() {
         <MiniFriends />
       </div>
       <div className='main-view' >
-
-
         <GameTitle />
         <GuessContainer />
         <Keyboard />
