@@ -1,17 +1,26 @@
 import React, { Fragment, useState } from "react";
+import './keyboard.css'
 
-const Keyboard = () => {
+const Keyboard = (props) => {
 
+  const keys = [
+    "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+    "A", "S", "D", "F", "G", "H", "J", "K", "L"
+    , "ENTER", "Z", "X", "C", "V", "B", "N", "M", "<<"
+  ]
+
+  const allKeys = keys.map((key) => {
+    return (
+      <button key={key} className={"key-" + key} onClick={
+        () => { props.onKeypress(key) }} > {key} </ button >
+    );
+  })
 
 
   return (
 
-    <div className="keyboard">
-      <p className="mt-5"> q </p>
-      <p className="mt-5"> w </p>
-      <p className="mt-5"> e </p>
-      <p className="mt-5"> r </p>
-      <p className="mt-5"> t </p>
+    <div className="key-container">
+      {allKeys}
     </div>
 
 

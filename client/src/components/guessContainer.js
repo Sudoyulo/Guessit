@@ -1,19 +1,115 @@
 import React, { Fragment, useState } from "react";
+import './guessContainer.css'
+import Keyboard from "./keyboard";
 
 const GuessContainer = () => {
 
+  const [message, setMessage] = useState(" ");
+  const [pos, setPos] = useState({ row: 0, col: 0 })
+  const [board, setBoard] = useState([
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "]
+  ])
+
+  const solution = "LIGHT";
+
+  const guessRows = board.map((row, rowIndex) => {
+    return (
+      <div key={row + rowIndex} className={"row row-" + rowIndex}> {
+        row.map((col, colIndex) => {
+          return (
+            <div key={col + colIndex} className={"col col-" + colIndex}> {col}</div>
+          )
+        })
+      }</div>
+    );
+  })
+
+
+
+  const handleKeypress = (key) => {
+
+
+
+    const copyBoard = [...board];
+
+    const handleDelete = () => {
+      if (pos.col > 0) {
+        console.log("backspace")
+        setPos({ ...pos, col: pos.col - 1 })
+        copyBoard[pos.row][pos.col - 1] = " "
+        setBoard(copyBoard)
+      } else {
+        setMessage("cant go back any further")
+        setTimeout(() => { setMessage("") }, 2000)
+      }
+    }
+
+    const handleEnter = () => {
+
+      //pointer is out of bounds === 5 meaning 0-4 is filled up
+      if (pos.col === 5) {
+        let userGuess = board[pos.row].join('')
+
+        if (solution === userGuess) {
+          //correct
+          setMessage("Perfect")
+          //setTimeout(() => { setMessage("") }, 2000)
+        } else {
+          //move on
+          setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
+          setTimeout(() => { setMessage("") }, 2000)
+          setPos({ ...pos, row: pos.row + 1, col: 0 })
+        }
+
+      } else { //reject the enter button
+        setMessage("need a 5 letter word")
+        setTimeout(() => { setMessage("") }, 2000)
+      }
+    }
+
+    const addLetter = (letter) => {
+      //pointer is in bounds < 5 meaning 0-4 is not filled up
+      if (pos.col < 5) {
+        copyBoard[pos.row][pos.col] = letter
+        setBoard(copyBoard)
+        setPos({ ...pos, col: pos.col + 1 })
+      } else {
+        setMessage('no space to enter letter ' + letter)
+        setTimeout(() => { setMessage("") }, 2000)
+      }
+    }
+
+    //handlers stert here
+    if (key === "<<") {
+      handleDelete();
+    } else if (key === "ENTER") {
+      handleEnter();
+    } else {
+      addLetter(key);
+    }
+
+  }
 
 
   return (
+    <Fragment >
 
-    <div className="guessRow0">
-      <p className="mt-5"> box </p>
-      <p className="mt-5"> box </p>
-      <p className="mt-5"> box </p>
-      <p className="mt-5"> box </p>
-      <p className="mt-5"> box </p>
-    </div>
+      <div className="message">
+        {message}
+      </div>
 
+      <div className="tile-container">
+        {guessRows}
+      </div>
+
+      <Keyboard onKeypress={handleKeypress} />
+
+    </Fragment>
 
   );
 

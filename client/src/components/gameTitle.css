@@ -1,0 +1,24 @@
+.gameNav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50vw;
+}
+
+p {
+  margin: 0;
+}
+
+.nav-icon {
+  width: 30px;
+  height: auto;
+  margin: 5px;
+}
+
+.left-icons{
+  display: flex;
+}
+
+.right-icons {
+  display: flex;
+}
