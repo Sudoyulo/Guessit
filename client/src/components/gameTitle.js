@@ -13,7 +13,6 @@ const GameTitle = (props) => {
 
     setShowStats(!showStats)
 
-
   }
 
   return (

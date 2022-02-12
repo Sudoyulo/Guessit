@@ -24,3 +24,6 @@
   margin: 2px;
 }
 
+.message {
+  display: flex;
+}

@@ -1,10 +1,10 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
 
 const GuessContainer = () => {
 
-  const [message, setMessage] = useState(" ");
+  const [message, setMessage] = useState("");
   const [pos, setPos] = useState({ row: 0, col: 0 })
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -29,11 +29,7 @@ const GuessContainer = () => {
     );
   })
 
-
-
   const handleKeypress = (key) => {
-
-
 
     const copyBoard = [...board];
 
@@ -60,10 +56,15 @@ const GuessContainer = () => {
           setMessage("Perfect")
           //setTimeout(() => { setMessage("") }, 2000)
         } else {
-          //move on
-          setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
-          setTimeout(() => { setMessage("") }, 2000)
           setPos({ ...pos, row: pos.row + 1, col: 0 })
+
+          if (pos.row < 5) {
+            //move on
+            setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
+            setTimeout(() => { setMessage("") }, 2000)
+          } else {
+            setMessage("Game over")
+          }
         }
 
       } else { //reject the enter button
@@ -84,7 +85,7 @@ const GuessContainer = () => {
       }
     }
 
-    //handlers stert here
+    //handlers start here
     if (key === "<<") {
       handleDelete();
     } else if (key === "ENTER") {
@@ -96,11 +97,19 @@ const GuessContainer = () => {
   }
 
 
+  // useEffect(() => { //after >5 always show game over
+  //   if (pos.row > 5) {
+  //     setMessage("Game over")
+  //   }
+  // }, [pos])
+
+
   return (
     <Fragment >
 
       <div className="message">
         {message}
+        <p>&nbsp;</p>
       </div>
 
       <div className="tile-container">
