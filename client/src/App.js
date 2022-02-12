@@ -20,7 +20,6 @@ function App() {
     <Fragment>
 
       <div className='left-sidebar' >
-        {/* <MiniFriends /> */}
         {leftSidebar}
       </div>
       <div className='main-view' >

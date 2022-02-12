@@ -1,5 +1,5 @@
 import React from "react";
-import './blank.css'
+import './rightSidebar.css'
 
 
 const Blank = () => {

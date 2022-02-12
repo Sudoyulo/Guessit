@@ -1,0 +1,67 @@
+
+.left-sidebar{
+  background-color: black;
+  display: flex;
+  height: 90vh;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  width: 25vw;
+}
+
+.help-title {
+  padding: 10px;
+  font-size: 25px;
+  border-bottom: 1px solid white;
+}
+
+.help-container {
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}
+
+.user-data {
+  border: 2px solid white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.avatar {
+  width: 30px;
+  height: auto;
+  margin: 5px;
+}
+
+.avatar-list {
+  background-color: white;
+  display: flex;
+}
+
+.initials-box {
+  width:30px;
+}
+
+.left-sidebar .avatar-list button {
+  background: grey;
+}
+
+.add-a-friend{
+  background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.add-input {
+  background-color: greenyellow;
+}
+
+.add-button {
+  width: 180px;
+  background-color: yellow;
+}

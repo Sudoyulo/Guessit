@@ -1,6 +1,5 @@
 import React from "react";
-import './settings.css'
-
+import './rightSidebar.css'
 
 const Settings = () => {
 

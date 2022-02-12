@@ -1,4 +1,9 @@
 
+.blank-sidebar{
+  background-color: black;
+  width: 25vw;
+  height: 100vh;
+}
 
 .right-sidebar{
   background-color: black;
@@ -10,7 +15,6 @@
 }
 
 .stat-title {
-  
   padding: 10px;
   font-size: 25px;
   border-bottom: 1px solid white;
