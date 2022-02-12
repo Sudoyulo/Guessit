@@ -10,6 +10,8 @@ import GameTitle from './components/gameTitle';
 import GuessContainer from './components/guessContainer';
 import Keyboard from './components/keyboard';
 
+import Stats from './components/stats';
+
 
 function App() {
   return (
@@ -24,7 +26,7 @@ function App() {
         <Keyboard />
       </div>
       <div className='right-sidebar'>
-
+        <Stats />
       </div>
 
 

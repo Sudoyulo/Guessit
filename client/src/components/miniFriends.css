@@ -1,5 +1,25 @@
 .left-sidebar{
+  background-color: black;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 25vw;
+}
+
+.add-a-friend{
 
   background-color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
+.add-input {
+  background-color: greenyellow;
+}
+
+.add-button {
+  width: 180px;
+  background-color: yellow;
 }

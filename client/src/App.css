@@ -4,15 +4,17 @@
 }
 
 body {
-  background-color: lightgray;
-  height: 90vw;
+  background-color: midnightblue;
   display: flex;
   justify-content: center;
+  color: white;
 }
 
-.gameNav {
+.main-view{
+  height: 90vh;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
   align-items: center;
 }
 

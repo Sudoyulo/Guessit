@@ -15,11 +15,11 @@ const MiniFriends = () => {
       </div>
 
       <div className="add-a-friend" >
-        Enter an id:
-        <button> Add friend </button>
+        <input className="add-input" placeholder="Enter id:" ></input>
+        <button className="add-button"> Add friend </button>
       </div>
 
-    </div>
+    </div >
 
   );
 
