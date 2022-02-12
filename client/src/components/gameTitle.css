@@ -9,6 +9,14 @@ p {
   margin: 0;
 }
 
+button {
+  background-color: black;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
 .nav-icon {
   width: 30px;
   height: auto;
