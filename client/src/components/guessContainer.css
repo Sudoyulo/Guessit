@@ -10,14 +10,13 @@
 }
 
 .tile-container .row {
-  background-color: aqua;
   display: flex;
 }
 
 .tile-container .col {
   width: 62px;
   height: 62px;
-  border: 2px solid black;
+  border: 2px solid grey;
   box-sizing: border-box;
   display: flex;
   justify-content: center;

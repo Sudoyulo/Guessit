@@ -1,0 +1,24 @@
+
+
+.right-sidebar{
+  background-color: black;
+  width: 25vw;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.stat-title {
+  
+  padding: 10px;
+  font-size: 25px;
+  border-bottom: 1px solid white;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  height: 100vh;
+}

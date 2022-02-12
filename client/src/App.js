@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React, { Fragment, useState } from 'react';
 import './App.css';
 
 import InputTodo from './components/inputTodo';
@@ -8,12 +8,14 @@ import MiniFriends from './components/miniFriends';
 
 import GameTitle from './components/gameTitle';
 import GuessContainer from './components/guessContainer';
-import Keyboard from './components/keyboard';
 
 import Stats from './components/stats';
-
+import Blank from './components/blank';
 
 function App() {
+
+  const [showStats, setShowStats] = useState(false);
+
   return (
     <Fragment>
 
@@ -21,15 +23,13 @@ function App() {
         <MiniFriends />
       </div>
       <div className='main-view' >
-        <GameTitle />
+        <GameTitle showStats={showStats} setShowStats={setShowStats} />
         <GuessContainer />
-        <Keyboard />
       </div>
-      <div className='right-sidebar'>
-        <Stats />
+      <div className='stats'>
+        {showStats ? <Stats /> : <Blank />}
+        {console.log(showStats)}
       </div>
-
-
 
     </Fragment>
   );

@@ -12,7 +12,7 @@ const Keyboard = (props) => {
   const allKeys = keys.map((key) => {
     return (
       <button key={key} className={"key-" + key} onClick={
-        () => { console.log(key + " clicked") }} > {key} </ button >
+        () => { props.onKeypress(key) }} > {key} </ button >
     );
   })
 
