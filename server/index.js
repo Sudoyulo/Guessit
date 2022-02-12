@@ -1,7 +1,15 @@
+// load .env data into process.env
+require("dotenv").config();
+
 const express = require('express');
 const app = express();
 const cors = require("cors");
-const pool = require("./db");
+// const pool = require("./lib/db");
+
+const { Pool } = require("pg");
+const dbParams = require("./lib/db");
+const pool = new Pool(dbParams);
+// db.connect();
 
 app.use(cors());
 app.use(express.json()); //req,.body
