@@ -18,6 +18,10 @@ button:hover {
   cursor: pointer;
 }
 
+.game-info {
+  background-color: grey;
+}
+
 .nav-icon {
   width: 30px;
   height: auto;

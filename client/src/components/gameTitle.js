@@ -57,10 +57,13 @@ const GameTitle = (props) => {
         <button onClick={() => { minifriendOnOff() }} >
           <img className="nav-icon" src={friendIcon} alt="minifriends" />
         </button>
-
+        <button className="game-info"> Your id: ####</button>
       </div>
+
       <h1 className="title"> miniWord </h1>
+
       <div className="right-icons">
+        <button className="game-info"> Game id: ####</button>
         <button onClick={() => { statsOnOff() }} >
           <img className="nav-icon" src={stats} alt="stats" />
         </button>
