@@ -9,28 +9,25 @@ import MiniFriends from './components/miniFriends';
 import GameTitle from './components/gameTitle';
 import GuessContainer from './components/guessContainer';
 
-import Stats from './components/stats';
 import Blank from './components/blank';
 
 function App() {
 
-  const [showStats, setShowStats] = useState(false);
-
-  const [rightSidebar, setRightSidebar] = useState(<Stats />)
+  const [leftSidebar, setLeftSidebar] = useState(<Blank />)
+  const [rightSidebar, setRightSidebar] = useState(<Blank />)
 
   return (
     <Fragment>
 
       <div className='left-sidebar' >
-        <MiniFriends />
+        {/* <MiniFriends /> */}
+        {leftSidebar}
       </div>
       <div className='main-view' >
-        {/* <GameTitle showStats={showStats} setShowStats={setShowStats} /> */}
-        <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} />
+        <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />
         <GuessContainer />
       </div>
       <div className='right-sidebar'>
-        {/* {showStats ? <Stats /> : <Blank />} */}
         {rightSidebar}
       </div>
 

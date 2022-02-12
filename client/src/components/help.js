@@ -1,15 +1,15 @@
 import React from "react";
-import './blank.css'
+import './help.css'
 
 
-const Blank = () => {
+const Help = () => {
 
   return (
 
     <div className="blank-sidebar">
-
+      <p>help</p>
     </div >
   );
 
 }
-export default Blank;
+export default Help;
