@@ -1,6 +1,6 @@
-INSERT INTO avatars (avatar_url) VALUES ('/Users/brenonparry/Desktop/avatars/user-astronaut-solid.svg');
-INSERT INTO avatars (avatar_url) VALUES ('/Users/brenonparry/Desktop/avatars/user-ninja-solid.svg');
-INSERT INTO avatars (avatar_url) VALUES ('/Users/brenonparry/Desktop/avatars/user-tie-solid.svg');
+INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/turtle.png');
+INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/penguin.png');
+INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/jelly_fish.png');
 -- insert into table. initial data like games and players
 INSERT INTO users (avatar_id, date_started, player_id) VALUES (1, '2022-01-01 00:00:00', 'x7d3k6');
 INSERT INTO users (avatar_id, date_started, player_id) VALUES (2, '2022-01-01 00:00:00', 'h6m2b5');
