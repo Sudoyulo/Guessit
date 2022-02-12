@@ -4,7 +4,7 @@ import Keyboard from "./keyboard";
 
 const GuessContainer = () => {
 
-  const [message, setMessage] = useState("");
+  const [message, setMessage] = useState(" ");
   const [pos, setPos] = useState({ row: 0, col: 0 })
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -32,6 +32,9 @@ const GuessContainer = () => {
 
 
   const handleKeypress = (key) => {
+
+
+
     const copyBoard = [...board];
 
     const handleDelete = () => {
@@ -47,18 +50,19 @@ const GuessContainer = () => {
     }
 
     const handleEnter = () => {
+
       //pointer is out of bounds === 5 meaning 0-4 is filled up
       if (pos.col === 5) {
-        console.log("enter")
         let userGuess = board[pos.row].join('')
-        console.log(userGuess)
 
         if (solution === userGuess) {
           //correct
           setMessage("Perfect")
-          setTimeout(() => { setMessage("") }, 2000)
+          //setTimeout(() => { setMessage("") }, 2000)
         } else {
           //move on
+          setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
+          setTimeout(() => { setMessage("") }, 2000)
           setPos({ ...pos, row: pos.row + 1, col: 0 })
         }
 
@@ -75,7 +79,8 @@ const GuessContainer = () => {
         setBoard(copyBoard)
         setPos({ ...pos, col: pos.col + 1 })
       } else {
-        console.log("no space to enter" + letter)
+        setMessage('no space to enter letter ' + letter)
+        setTimeout(() => { setMessage("") }, 2000)
       }
     }
 
