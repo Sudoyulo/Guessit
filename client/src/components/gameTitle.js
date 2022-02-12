@@ -5,13 +5,22 @@ import help from '../images/help.png'
 import stats from '../images/stats.png'
 import settings from '../images/settings.png'
 
+import Stats from "./stats";
+import Blank from "./blank";
+
 const GameTitle = (props) => {
 
-  const { showStats, setShowStats } = props;
+  const { rightSidebar, setRightSidebar } = props;
 
   const statsOnOff = () => {
 
-    setShowStats(!showStats)
+    if (rightSidebar.type.name === "Stats") {
+      console.log("Stats")
+      setRightSidebar(<Blank />)
+    } else {
+      console.log("Blank")
+      setRightSidebar(<Stats />)
+    }
 
   }
 
@@ -24,9 +33,12 @@ const GameTitle = (props) => {
       </div>
       <h1 className="title"> miniWord </h1>
       <div className="right-icons">
-        <button
-          onClick={() => { statsOnOff() }} > <img className="nav-icon" src={stats} alt="stats" /></button>
-        <img className="nav-icon" src={settings} alt="settings" />
+        <button onClick={() => { statsOnOff() }} >
+          <img className="nav-icon" src={stats} alt="stats" />
+        </button>
+        <button  >
+          <img className="nav-icon" src={settings} alt="settings" />
+        </button>
       </div>
     </div >
   );

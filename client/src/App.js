@@ -16,19 +16,22 @@ function App() {
 
   const [showStats, setShowStats] = useState(false);
 
+  const [rightSidebar, setRightSidebar] = useState(<Stats />)
+
   return (
     <Fragment>
 
-      <div className='miniFriends' >
+      <div className='left-sidebar' >
         <MiniFriends />
       </div>
       <div className='main-view' >
-        <GameTitle showStats={showStats} setShowStats={setShowStats} />
+        {/* <GameTitle showStats={showStats} setShowStats={setShowStats} /> */}
+        <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} />
         <GuessContainer />
       </div>
-      <div className='stats'>
-        {showStats ? <Stats /> : <Blank />}
-        {console.log(showStats)}
+      <div className='right-sidebar'>
+        {/* {showStats ? <Stats /> : <Blank />} */}
+        {rightSidebar}
       </div>
 
     </Fragment>

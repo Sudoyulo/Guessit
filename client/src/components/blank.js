@@ -1,19 +1,14 @@
-import React, { Fragment, useState } from "react";
+import React from "react";
 import './stats.css'
 
 
 const Blank = () => {
 
-
   return (
 
-
-    <div className="right-sidebar">
-
+    <div className="blank-sidebar">
 
     </div >
-
-
   );
 
 }
