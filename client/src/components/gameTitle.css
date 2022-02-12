@@ -9,6 +9,19 @@ p {
   margin: 0;
 }
 
+button {
+  background-color: black;
+  border: none;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.game-info {
+  background-color: grey;
+}
+
 .nav-icon {
   width: 30px;
   height: auto;
