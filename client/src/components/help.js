@@ -8,7 +8,7 @@ const Help = () => {
   return (
 
     <div className="left-sidebar">
-      <div className="help-title">
+      <div className="side-title">
         Help
       </div>
       <div className="help-container" >

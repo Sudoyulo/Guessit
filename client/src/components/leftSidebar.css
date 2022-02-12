@@ -9,7 +9,7 @@
   width: 25vw;
 }
 
-.help-title {
+.side-title {
   padding: 10px;
   font-size: 25px;
   border-bottom: 1px solid white;
@@ -50,6 +50,23 @@
   background: grey;
 }
 
+.following-list {
+  background-color: gray;
+  padding: 10px;
+  height: 300px;
+  width: 200px;
+}
+
+.friend-info {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.complete {
+  width: 75px;
+}
+
 .add-a-friend{
   background-color: black;
   display: flex;
@@ -59,9 +76,10 @@
 
 .add-input {
   background-color: greenyellow;
+  width: 100px;
 }
 
 .add-button {
-  width: 180px;
+  width: 110px;
   background-color: yellow;
 }

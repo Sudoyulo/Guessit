@@ -7,13 +7,12 @@ import stats from '../images/stats.png'
 const MiniFriends = () => {
 
   const [myAvatar, setMyAvatar] = useState(help);
-  const [initials, setInitials] = useState("")
+  const [initials, setInitials] = useState("---")
 
   //this is a list of all avatars source code
   const avatarList = [help, settings, stats]
 
-
-  //I know there is white sticking out. Hopefully avatar list is divisible by 5
+  //sometimes white sticks out
   const selectAvatar = avatarList.map((avatar) => {
     return (<button key={avatar} onClick={() => { setMyAvatar(avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
   })
@@ -25,12 +24,30 @@ const MiniFriends = () => {
     }
   }
 
+  //query with user avatar, initials, game completed
+  const followersList = [
+    { user_id: 1, initials: "KEV", avatar: help, completed: true },
+    { user_id: 2, initials: "LHL", avatar: settings, completed: false }
+  ];
+
+  const followers = followersList.map((user) => {
+    return (
+      <div className="friend-info">
+        <img className="avatar" src={user.avatar} alt="img" />
+        <p > {user.initials}#{user.user_id}</p>
+        {user.completed ? <button className="complete">challenge</button> : <button className="complete">incomplete</button>}
+      </div>
+    );
+  })
+
+
+
   return (
 
     <div className="left-sidebar">
 
-      <div className="friends-list">
-        icon, id, stats
+      <div className="side-title">
+        Following List
       </div>
 
 
@@ -52,10 +69,12 @@ const MiniFriends = () => {
         </div>
       </div>
 
-
+      <div className="following-list">
+        {followers}
+      </div>
 
       <div className="add-a-friend" >
-        <input className="add-input" placeholder="Enter id:" ></input>
+        <input className="add-input" placeholder="Enter follower id:" ></input>
         <button className="add-button"> Add friend </button>
       </div>
 
