@@ -1,7 +1,15 @@
+// load .env data into process.env
+require("dotenv").config();
+
 const express = require('express');
 const app = express();
 const cors = require("cors");
-const pool = require("./db");
+
+// DATABASE CONNECTION
+const { Pool } = require("pg");
+const dbParams = require("./lib/db");
+const pool = new Pool(dbParams);
+
 
 app.use(cors());
 app.use(express.json()); //req,.body
@@ -67,6 +75,6 @@ app.delete("/todos/:id", async (req, res) => {
   }
 })
 
-app.listen(5000, () => {
-  console.log("connected to port 5000")
+app.listen(5001, () => {
+  console.log("connected to port 5001")
 })
