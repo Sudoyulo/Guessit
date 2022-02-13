@@ -25,7 +25,31 @@ const getGames = () => {
   }) 
 }
 
+const getAvatars = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM avatars', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(results.rows);
+    })
+  }) 
+}
+
+const getStats = () => {
+  return new Promise(function(resolve, reject) {
+    pool.query('SELECT * FROM user_game', (error, results) => {
+      if (error) {
+        reject(error)
+      }
+      resolve(results.rows);
+    })
+  }) 
+}
+
 module.exports = {
   getUsers,
-  getGames
+  getGames,
+  getAvatars,
+  getStats
 }
