@@ -9,7 +9,7 @@ p {
   margin: 0;
 }
 
-button {
+.gameNav button {
   background-color: black;
   border: none;
 }

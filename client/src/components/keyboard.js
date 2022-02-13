@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import './keyboard.css'
 
 const Keyboard = (props) => {

@@ -1,13 +1,26 @@
 import React from "react";
-import './help.css'
+import './leftSidebar.css'
 
 
 const Help = () => {
 
   return (
 
-    <div className="blank-sidebar">
-      <p>help</p>
+    <div className="left-sidebar">
+      <div className="side-title">
+        Help
+      </div>
+      <div className="help-container" >
+        <div>
+          Guess the five letter word using the keypad below! <br />
+          Click enter to check your results!
+        </div>
+        <div>
+          Green letters mean the letter is in the exact position as the answer.
+          <br /><br />
+          Yellow letters mean the letter is within the word!
+        </div>
+      </div>
     </div >
   );
 

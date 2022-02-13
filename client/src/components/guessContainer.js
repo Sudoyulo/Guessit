@@ -21,8 +21,9 @@ const GuessContainer = () => {
     return (
       <div key={row + rowIndex} className={"row row-" + rowIndex}> {
         row.map((col, colIndex) => {
+          let color = "black";
           return (
-            <div key={col + colIndex} className={"col col-" + colIndex}> {col}</div>
+            <div key={col + colIndex} style={{ backgroundColor: color }} className={"col col-" + colIndex}> {col}</div>
           )
         })
       }</div>

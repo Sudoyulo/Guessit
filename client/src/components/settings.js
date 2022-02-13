@@ -1,13 +1,12 @@
 import React from "react";
-import './settings.css'
-
+import './rightSidebar.css'
 
 const Settings = () => {
 
   return (
 
-    <div className="setting-container">
-      <p>Settings here</p>
+    <div className="right-sidebar">
+      <p className="stat-title">Settings </p>
     </div >
   );
 

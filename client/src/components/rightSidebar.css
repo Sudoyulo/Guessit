@@ -1,0 +1,53 @@
+
+.blank-sidebar{
+  background-color: black;
+  width: 25vw;
+  height: 100vh;
+}
+
+.right-sidebar{
+  background-color: black;
+  width: 25vw;
+  height: 90vh;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.stat-title {
+  padding: 10px;
+  font-size: 25px;
+  border-bottom: 1px solid white;
+}
+
+.stats-container {
+  display: flex;
+  flex-direction: column;
+  
+}
+
+.games-played {
+  margin-top: 50px;
+  margin-bottom: 50px;
+}
+
+.progress-bar {
+  width: 150px;
+  margin-bottom: 50px;
+  border: 1px solid grey;
+}
+
+.bar-segment {
+  display: flex;
+  flex-direction: row;
+}
+
+.win-percent {
+  border: 1px solid black;
+  height: 20px;
+  background-color: gray;
+  width: 40%;
+  white-space: nowrap;
+  display: flex;
+  justify-content: flex-end;
+}
