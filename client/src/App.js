@@ -1,11 +1,6 @@
 import React, { Fragment, useState } from 'react';
 import './App.css';
 
-import InputTodo from './components/inputTodo';
-import ListTodos from './components/listTodos';
-
-import MiniFriends from './components/miniFriends';
-
 import GameTitle from './components/gameTitle';
 import GuessContainer from './components/guessContainer';
 

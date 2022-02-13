@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { useState } from "react";
 import './leftSidebar.css'
 import help from '../images/help.png'
 import settings from '../images/settings.png'
@@ -6,8 +6,10 @@ import stats from '../images/stats.png'
 
 const MiniFriends = () => {
 
+
+  //set avatar and initials
   const [myAvatar, setMyAvatar] = useState(help);
-  const [initials, setInitials] = useState("---")
+  const [initials, setInitials] = useState("")
 
   //this is a list of all avatars source code
   const avatarList = [help, settings, stats]
@@ -24,7 +26,7 @@ const MiniFriends = () => {
     }
   }
 
-  //query with user avatar, initials, game completed
+  //query with user avatar, initials, game completed, turns
   const followersList = [
     { user_id: 1, initials: "KEV", avatar: help, completed: true },
     { user_id: 2, initials: "LHL", avatar: settings, completed: false }
@@ -35,12 +37,10 @@ const MiniFriends = () => {
       <div className="friend-info">
         <img className="avatar" src={user.avatar} alt="img" />
         <p > {user.initials}#{user.user_id}</p>
-        {user.completed ? <button className="complete">challenge</button> : <button className="complete">incomplete</button>}
+        {user.completed ? <button className="complete">Completed in 4</button> : <button className="complete">Not yet complete</button>}
       </div>
     );
   })
-
-
 
   return (
 
@@ -49,7 +49,6 @@ const MiniFriends = () => {
       <div className="side-title">
         Following List
       </div>
-
 
       <div className="user-data">
         <p><img className="avatar" src={myAvatar} alt="Avatar" />  </p>

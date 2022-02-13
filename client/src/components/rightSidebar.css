@@ -26,3 +26,15 @@
   justify-content: space-around;
   height: 100vh;
 }
+
+.progress-bar {
+  border: 1px solid green;
+}
+
+.win-percent {
+  border: 1px solid blue;
+  height: 20px;
+  background-color: green;
+  width: 40%;
+  white-space: nowrap;
+}

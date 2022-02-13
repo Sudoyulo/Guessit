@@ -6,7 +6,7 @@
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  width: 25vw;
+  width: 22vw;
 }
 
 .side-title {
@@ -54,7 +54,7 @@
   background-color: gray;
   padding: 10px;
   height: 300px;
-  width: 200px;
+  width: 250px;
 }
 
 .friend-info {
@@ -64,7 +64,7 @@
 }
 
 .complete {
-  width: 75px;
+  width: 120px;
 }
 
 .add-a-friend{
