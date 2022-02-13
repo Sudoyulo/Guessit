@@ -29,6 +29,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 50px;
 }
 
 .avatar {
@@ -37,9 +38,10 @@
   margin: 5px;
 }
 
+
 .avatar-list {
   background-color: white;
-  display: flex;
+  width: 280px;
 }
 
 .initials-box {
@@ -48,6 +50,10 @@
 
 .left-sidebar .avatar-list button {
   background: grey;
+}
+
+.left-sidebar .avatar-list button:hover{
+  background-color: white;
 }
 
 .following-list {

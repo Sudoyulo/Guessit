@@ -22,10 +22,10 @@ const GameTitle = (props) => {
 
 
   const getUser = () => {
-    axios('http://localhost:5001/users')
+    axios('http://localhost:5001/users/1')
       .then(res => {
         console.log("RES USER: ", res.data)
-        setUser(res.data[0])
+        setUser(res.data)
       })
   }
   const getGame = () => {
@@ -39,6 +39,7 @@ const GameTitle = (props) => {
   useEffect(() => {
     getUser();
     getGame();
+    // console.log("id", user[0].user_id);
   }, []);
 
   const helpOnOff = () => {
@@ -53,7 +54,7 @@ const GameTitle = (props) => {
     if (leftSidebar.type.name === "MiniFriends") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<MiniFriends />)
+      setLeftSidebar(<MiniFriends user_id={user[0].user_id} userAvatar={user[0].avatar_url} userInitials={user[0].initials} />)
     }
   }
 
@@ -72,7 +73,7 @@ const GameTitle = (props) => {
       setRightSidebar(<Settings />)
     }
   }
-
+  //user[0].player_id
   return (
 
     <div className="gameNav">
@@ -83,13 +84,14 @@ const GameTitle = (props) => {
         <button onClick={() => { minifriendOnOff() }} >
           <img className="nav-icon" src={friendIcon} alt="minifriends" />
         </button>
-        <button className="game-info"> Your id: {user.player_id} </button>
+        <div className="game-info"> Your id: <br /> {user[0] ? user[0].player_id : ""} </div>
       </div>
+
 
       <h1 className="title"> miniWord </h1>
 
       <div className="right-icons">
-        <button className="game-info"> Game id: #{game.id}</button>
+        <div className="game-info"> Game id: <br /> &nbsp;&nbsp; #{game.id}</div>
         <button onClick={() => { statsOnOff() }} >
           <img className="nav-icon" src={stats} alt="stats" />
         </button>

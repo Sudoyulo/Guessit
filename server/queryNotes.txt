@@ -6,3 +6,7 @@ INNER JOIN games ON user_game.game_id = games.id
 WHERE users.id = 1;
 
 How to implement followee_follower?
+
+UPDATE users
+SET avatar_id = 9
+WHERE user.id = 1;

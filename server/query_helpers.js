@@ -48,6 +48,15 @@ const getAvatars = () => {
   })
 }
 
+const setAvatar = (uid, aid) => {
+
+  return pool.query('UPDATE users SET avatar_id = $1 WHERE id = $2;', [aid, uid])
+    .then(results => {
+      return results;
+    })
+
+}
+
 const getStats = () => {
   return new Promise(function (resolve, reject) {
     pool.query('SELECT * FROM user_game', (error, results) => {
@@ -64,5 +73,6 @@ module.exports = {
   getUser,
   getGames,
   getAvatars,
+  setAvatar,
   getStats
 }

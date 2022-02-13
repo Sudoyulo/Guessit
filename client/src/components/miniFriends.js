@@ -1,22 +1,67 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import './leftSidebar.css'
 import help from '../images/help.png'
 import settings from '../images/settings.png'
 import stats from '../images/stats.png'
+import axios from "axios";
 
-const MiniFriends = () => {
+const MiniFriends = (props) => {
 
+  const { userAvatar, userInitials, user_id } = props;
+
+  const [allAvatars, setAllAvatars] = useState([]);
+  const [user, setUser] = useState([])
+
+  const getAvatars = () => {
+    axios('http://localhost:5001/avatars')
+      .then(res => {
+        console.log("RES AVATAR: ", res.data)
+        const list = []
+        res.data.forEach((id) => {
+          list.push(id.avatar_url)
+        })
+        setAllAvatars(list);
+      })
+  }
+
+  const getUser = () => {
+    axios('http://localhost:5001/users/1')
+      .then(res => {
+        setMyAvatar(res.data[0].avatar_url)
+        setUser(res.data)
+      })
+  }
+
+  const setUserAvatar = (uid, aid, avatar) => {
+    axios.put('http://localhost:5001/users/' + uid + '/avatar/' + (aid + 1))
+      .then(res => {
+        console.log("RES AVATAR PUT: ", res.data)
+        setMyAvatar(avatar);
+      })
+  }
+
+
+
+  const [myAvatar, setMyAvatar] = useState(userAvatar ? userAvatar : help);
+  const [initials, setInitials] = useState(userInitials ? userInitials : "");
+
+  console.log("ava", userAvatar)
+  console.log("my", myAvatar)
+
+  useEffect(() => {
+    getUser();
+  }, [])
+
+  useEffect(() => {
+    getAvatars();
+  }, [myAvatar])
 
   //set avatar and initials
-  const [myAvatar, setMyAvatar] = useState(help);
-  const [initials, setInitials] = useState("")
 
   //this is a list of all avatars source code
-  const avatarList = [help, settings, stats]
-
-  //sometimes white sticks out
-  const selectAvatar = avatarList.map((avatar) => {
-    return (<button key={avatar} onClick={() => { setMyAvatar(avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
+  //setMyAvatar(avatar)
+  const selectAvatar = allAvatars.map((avatar, index) => {
+    return (<button key={index} onClick={() => { setUserAvatar(user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
   })
 
   //max three
