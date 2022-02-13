@@ -2,9 +2,9 @@ INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/turtle.png');
 INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/penguin.png');
 INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/jelly_fish.png');
 -- insert into table. initial data like games and players
-INSERT INTO users (avatar_id, date_started, player_id) VALUES (1, '2022-01-01 00:00:00', 'x7d3k6');
-INSERT INTO users (avatar_id, date_started, player_id) VALUES (2, '2022-01-01 00:00:00', 'h6m2b5');
-INSERT INTO users (avatar_id, date_started, player_id) VALUES (3, '2022-01-01 00:00:00', 'j7m3d6');
+INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('MGS', 1, '2022-01-01 00:00:00', 'x7d3k6');
+INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('DCS', 2, '2022-01-01 00:00:00', 'h6m2b5');
+INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('PBH', 3, '2022-01-01 00:00:00', 'j7m3d6');
 
 
 INSERT INTO games (solution) VALUES ('adore');

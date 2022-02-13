@@ -12,6 +12,7 @@ CREATE TABLE avatars (
 
 CREATE TABLE users (
   id SERIAL PRIMARY KEY NOT NULL,
+  initials VARCHAR(255),
   avatar_id INTEGER REFERENCES avatars(id) ON DELETE CASCADE,
   date_started TIMESTAMP,
   player_id VARCHAR(255)
