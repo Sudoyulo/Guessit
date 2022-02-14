@@ -2,7 +2,7 @@ import React, { Fragment, useState, useEffect } from "react";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
 
-const GuessContainer = () => {
+const GuessContainer = (props) => {
 
   const [message, setMessage] = useState("");
   const [pos, setPos] = useState({ row: 0, col: 0 })
@@ -15,7 +15,7 @@ const GuessContainer = () => {
     [" ", " ", " ", " ", " "]
   ])
 
-  const solution = "LIGHT";
+  const solution = props.solution;
 
   const guessRows = board.map((row, rowIndex) => {
     return (

@@ -116,7 +116,7 @@ const GameTitle = (props) => {
 
 
       </div >
-      <GuessContainer />
+      <GuessContainer solution={game.solution} />
     </div>
   );
 }
