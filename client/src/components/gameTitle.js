@@ -14,13 +14,34 @@ import Settings from "./settings";
 import GuessContainer from './guessContainer';
 
 
-
 const GameTitle = (props) => {
 
   const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
 
+  const [board, setBoard] = useState([
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "]
+  ])
+
+  const [pos, setPos] = useState({ row: 0, col: 0 })
+
+  const resetBoard = () => {
+    setBoard([
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "]
+    ])
+    setPos({ row: 0, col: 0 })
+  };
 
   const getUser = () => {
     axios('http://localhost:5001/users/1')
@@ -33,7 +54,6 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/games')
       .then(res => {
         setGame(res.data[0])
-        console.log("New Game", res.data[0])
       })
   }
 
@@ -41,17 +61,12 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/game/' + id)
       .then(res => {
         setGame(res.data)
-        console.log("New Game")
       })
   }
 
   useEffect(() => {
     getUser();
     getGames();
-    // console.log("id", user[0].user_id);
-  }, []);
-
-  useEffect(() => {
     getGame();
   }, []);
 
@@ -83,7 +98,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings getGame={getGame} />)
+      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} />)
     }
   }
   //user[0].player_id
@@ -114,9 +129,8 @@ const GameTitle = (props) => {
           </button>
         </div>
 
-
       </div >
-      <GuessContainer solution={game.solution} />
+      <GuessContainer board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} />
     </div>
   );
 }

@@ -1,22 +1,12 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
-import GameTitle from "./gameTitle";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
 
 const GuessContainer = (props) => {
-  
-  const [message, setMessage] = useState("");
-  const [pos, setPos] = useState({ row: 0, col: 0 })
-  const [board, setBoard] = useState([
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "]
-  ])
 
-  const solution = props.solution;
+  const [message, setMessage] = useState("");
+
+  const { board, setBoard, solution, pos, setPos } = props;
 
   const guessRows = board.map((row, rowIndex) => {
     return (
@@ -36,32 +26,27 @@ const GuessContainer = (props) => {
     let userGuess = board[pos.row]
     let answer = solution.split('')
 
-
     userGuess.forEach((letter, index) => {
       const tile = document.getElementById(pos.row.toString() + index.toString())
 
       if (letter === answer[index]) {
-        setTimeout(()=>{
+        setTimeout(() => {
           tile.classList.add('green-overlay')
         }, 500 * index)
       } else if (answer.includes(letter)) {
-        setTimeout(()=>{
+        setTimeout(() => {
           tile.classList.add('yellow-overlay')
         }, 500 * index)
       } else {
-        setTimeout(()=>{
+        setTimeout(() => {
           tile.classList.add('grey-overlay')
         }, 500 * index)
       }
     })
   };
 
-  const flipKey = (key) => {
-    
-  }
-  
   const handleKeypress = (key) => {
-    
+
     console.log("KEY: ", key)
 
     const copyBoard = [...board];
@@ -79,13 +64,13 @@ const GuessContainer = (props) => {
     }
 
     const handleEnter = () => {
-     
+
       if (pos.col === 5) {
         flipTile()
         let userGuess = board[pos.row].join('')
 
         if (solution === userGuess) {
-          
+
           //correct
           setMessage("Perfect")
           //setTimeout(() => { setMessage("") }, 2000)
@@ -127,16 +112,8 @@ const GuessContainer = (props) => {
     } else {
       addLetter(key);
     }
-    
+
   }
-
-
-  // useEffect(() => { //after >5 always show game over
-  //   if (pos.row > 5) {
-  //     setMessage("Game over")
-  //   }
-  // }, [pos])
-
 
   return (
     <Fragment >
