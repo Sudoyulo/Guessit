@@ -37,6 +37,16 @@ const getGames = () => {
   })
 }
 
+const makeGame = (word) => {
+
+  return pool.query('INSERT INTO games (solution) VALUES ($1);', [word])
+    .then(results => {
+      return results;
+    })
+
+}
+
+
 const getAvatars = () => {
   return new Promise(function (resolve, reject) {
     pool.query('SELECT * FROM avatars', (error, results) => {
@@ -51,6 +61,15 @@ const getAvatars = () => {
 const setAvatar = (uid, aid) => {
 
   return pool.query('UPDATE users SET avatar_id = $1 WHERE id = $2;', [aid, uid])
+    .then(results => {
+      return results;
+    })
+
+}
+
+const setInitials = (uid, key) => {
+
+  return pool.query("UPDATE users SET initials = $1 WHERE id = $2;", [key, uid])
     .then(results => {
       return results;
     })
@@ -72,7 +91,9 @@ module.exports = {
   getUsers,
   getUser,
   getGames,
+  makeGame,
   getAvatars,
   setAvatar,
+  setInitials,
   getStats
 }

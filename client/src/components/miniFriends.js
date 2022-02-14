@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
 import './leftSidebar.css'
-import help from '../images/help.png'
-import settings from '../images/settings.png'
-import stats from '../images/stats.png'
 import axios from "axios";
 
 const MiniFriends = (props) => {
@@ -12,10 +9,11 @@ const MiniFriends = (props) => {
   const [allAvatars, setAllAvatars] = useState([]);
   const [user, setUser] = useState([])
 
+
   const getAvatars = () => {
     axios('http://localhost:5001/avatars')
       .then(res => {
-        console.log("RES AVATAR: ", res.data)
+        // console.log("RES AVATAR: ", res.data)
         const list = []
         res.data.forEach((id) => {
           list.push(id.avatar_url)
@@ -25,9 +23,10 @@ const MiniFriends = (props) => {
   }
 
   const getUser = () => {
-    axios('http://localhost:5001/users/1')
+    axios('http://localhost:5001/users/' + user_id)
       .then(res => {
         setMyAvatar(res.data[0].avatar_url)
+        setInitials(res.data[0].initials)
         setUser(res.data)
       })
   }
@@ -35,19 +34,23 @@ const MiniFriends = (props) => {
   const setUserAvatar = (uid, aid, avatar) => {
     axios.put('http://localhost:5001/users/' + uid + '/avatar/' + (aid + 1))
       .then(res => {
-        console.log("RES AVATAR PUT: ", res.data)
+        // console.log("RES AVATAR PUT: ", res.data)
         setMyAvatar(avatar);
       })
   }
 
+  const setUserInitials = (uid, str) => {
+    axios.put('http://localhost:5001/users/' + uid + '/initials/' + str)
+      .then(res => {
+        // console.log("RES INIT PUT: ", res.data)
+        setInitials(str);
+      })
+  }
 
+  const [myAvatar, setMyAvatar] = useState(userAvatar);
+  const [myInitials, setInitials] = useState(userInitials);
 
-  const [myAvatar, setMyAvatar] = useState(userAvatar ? userAvatar : help);
-  const [initials, setInitials] = useState(userInitials ? userInitials : "");
-
-  console.log("ava", userAvatar)
-  console.log("my", myAvatar)
-
+  //called here because of reload issues
   useEffect(() => {
     getUser();
   }, [])
@@ -55,8 +58,6 @@ const MiniFriends = (props) => {
   useEffect(() => {
     getAvatars();
   }, [myAvatar])
-
-  //set avatar and initials
 
   //this is a list of all avatars source code
   //setMyAvatar(avatar)
@@ -66,38 +67,40 @@ const MiniFriends = (props) => {
 
   //max three
   const changeInitials = (value) => {
-    if (initials.length < 4) {
-      setInitials(value.slice(0, 3).toUpperCase());
+
+    if (myInitials.length < 4) {
+      setUserInitials(user_id, value.slice(0, 3).toUpperCase());
+      setInitials(value.slice(0, 3).toUpperCase())
     }
   }
 
   //query with user avatar, initials, game completed, turns
   const followersList = [
-    { user_id: 1, initials: "KEV", avatar: help, completed: true },
-    { user_id: 2, initials: "LHL", avatar: settings, completed: false }
+    { user_id: 1, initials: "KEV", avatar: allAvatars[2], completed: true },
+    { user_id: 2, initials: "LHL", avatar: allAvatars[8], completed: false }
   ];
 
   const followers = followersList.map((user) => {
     return (
-      <div className="friend-info">
+      <div key={user.id} className="friend-info">
         <img className="avatar" src={user.avatar} alt="img" />
         <p > {user.initials}#{user.user_id}</p>
         {user.completed ? <button className="complete">Completed in 4</button> : <button className="complete">Not yet complete</button>}
       </div>
     );
   })
-
+  //{ changeInitials(e.target.value) 
   return (
 
     <div className="left-sidebar">
 
       <div className="side-title">
-        Following List
+        Social
       </div>
 
       <div className="user-data">
         <p><img className="avatar" src={myAvatar} alt="Avatar" />  </p>
-        <p>{initials} </p>
+        <p>{myInitials} </p>
       </div>
       <div className="avatar-initials">
         <div className="avatar-container">
@@ -109,7 +112,7 @@ const MiniFriends = (props) => {
         <br />
         <div className="initial-container" >
           Set Initials: &nbsp;
-          <input className="initials-box" placeholder="LHL" value={initials} onChange={(e) => { changeInitials(e.target.value) }}></input>
+          <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
         </div>
       </div>
 

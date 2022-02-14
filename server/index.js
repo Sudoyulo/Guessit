@@ -9,7 +9,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const pool = new Pool(dbParams);
-const { getUsers, getUser, getGames, getAvatars, setAvatar, getStats } = require('./query_helpers')
+const { getUsers, getUser, getGames, makeGame, getAvatars, setAvatar, setInitials, getStats } = require('./query_helpers')
 
 
 app.use(cors());
@@ -29,7 +29,6 @@ app.get('/users', (req, res) => {
 
 });
 
-
 app.get("/users/:id", (req, res) => {
   const { id } = req.params;
   //comes in as a string
@@ -42,14 +41,26 @@ app.get("/users/:id", (req, res) => {
     })
 })
 
-
-
-
 app.put("/users/:id/avatar/:avatar_id", (req, res) => {
 
   const { id, avatar_id } = req.params;
 
   setAvatar(id, avatar_id)
+    .then(response => {
+      res.status(200).send("Updated");
+    })
+    .catch(error => {
+      console.log("Error in avatar update")
+      res.status(500).send("Not updated");
+    })
+
+})
+
+app.put("/users/:id/initials/:str", (req, res) => {
+
+  const { id, str } = req.params;
+
+  setInitials(id, str)
     .then(response => {
       res.status(200).send("Updated");
     })
@@ -72,6 +83,22 @@ app.get('/games', (req, res) => {
     })
 
 });
+
+app.put('/games/:word', (req, res) => {
+
+  const { word } = req.params;
+
+  makeGame(word)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+
+});
+
+
 
 app.get('/avatars', (req, res) => {
 

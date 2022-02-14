@@ -34,7 +34,7 @@ INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) 
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 5, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 6, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 7, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 8, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 8, 7, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
 
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 2, 3, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 4, 3, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
@@ -43,5 +43,5 @@ INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) 
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 1, 4, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 2, 6, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 3, 1, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 4, 4, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 5, 5, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 4, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 5, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');

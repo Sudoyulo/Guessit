@@ -1,14 +1,25 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './rightSidebar.css'
 
-const Stats = () => {
+const Stats = (props) => {
 
-  //winTimes, totalgames needed from db
+  const { user } = props;
+  let winTimes = [0, 0, 0, 0, 0, 0, 0]; // 1 to 6 
+  let totalGames = user.length;
 
-  let winTimes = [0, 0, 4, 6, 14, 6]; // 1 to 6 
-  let totalGames = 100;
+  const calculateWinTimes = (userData) => {
+    userData.forEach((game) => {
+      winTimes[game.turns_taken - 1]++;
+    })
+  }
+  useEffect(() => {
+    calculateWinTimes(user);
+  }, [])
 
-  let totalWins = winTimes.reduce((sum, i) => sum + i, 0);
+  let totalWins = totalGames - winTimes[6];
+
+  // let totalWins = winTimes.reduce((sum, i) => sum + i, 0);
   let totalWinPercent = (totalWins / totalGames) * 100; //minimum 30 to fill bar
   let maxWin = Math.max(...winTimes) //highest to get percentage of max
   let winPercent = winTimes.map((x) => (x / maxWin * 100) + 15) //min 15 to show 0

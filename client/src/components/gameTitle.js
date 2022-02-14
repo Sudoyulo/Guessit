@@ -1,4 +1,4 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import './gameTitle.css'
 import friendIcon from '../images/friendIcon.png'
 import help from '../images/help.png'
@@ -24,14 +24,14 @@ const GameTitle = (props) => {
   const getUser = () => {
     axios('http://localhost:5001/users/1')
       .then(res => {
-        console.log("RES USER: ", res.data)
+        // console.log("RES USER: ", res.data)
         setUser(res.data)
       })
   }
   const getGame = () => {
     axios('http://localhost:5001/games')
       .then(res => {
-        console.log("RES GAME: ", res.data)
+        // console.log("RES GAME: ", res.data)
         setGame(res.data[0])
       })
   }
@@ -62,7 +62,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Stats") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Stats />)
+      setRightSidebar(<Stats user={user} />)
     }
   }
 
@@ -91,7 +91,7 @@ const GameTitle = (props) => {
       <h1 className="title"> miniWord </h1>
 
       <div className="right-icons">
-        <div className="game-info"> Game id: <br /> &nbsp;&nbsp; #{game.id}</div>
+        <div className="game-info"> Game id: <br /> <div>#{game.id}</div> </div>
         <button onClick={() => { statsOnOff() }} >
           <img className="nav-icon" src={stats} alt="stats" />
         </button>
