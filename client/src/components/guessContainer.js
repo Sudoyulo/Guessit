@@ -3,8 +3,8 @@ import GameTitle from "./gameTitle";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
 
-const GuessContainer = () => {
-  const divRef = useRef()
+const GuessContainer = (props) => {
+  
   const [message, setMessage] = useState("");
   const [pos, setPos] = useState({ row: 0, col: 0 })
   const [board, setBoard] = useState([
@@ -16,7 +16,7 @@ const GuessContainer = () => {
     [" ", " ", " ", " ", " "]
   ])
 
-  const solution = "POLLY";
+  const solution = props.solution;
 
   const guessRows = board.map((row, rowIndex) => {
     return (
