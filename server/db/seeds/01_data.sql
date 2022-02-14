@@ -1,17 +1,47 @@
-INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/turtle.png');
-INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/penguin.png');
-INSERT INTO avatars (avatar_url) VALUES ('server/public/avatars/jelly_fish.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/albatross--v3.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/spider.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/cow--v2.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/dog--v3.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/crab--v1.png');
+
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/starfish--v1.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/bear.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/jellyfish--v2.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/cat--v4.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/owl--v2.png');
+
 -- insert into table. initial data like games and players
 INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('MGS', 1, '2022-01-01 00:00:00', 'x7d3k6');
-INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('DCS', 2, '2022-01-01 00:00:00', 'h6m2b5');
-INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('PBH', 3, '2022-01-01 00:00:00', 'j7m3d6');
+INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('DCS', 2, '2022-01-02 00:00:00', 'h6m2b5');
+INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('PBH', 3, '2022-01-03 00:00:00', 'j7m3d6');
 
+INSERT INTO games (solution) VALUES ('LIGHT');
+INSERT INTO games (solution) VALUES ('ADORE');
+INSERT INTO games (solution) VALUES ('HONOR');
+INSERT INTO games (solution) VALUES ('METAL');
+INSERT INTO games (solution) VALUES ('STEPS');
 
-INSERT INTO games (solution) VALUES ('adore');
-INSERT INTO games (solution) VALUES ('honor');
-INSERT INTO games (solution) VALUES ('metal');
+INSERT INTO games (solution) VALUES ('WATER');
+INSERT INTO games (solution) VALUES ('JOUST');
+INSERT INTO games (solution) VALUES ('CREAM');
+INSERT INTO games (solution) VALUES ('PAPER');
+INSERT INTO games (solution) VALUES ('BOARD');
 
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 1, 4, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 1, 3, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 1, 4, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 2, 2, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 3, 6, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 4, 6, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 5, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 6, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 7, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 8, 7, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
 
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 2, 3, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 4, 3, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 5, 4, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
+
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 1, 4, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 2, 6, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 3, 1, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 4, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 5, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');

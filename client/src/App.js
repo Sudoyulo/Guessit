@@ -2,8 +2,6 @@ import React, { Fragment, useState } from 'react';
 import './App.css';
 
 import GameTitle from './components/gameTitle';
-import GuessContainer from './components/guessContainer';
-
 import Blank from './components/blank';
 
 function App() {
@@ -19,7 +17,7 @@ function App() {
       </div>
       <div className='main-view' >
         <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />
-        <GuessContainer />
+
       </div>
       <div className='right-sidebar'>
         {rightSidebar}

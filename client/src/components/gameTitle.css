@@ -18,8 +18,14 @@ button:hover {
   cursor: pointer;
 }
 
-.game-info {
-  background-color: grey;
+.game-info{
+  border-radius: 10px;
+  background-color: gray;
+  width: 75px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .nav-icon {
