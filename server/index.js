@@ -9,7 +9,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const pool = new Pool(dbParams);
-const { getUsers, getUser, getGames, makeGame, getAvatars, setAvatar, setInitials, getStats } = require('./query_helpers')
+const { getUsers, getUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, getStats } = require('./query_helpers')
 
 
 app.use(cors());
@@ -83,6 +83,21 @@ app.get('/games', (req, res) => {
     })
 
 });
+
+app.get('/game/:id', (req, res) => {
+
+  const { id } = req.params;
+
+  getGame(id)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+
+});
+
 
 app.put('/games/:word', (req, res) => {
 

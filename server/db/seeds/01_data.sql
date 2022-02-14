@@ -1,14 +1,14 @@
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977402.png?token=exp=1644783297~hmac=cb81c293070c515da2bbe9a4c6d561b1');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977359.png?token=exp=1644783300~hmac=531b2a25ac3fe2e562d405340e554f36');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977384.png?token=exp=1644783404~hmac=9c1d3dd712d9db1bbd23a5a49bd8c4bc');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977318.png?token=exp=1644783429~hmac=4bd70c84ff52f80d6b32dfef0fac59ce');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977333.png?token=exp=1644783464~hmac=2a65c8a15b3509a4fe07f5092803dd8f');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/albatross--v3.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/spider.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/cow--v2.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/dog--v3.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/crab--v1.png');
 
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977380.png?token=exp=1644783480~hmac=d8ab8e1edc660c4195dd89e2b34cb0ef');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977311.png?token=exp=1644783493~hmac=fe8a3f41aaba396a0f8b396dd7fff109');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977392.png?token=exp=1644783533~hmac=f9a4a044eacb52aa8712783cb714d30e');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977351.png?token=exp=1644783545~hmac=8cf6862219c7906c8de863f16db8ec05');
-INSERT INTO avatars (avatar_url) VALUES ('https://cdn-icons.flaticon.com/png/512/2977/premium/2977361.png?token=exp=1644783533~hmac=62a0eea150dc51dcd47f918fc1a486ae');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/starfish--v1.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/bear.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/jellyfish--v2.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/cat--v4.png');
+INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/owl--v2.png');
 
 -- insert into table. initial data like games and players
 INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('MGS', 1, '2022-01-01 00:00:00', 'x7d3k6');

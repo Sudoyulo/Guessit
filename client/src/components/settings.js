@@ -2,9 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './rightSidebar.css'
 
-const Settings = () => {
+const Settings = (props) => {
 
   const [gameAmount, setGameAmount] = useState([])
+  const [search, setSearch] = useState(0)
+  const { getGame } = props;
 
   const getGames = () => {
     axios('http://localhost:5001/games')
@@ -41,10 +43,10 @@ const Settings = () => {
       <p className="stat-title">Settings </p>
       <div className="setting-container">
         Find a game
-        <select onChange={(e) => { console.log(e.target.value) }}>
+        <select onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button>Search</button>
+        <button onClick={() => { getGame(search) }}>Search</button>
       </div>
       <div className="setting-container">
         Create a game

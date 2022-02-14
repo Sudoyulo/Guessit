@@ -37,6 +37,15 @@ const getGames = () => {
   })
 }
 
+const getGame = (id) => {
+
+  return pool.query('SELECT * FROM games WHERE id = $1', [id])
+    .then(results => {
+      return results.rows[0];
+    })
+
+}
+
 const makeGame = (word) => {
 
   return pool.query('INSERT INTO games (solution) VALUES ($1);', [word])
@@ -91,6 +100,7 @@ module.exports = {
   getUsers,
   getUser,
   getGames,
+  getGame,
   makeGame,
   getAvatars,
   setAvatar,

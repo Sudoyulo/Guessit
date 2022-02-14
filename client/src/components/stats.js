@@ -1,16 +1,18 @@
 import React, { useState, useEffect } from "react";
-import axios from "axios";
 import './rightSidebar.css'
 
 const Stats = (props) => {
 
+  const [winTimes, setWinTimes] = useState([0, 0, 0, 0, 0, 0, 0])
   const { user } = props;
-  let winTimes = [0, 0, 0, 0, 0, 0, 0]; // 1 to 6 
+
+  let calcTimes = [0, 0, 0, 0, 0, 0, 0]; // 1 to 6 
   let totalGames = user.length;
 
   const calculateWinTimes = (userData) => {
     userData.forEach((game) => {
-      winTimes[game.turns_taken - 1]++;
+      calcTimes[game.turns_taken - 1]++;
+      setWinTimes(calcTimes)
     })
   }
   useEffect(() => {
