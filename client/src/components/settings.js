@@ -33,7 +33,7 @@ const Settings = (props) => {
 
   const gameLinks = gameAmount.map((gameid) => {
     return (
-      <option value={gameid}> {gameid}</option>
+      <option key={gameid} value={gameid}> {gameid}</option>
     )
   })
 

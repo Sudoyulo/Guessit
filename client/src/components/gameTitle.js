@@ -53,7 +53,7 @@ const GameTitle = (props) => {
 
   useEffect(() => {
     getGame();
-  }, [game]);
+  }, []);
 
   const helpOnOff = () => {
     if (leftSidebar.type.name === "Help") {

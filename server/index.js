@@ -86,7 +86,11 @@ app.get('/games', (req, res) => {
 
 app.get('/game/:id', (req, res) => {
 
-  const { id } = req.params;
+  let { id } = req.params;
+
+  if (id === "undefined") {
+    id = 0;
+  }
 
   getGame(id)
     .then(response => {
@@ -97,7 +101,6 @@ app.get('/game/:id', (req, res) => {
     })
 
 });
-
 
 app.put('/games/:word', (req, res) => {
 

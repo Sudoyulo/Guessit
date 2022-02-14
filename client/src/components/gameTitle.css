@@ -19,6 +19,7 @@ button:hover {
 }
 
 .game-info{
+  border-radius: 10px;
   background-color: gray;
   width: 75px;
   display: flex;

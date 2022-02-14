@@ -39,6 +39,13 @@ const getGames = () => {
 
 const getGame = (id) => {
 
+  if (id === 0) {
+    return pool.query('SELECT * FROM games ORDER BY id desc LIMIT 1')
+      .then(results => {
+        return results.rows[0];
+      })
+  }
+
   return pool.query('SELECT * FROM games WHERE id = $1', [id])
     .then(results => {
       return results.rows[0];
