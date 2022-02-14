@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import './leftSidebar.css'
 import axios from "axios";
 
-const MiniFriends = (props) => {
+const Followers = (props) => {
 
   const { userAvatar, userInitials, user_id } = props;
 
@@ -130,4 +130,4 @@ const MiniFriends = (props) => {
   );
 
 }
-export default MiniFriends;
+export default Followers;

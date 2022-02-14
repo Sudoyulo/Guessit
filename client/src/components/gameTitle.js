@@ -7,7 +7,7 @@ import settings from '../images/settings.png'
 import axios from 'axios';
 
 import Help from "./help";
-import MiniFriends from "./miniFriends";
+import Followers from "./followers";
 import Stats from "./stats";
 import Blank from "./blank";
 import Settings from "./settings";
@@ -63,11 +63,11 @@ const GameTitle = (props) => {
     }
   }
 
-  const minifriendOnOff = () => {
-    if (leftSidebar.type.name === "MiniFriends") {
+  const followerOnOff = () => {
+    if (leftSidebar.type.name === "Followers") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<MiniFriends user_id={user[0].user_id} userAvatar={user[0].avatar_url} userInitials={user[0].initials} />)
+      setLeftSidebar(<Followers user_id={user[0].user_id} userAvatar={user[0].avatar_url} userInitials={user[0].initials} />)
     }
   }
 
@@ -95,8 +95,8 @@ const GameTitle = (props) => {
           <button onClick={() => { helpOnOff() }} >
             <img className="nav-icon" src={help} alt="help" />
           </button>
-          <button onClick={() => { minifriendOnOff() }} >
-            <img className="nav-icon" src={friendIcon} alt="minifriends" />
+          <button onClick={() => { followerOnOff() }} >
+            <img className="nav-icon" src={friendIcon} alt="follower" />
           </button>
           <div className="game-info"> Your id: <br /> {user[0] ? user[0].player_id : ""} </div>
         </div>
