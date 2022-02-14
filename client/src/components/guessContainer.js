@@ -1,9 +1,10 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { Fragment, useState, useEffect, useRef } from "react";
+import GameTitle from "./gameTitle";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
 
 const GuessContainer = (props) => {
-
+  
   const [message, setMessage] = useState("");
   const [pos, setPos] = useState({ row: 0, col: 0 })
   const [board, setBoard] = useState([
@@ -23,14 +24,45 @@ const GuessContainer = (props) => {
         row.map((col, colIndex) => {
           let color = "black";
           return (
-            <div key={col + colIndex} style={{ backgroundColor: color }} className={"col col-" + colIndex}> {col}</div>
+            <div id={rowIndex.toString() + colIndex.toString()} key={col + colIndex} style={{ backgroundColor: color }} className={"col col-" + colIndex}>{col}</div>
           )
         })
       }</div>
     );
   })
 
+  const flipTile = () => {
+
+    let userGuess = board[pos.row]
+    let answer = solution.split('')
+
+
+    userGuess.forEach((letter, index) => {
+      const tile = document.getElementById(pos.row.toString() + index.toString())
+
+      if (letter === answer[index]) {
+        setTimeout(()=>{
+          tile.classList.add('green-overlay')
+        }, 500 * index)
+      } else if (answer.includes(letter)) {
+        setTimeout(()=>{
+          tile.classList.add('yellow-overlay')
+        }, 500 * index)
+      } else {
+        setTimeout(()=>{
+          tile.classList.add('grey-overlay')
+        }, 500 * index)
+      }
+    })
+  };
+
+  const flipKey = (key) => {
+    
+  }
+  
   const handleKeypress = (key) => {
+    
+    console.log("KEY: ", key)
 
     const copyBoard = [...board];
 
@@ -47,12 +79,13 @@ const GuessContainer = (props) => {
     }
 
     const handleEnter = () => {
-
-      //pointer is out of bounds === 5 meaning 0-4 is filled up
+     
       if (pos.col === 5) {
+        flipTile()
         let userGuess = board[pos.row].join('')
 
         if (solution === userGuess) {
+          
           //correct
           setMessage("Perfect")
           //setTimeout(() => { setMessage("") }, 2000)
@@ -94,7 +127,7 @@ const GuessContainer = (props) => {
     } else {
       addLetter(key);
     }
-
+    
   }
 
 
