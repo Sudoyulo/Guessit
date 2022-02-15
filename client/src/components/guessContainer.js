@@ -1,22 +1,15 @@
 import React, { Fragment, useState, useEffect, useRef } from "react";
-import GameTitle from "./gameTitle";
+import axios from "axios";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
+// import { getUser } from "../../../server/query_helpers";
 
 const GuessContainer = (props) => {
-  
-  const [message, setMessage] = useState("");
-  const [pos, setPos] = useState({ row: 0, col: 0 })
-  const [board, setBoard] = useState([
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "]
-  ])
 
-  const solution = props.solution;
+  const [message, setMessage] = useState("");
+  const [userGame, setUserGame] = useState([]);
+
+  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
 
   const guessRows = board.map((row, rowIndex) => {
     return (
@@ -36,32 +29,82 @@ const GuessContainer = (props) => {
     let userGuess = board[pos.row]
     let answer = solution.split('')
 
-
     userGuess.forEach((letter, index) => {
       const tile = document.getElementById(pos.row.toString() + index.toString())
 
       if (letter === answer[index]) {
-        setTimeout(()=>{
+        setTimeout(() => {
           tile.classList.add('green-overlay')
         }, 500 * index)
       } else if (answer.includes(letter)) {
-        setTimeout(()=>{
+        setTimeout(() => {
           tile.classList.add('yellow-overlay')
         }, 500 * index)
       } else {
-        setTimeout(()=>{
+        setTimeout(() => {
           tile.classList.add('grey-overlay')
         }, 500 * index)
       }
     })
   };
 
-  const flipKey = (key) => {
-    
+  const getUserGame = (user, gid) => {
+    // console.log("getting game", user, gid)
+
+    if (user[0] && gid) {
+      // console.log("fetching", user[0].user_id, gameId)
+      axios('http://localhost:5001/user_game/' + user[0].user_id + "/" + gid)
+        .then(res => {
+          // console.log("usergame", res.data.rows)
+          setUserGame(res.data.rows)
+        })
+    }
+
   }
-  
+
+  const makeUserGame = (user, gid, guess) => {
+    console.log("making game", user, gid, guess)
+
+    if (user[0] && gid && guess) {
+      console.log("making", user[0].user_id, gameId, guess)
+      axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess)
+        .then(res => {
+          console.log("make", res.data.rows)
+          setUserGame(res.data.rows)
+        })
+    }
+
+  }
+
+  // console.log("user", user);
+  //  console.log("cg gid", completedGames, gameId)
+
+  const saveGuess = (guess, row) => {
+    console.log("guess, row num, ugid", guess, row, userGame[0].id)
+
+    axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + row + "/" + guess)
+      .then(res => {
+        console.log("inserted new guess")
+      })
+  };
+
+  const saveNewGuess = (ugid, guess) => {
+    console.log("new ugid guess", ugid, guess)
+    //Why wont you connect to the router? error 500
+    axios.put('http://localhost:5001/guess/new/' + ugid + "/" + guess)
+      .then(res => {
+        console.log("inserted new guess")
+      })
+  };
+
+
+  useEffect(() => {
+    getUserGame(user, gameId);
+  }, [userGame])
+
+
   const handleKeypress = (key) => {
-    
+
     console.log("KEY: ", key)
 
     const copyBoard = [...board];
@@ -79,13 +122,64 @@ const GuessContainer = (props) => {
     }
 
     const handleEnter = () => {
-     
+
+
+      //saveGuess(userGuess, pos.row + 1)
+
+
       if (pos.col === 5) {
         flipTile()
         let userGuess = board[pos.row].join('')
+        let goodGuess = true; // this is a real word
 
+        if (goodGuess) {
+
+          if (!completedGames.includes(gameId)) { //not completed game
+
+            if (userGame.length === 0) { // user_game doesnt exist
+              console.log("create new user_game and guesses", user[0].user_id, gameId)
+              makeUserGame(user, gameId, userGuess)
+              getUserGame(user, gameId)
+              console.log("first guess, making new guesses table", userGame)
+            } else { //continuing a game
+
+              if (solution === userGuess) {
+                //correct
+                setMessage("Perfect")
+                //setTimeout(() => { setMessage("") }, 2000)
+                // set complete time, get guess, set complete in x turns
+              } else { // move on
+                setPos({ ...pos, row: pos.row + 1, col: 0 })
+                console.log("moving on")
+
+                if (pos.row < 6) {
+                  console.log("more guesses left ugid row", userGame, pos.row + 1)
+                  //move on
+                  setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
+                  saveGuess(userGuess, pos.row + 1)
+                  console.log("saved guess to existing guesses row")
+                  //update guesses
+                  setTimeout(() => { setMessage("") }, 2000)
+                } else {
+                  setMessage("Game over")
+                } //end row < 5
+              }
+
+            }
+
+
+          } else {
+            console.log("You have finished this game already")
+          }
+
+
+        } else {
+          console.log("not a good word")
+        }
+
+        /////////////
         if (solution === userGuess) {
-          
+
           //correct
           setMessage("Perfect")
           //setTimeout(() => { setMessage("") }, 2000)
@@ -100,7 +194,7 @@ const GuessContainer = (props) => {
             setMessage("Game over")
           }
         }
-
+        /////////////
       } else { //reject the enter button
         setMessage("need a 5 letter word")
         setTimeout(() => { setMessage("") }, 2000)
@@ -127,16 +221,8 @@ const GuessContainer = (props) => {
     } else {
       addLetter(key);
     }
-    
+
   }
-
-
-  // useEffect(() => { //after >5 always show game over
-  //   if (pos.row > 5) {
-  //     setMessage("Game over")
-  //   }
-  // }, [pos])
-
 
   return (
     <Fragment >

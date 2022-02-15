@@ -4,9 +4,10 @@ import './rightSidebar.css'
 
 const Settings = (props) => {
 
-  const [gameAmount, setGameAmount] = useState([])
-  const [search, setSearch] = useState(0)
-  const { getGame } = props;
+  const [gameAmount, setGameAmount] = useState([]);
+  const [search, setSearch] = useState(1);
+  const [completedGames, setCompletedGames] = useState([]);
+  const { getGame, resetBoard, user } = props;
 
   const getGames = () => {
     axios('http://localhost:5001/games')
@@ -15,7 +16,8 @@ const Settings = (props) => {
         res.data.forEach((id) => {
           list.push(id.id)
         })
-        setGameAmount(list)
+        setGameAmount(list);
+
       })
   }
 
@@ -27,13 +29,34 @@ const Settings = (props) => {
       })
   }
 
+
+
+  const readCompletedgames = (userId) => {
+
+    let list = [];
+    userId.forEach((game) => {
+      list.push(game.game_id);
+    })
+
+    setCompletedGames(list)
+    console.log(completedGames)
+  }
+
+
   useEffect(() => {
+    readCompletedgames(user);
     getGames();
   }, [])
 
   const gameLinks = gameAmount.map((gameid) => {
+    let icon = "🛑 Not yet";
+
+    if (completedGames.includes(gameid)) {
+      icon = "✅ Done";
+    }
+
     return (
-      <option key={gameid} value={gameid}> {gameid}</option>
+      <option key={gameid} value={gameid}> {gameid} {icon} </option>
     )
   })
 
@@ -43,10 +66,10 @@ const Settings = (props) => {
       <p className="stat-title">Settings </p>
       <div className="setting-container">
         Find a game
-        <select onChange={(e) => { setSearch(e.target.value) }}>
+        <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search) }}>Search</button>
+        <button onClick={() => { getGame(search); resetBoard(); }}>Search</button>
       </div>
       <div className="setting-container">
         Create a game
