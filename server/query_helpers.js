@@ -102,10 +102,7 @@ const createUserGame = (uid, gid, guess) => {
   pool.query("SELECT id FROM user_game ORDER BY id desc LIMIT 1")
     .then(results => {
 
-      console.log("please show", results.rows[0].id)
-      //create guesses with guess and result
-
-      pool.query("INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp) VALUES ($1, $2, NOW())", [results.rows[0].id + 1, guess])
+      pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
         .then(results => {
           return results;
         })
@@ -123,24 +120,34 @@ const getUserStats = (uid, gid) => {
     })
 }
 
-const saveGuess = (id, row, guess) => {
+const saveWin = (turns, gid) => {
 
-  return pool.query("UPDATE guesses SET row" + row + "guess = $1, row" + row + "timestamp = NOW() WHERE user_game_id = $2;", [guess, id])
+  return pool.query("UPDATE user_game SET turns_taken = $1, won_on = NOW() WHERE id = $2;", [turns, gid])
     .then(results => {
       return results;
     })
 
 }
 
-const saveNewGuess = (ugid, guess) => {
-  console.log("saving new", ugid, guess)
 
-  return pool.query("INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp) VALUES ($1, $2, NOW())", [ugid, guess])
+const saveGuess = (id, guess) => {
+
+  return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [id, guess])
     .then(results => {
       return results;
     })
 
 }
+
+// const saveNewGuess = (ugid, guess) => {
+//   console.log("saving new", ugid, guess)
+
+//   return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [ugid, guess])
+//     .then(results => {
+//       return results;
+//     })
+
+// }
 
 
 module.exports = {
@@ -154,6 +161,6 @@ module.exports = {
   setInitials,
   createUserGame,
   getUserStats,
+  saveWin,
   saveGuess,
-  saveNewGuess
 }

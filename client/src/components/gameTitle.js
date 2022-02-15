@@ -45,7 +45,7 @@ const GameTitle = (props) => {
   };
 
   const getUser = () => {
-    axios('http://localhost:5001/users/1')
+    axios('http://localhost:5001/users/2')
       .then(res => {
         // console.log("RES USER: ", res.data)
         setUser(res.data)
@@ -86,10 +86,10 @@ const GameTitle = (props) => {
   }, [user]);
 
   const helpOnOff = () => {
-    if (leftSidebar.type.name === "Help") {
-      setLeftSidebar(<Blank />)
+    if (rightSidebar.type.name === "Help") {
+      setRightSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Help />)
+      setRightSidebar(<Help />)
     }
   }
 
@@ -102,10 +102,10 @@ const GameTitle = (props) => {
   }
 
   const statsOnOff = () => {
-    if (rightSidebar.type.name === "Stats") {
-      setRightSidebar(<Blank />)
+    if (leftSidebar.type.name === "Stats") {
+      setLeftSidebar(<Blank />)
     } else {
-      setRightSidebar(<Stats user={user} />)
+      setLeftSidebar(<Stats user={user} />)
     }
   }
 
@@ -123,8 +123,8 @@ const GameTitle = (props) => {
     <div className="main-view">
       <div className="gameNav">
         <div className="left-icons">
-          <button onClick={() => { helpOnOff() }} >
-            <img className="nav-icon" src={help} alt="help" />
+          <button onClick={() => { statsOnOff() }} >
+            <img className="nav-icon" src={stats} alt="stats" />
           </button>
           <button onClick={() => { followerOnOff() }} >
             <img className="nav-icon" src={friendIcon} alt="follower" />
@@ -137,8 +137,8 @@ const GameTitle = (props) => {
 
         <div className="right-icons">
           <div className="game-info"> Game id: <br /> <div>#{game.id}</div> </div>
-          <button onClick={() => { statsOnOff() }} >
-            <img className="nav-icon" src={stats} alt="stats" />
+          <button onClick={() => { helpOnOff() }} >
+            <img className="nav-icon" src={help} alt="help" />
           </button>
           <button onClick={() => { settingsOnOff() }}>
             <img className="nav-icon" src={settings} alt="settings" />

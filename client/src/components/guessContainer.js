@@ -5,7 +5,7 @@ import Keyboard from "./keyboard";
 
 
 const GuessContainer = (props) => {
-  
+
   const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
 
   const [message, setMessage] = useState("");
@@ -24,7 +24,7 @@ const GuessContainer = (props) => {
       }</div>
     );
   })
-  
+
   const changeKeyColour = (key, colour) => {
     const button = document.getElementById(key)
     button.classList.add(colour)
@@ -39,37 +39,37 @@ const GuessContainer = (props) => {
 
     userGuess.forEach((tile, index) => {
       tile = document.getElementById(pos.row.toString() + index.toString())
-      guess.push({lett: tile.textContent, colour: 'grey-overlay'})
-  
-      guess.forEach((guess, index)=>{
+      guess.push({ lett: tile.textContent, colour: 'grey-overlay' })
+
+      guess.forEach((guess, index) => {
         if (guess.lett === answer[index]) {
           guess.colour = 'green-overlay'
           checkSolution = checkSolution.replace(guess.lett, '')
         }
       })
-  
+
       guess.forEach(guess => {
         if (checkSolution.includes(guess.lett)) {
           guess.colour = 'yellow-overlay'
           checkSolution = checkSolution.replace(guess.lett, '')
         }
-    })
+      })
 
-      setTimeout(()=>{
+      setTimeout(() => {
         tile.classList.add('flip')
         tile.classList.add(guess[index].colour)
       }, 500 * index)
 
-      setTimeout(()=>{
+      setTimeout(() => {
         changeKeyColour(guess[index].lett, guess[index].colour)
       }, 2500)
 
     })
   };
 
-  
-  
-    
+
+
+
 
   const getUserGame = (user, gid) => {
     // console.log("getting game", user, gid)
@@ -102,23 +102,24 @@ const GuessContainer = (props) => {
   // console.log("user", user);
   //  console.log("cg gid", completedGames, gameId)
 
-  const saveGuess = (guess, row) => {
-    console.log("guess, row num, ugid", guess, row, userGame[0].id)
+  const saveGuess = (guess) => {
+    console.log("guess, row num, ugid", guess, userGame[0].id)
 
-    axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + row + "/" + guess)
+    axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess)
       .then(res => {
         console.log("inserted new guess")
       })
   };
 
-  const saveNewGuess = (ugid, guess) => {
-    console.log("new ugid guess", ugid, guess)
-    //Why wont you connect to the router? error 500
-    axios.put('http://localhost:5001/guess/new/' + ugid + "/" + guess)
+  const saveWin = (turns, gid) => {
+    console.log("saving won game", turns, gid)
+
+    axios.put('http://localhost:5001/win_user_game/' + turns + "/" + gid)
       .then(res => {
-        console.log("inserted new guess")
+        console.log("inserted new win")
       })
   };
+
 
 
   useEffect(() => {
@@ -169,8 +170,9 @@ const GuessContainer = (props) => {
               if (solution === userGuess) {
                 //correct
                 setMessage("Perfect")
+                saveWin(pos.row + 1, gameId)
                 //setTimeout(() => { setMessage("") }, 2000)
-                // set complete time, get guess, set complete in x turns
+
               } else { // move on
                 setPos({ ...pos, row: pos.row + 1, col: 0 })
                 console.log("moving on")
@@ -179,7 +181,7 @@ const GuessContainer = (props) => {
                   console.log("more guesses left ugid row", userGame, pos.row + 1)
                   //move on
                   setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
-                  saveGuess(userGuess, pos.row + 1)
+                  saveGuess(userGuess)
                   console.log("saved guess to existing guesses row")
                   //update guesses
                   setTimeout(() => { setMessage("") }, 2000)
@@ -202,7 +204,7 @@ const GuessContainer = (props) => {
 
         /////////////
         if (solution === userGuess) {
-
+          console.log("pos", pos)
           //correct
           setMessage("Perfect")
           //setTimeout(() => { setMessage("") }, 2000)
@@ -225,8 +227,11 @@ const GuessContainer = (props) => {
     }
 
     const addLetter = (letter) => {
+      // console.log("pos", pos)
       //pointer is in bounds < 5 meaning 0-4 is not filled up
-      if (pos.col < 5) {
+      if (pos.row > 5) {
+        setMessage("Game over")
+      } else if (pos.col < 5) {
         copyBoard[pos.row][pos.col] = letter
         setBoard(copyBoard)
         setPos({ ...pos, col: pos.col + 1 })

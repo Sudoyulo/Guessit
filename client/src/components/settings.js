@@ -65,11 +65,11 @@ const Settings = (props) => {
     <div className="right-sidebar">
       <p className="stat-title">Settings </p>
       <div className="setting-container">
-        Find a game
+        Load a game
         <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); resetBoard(); }}>Search</button>
+        <button onClick={() => { getGame(search); resetBoard(); }}>Load</button>
       </div>
       <div className="setting-container">
         Create a game
