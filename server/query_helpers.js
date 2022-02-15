@@ -94,13 +94,11 @@ const createUserGame = (uid, gid, guess) => {
 
   pool.query("INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1,$2, NOW()) RETURNING *;", [uid, gid])
     .then(results => {
-      console.log("after insert", results)
 
       pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
         .then(results => {
-          return results;
-        })
 
+        })
 
     })
 
@@ -114,9 +112,9 @@ const getUserStats = (uid, gid) => {
     })
 }
 
-const saveWin = (turns, gid) => {
+const saveWin = (turns, ugid) => {
 
-  return pool.query("UPDATE user_game SET turns_taken = $1, won_on = NOW() WHERE id = $2;", [turns, gid])
+  return pool.query("UPDATE user_game SET turns_taken = $1, won_on = NOW() WHERE id = $2;", [turns, ugid])
     .then(results => {
       return results;
     })

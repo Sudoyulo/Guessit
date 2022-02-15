@@ -68,9 +68,6 @@ const GuessContainer = (props) => {
   };
 
 
-
-
-
   const getUserGame = (user, gid) => {
     // console.log("getting game", user, gid)
 
@@ -111,10 +108,10 @@ const GuessContainer = (props) => {
       })
   };
 
-  const saveWin = (turns, gid) => {
-    console.log("saving won game", turns, gid)
+  const saveWin = (turns) => {
+    console.log("saving won game", turns);
 
-    axios.put('http://localhost:5001/win_user_game/' + turns + "/" + gid)
+    axios.put('http://localhost:5001/win_user_game/' + turns + "/" + userGame[0].id)
       .then(res => {
         console.log("inserted new win")
       })
@@ -147,7 +144,6 @@ const GuessContainer = (props) => {
 
     const handleEnter = () => {
 
-
       //saveGuess(userGuess, pos.row + 1)
 
 
@@ -155,6 +151,7 @@ const GuessContainer = (props) => {
         flipTile()
         let userGuess = board[pos.row].join('')
         let goodGuess = true; // this is a real word
+        console.log("solution guess", solution, userGuess)
 
         if (goodGuess) {
 
@@ -165,12 +162,25 @@ const GuessContainer = (props) => {
               makeUserGame(user, gameId, userGuess)
               getUserGame(user, gameId)
               console.log("first guess, making new guesses table", userGame)
+
+
+              if (solution === userGuess) {
+                //correct
+                console.log("FIRST GUESS WIN??!?!?")
+                setMessage("Perfect")
+                saveGuess(userGuess)
+                saveWin(pos.row + 1)
+                //setTimeout(() => { setMessage("") }, 2000)
+
+              }
+
             } else { //continuing a game
 
               if (solution === userGuess) {
                 //correct
                 setMessage("Perfect")
-                saveWin(pos.row + 1, gameId)
+                saveGuess(userGuess)
+                saveWin(pos.row + 1)
                 //setTimeout(() => { setMessage("") }, 2000)
 
               } else { // move on

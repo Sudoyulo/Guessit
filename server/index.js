@@ -159,11 +159,11 @@ app.get('/user_game/:uid/:gid', (req, res) => {
 });
 
 //set game as completed in x turns
-app.get('/win_user_game/:turns/:gid', (req, res) => {
+app.put('/win_user_game/:turns/:ugid', (req, res) => {
 
-  const { turns, gid } = req.params;
+  const { turns, ugid } = req.params;
 
-  saveWin(turns, gid)
+  saveWin(turns, ugid)
     .then(response => {
       res.status(200).send(response);
     })
