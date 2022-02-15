@@ -19,6 +19,7 @@ const GameTitle = (props) => {
   const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
+  const [completedGames, setCompletedGames] = useState([]);
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -44,7 +45,7 @@ const GameTitle = (props) => {
   };
 
   const getUser = () => {
-    axios('http://localhost:5001/users/1')
+    axios('http://localhost:5001/users/2')
       .then(res => {
         // console.log("RES USER: ", res.data)
         setUser(res.data)
@@ -64,11 +65,25 @@ const GameTitle = (props) => {
       })
   }
 
+  const readCompletedgames = (user) => {
+
+    let list = [];
+    user.forEach((game) => {
+      list.push(game.id);
+    })
+
+    setCompletedGames(list)
+  }
+
   useEffect(() => {
     getUser();
     getGames();
     getGame();
   }, []);
+
+  useEffect(() => {
+    readCompletedgames(user);
+  }, [user]);
 
   const helpOnOff = () => {
     if (leftSidebar.type.name === "Help") {
@@ -98,10 +113,11 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} />)
+      setRightSidebar(<Settings user={user} resetBoard={resetBoard} getGame={getGame} />)
     }
   }
   //user[0].player_id
+
   return (
 
     <div className="main-view">
@@ -130,7 +146,7 @@ const GameTitle = (props) => {
         </div>
 
       </div >
-      <GuessContainer board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} />
+      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
     </div>
   );
 }

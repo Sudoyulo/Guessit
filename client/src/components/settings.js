@@ -4,9 +4,10 @@ import './rightSidebar.css'
 
 const Settings = (props) => {
 
-  const [gameAmount, setGameAmount] = useState([])
-  const [search, setSearch] = useState(1)
-  const { getGame, resetBoard } = props;
+  const [gameAmount, setGameAmount] = useState([]);
+  const [search, setSearch] = useState(1);
+  const [completedGames, setCompletedGames] = useState([]);
+  const { getGame, resetBoard, user } = props;
 
   const getGames = () => {
     axios('http://localhost:5001/games')
@@ -28,13 +29,34 @@ const Settings = (props) => {
       })
   }
 
+
+
+  const readCompletedgames = (userId) => {
+
+    let list = [];
+    userId.forEach((game) => {
+      list.push(game.game_id);
+    })
+
+    setCompletedGames(list)
+    console.log(completedGames)
+  }
+
+
   useEffect(() => {
+    readCompletedgames(user);
     getGames();
   }, [])
 
   const gameLinks = gameAmount.map((gameid) => {
+    let icon = "🛑 Not yet";
+
+    if (completedGames.includes(gameid)) {
+      icon = "✅ Done";
+    }
+
     return (
-      <option key={gameid} value={gameid}> {gameid}</option>
+      <option key={gameid} value={gameid}> {gameid} {icon} </option>
     )
   })
 

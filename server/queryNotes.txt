@@ -1,4 +1,4 @@
-SELECT * 
+SELECT * , user_game.id AS ugid
 FROM users 
 INNER JOIN avatars ON users.avatar_id = avatars.id 
 INNER JOIN user_game ON users.id = user_game.user_id
@@ -21,3 +21,30 @@ INNER JOIN avatars ON users.avatar_id = avatars.id
 INNER JOIN user_game ON users.id = user_game.user_id
 INNER JOIN games ON user_game.game_id = games.id
 WHERE users.id = 1;
+
+gets the guesses
+SELECT users.id, user_game.id, row1guess, row2guess
+FROM users 
+INNER JOIN user_game ON users.id = user_game.user_id
+INNER JOIN games ON user_game.game_id = games.id
+INNER JOIN guesses ON user_game.id = guesses.user_game_id
+WHERE users.id = 1;
+
+UPDATE guesses SET row3guess = 'HAPPY', row3timestamp = NOW() WHERE id = 1;
+
+SELECT user_game.id
+FROM users 
+INNER JOIN avatars ON users.avatar_id = avatars.id 
+INNER JOIN user_game ON users.id = user_game.user_id
+INNER JOIN games ON user_game.game_id = games.id
+WHERE users.id = 1;
+
+game_id + user_id -> user_game_id
+
+SELECT *
+from user_game
+WHERE user_id = 2 AND game_id = 2;
+
+INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp) VALUES (3, 'HOUSE', NOW());
+
+select id, user_game_id, row1guess, row1timestamp from guesses;

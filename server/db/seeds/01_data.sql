@@ -45,3 +45,5 @@ INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) 
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 3, 1, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 4, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
 INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 5, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+
+INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp, row2Guess, row2Timestamp) VALUES (1, 'HOUSE', '2022-01-01 01:11:55', 'WATER', '2022-01-01 01:14:55')
