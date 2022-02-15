@@ -1,15 +1,16 @@
-import React, { Fragment, useState, useEffect, useRef } from "react";
+import React, { Fragment, useState, useEffect } from "react";
 import axios from "axios";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
-// import { getUser } from "../../../server/query_helpers";
+
 
 const GuessContainer = (props) => {
+  
+  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
 
   const [message, setMessage] = useState("");
   const [userGame, setUserGame] = useState([]);
 
-  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
 
   const guessRows = board.map((row, rowIndex) => {
     return (
@@ -23,30 +24,52 @@ const GuessContainer = (props) => {
       }</div>
     );
   })
-
+  
+  const changeKeyColour = (key, colour) => {
+    const button = document.getElementById(key)
+    button.classList.add(colour)
+  }
   const flipTile = () => {
 
     let userGuess = board[pos.row]
-    let answer = solution.split('')
+    let answer = solution
+    let checkSolution = answer
+    let guess = []
 
-    userGuess.forEach((letter, index) => {
-      const tile = document.getElementById(pos.row.toString() + index.toString())
 
-      if (letter === answer[index]) {
-        setTimeout(() => {
-          tile.classList.add('green-overlay')
-        }, 500 * index)
-      } else if (answer.includes(letter)) {
-        setTimeout(() => {
-          tile.classList.add('yellow-overlay')
-        }, 500 * index)
-      } else {
-        setTimeout(() => {
-          tile.classList.add('grey-overlay')
-        }, 500 * index)
-      }
+    userGuess.forEach((tile, index) => {
+      tile = document.getElementById(pos.row.toString() + index.toString())
+      guess.push({lett: tile.textContent, colour: 'grey-overlay'})
+  
+      guess.forEach((guess, index)=>{
+        if (guess.lett === answer[index]) {
+          guess.colour = 'green-overlay'
+          checkSolution = checkSolution.replace(guess.lett, '')
+        }
+      })
+  
+      guess.forEach(guess => {
+        if (checkSolution.includes(guess.lett)) {
+          guess.colour = 'yellow-overlay'
+          checkSolution = checkSolution.replace(guess.lett, '')
+        }
+    })
+
+      setTimeout(()=>{
+        tile.classList.add('flip')
+        tile.classList.add(guess[index].colour)
+      }, 500 * index)
+
+      setTimeout(()=>{
+        changeKeyColour(guess[index].lett, guess[index].colour)
+      }, 2500)
+
     })
   };
+
+  
+  
+    
 
   const getUserGame = (user, gid) => {
     // console.log("getting game", user, gid)
