@@ -4,7 +4,7 @@ import './guessContainer.css'
 import Keyboard from "./keyboard";
 
 const GuessContainer = (props) => {
-  
+
   const [message, setMessage] = useState("");
   const [pos, setPos] = useState({ row: 0, col: 0 })
   const [board, setBoard] = useState([
@@ -16,7 +16,8 @@ const GuessContainer = (props) => {
     [" ", " ", " ", " ", " "]
   ])
 
-  const solution = props.solution;
+  const solution = "BOOKS";
+  console.log("SOLUTION: ", solution)
 
   const guessRows = board.map((row, rowIndex) => {
     return (
@@ -30,40 +31,52 @@ const GuessContainer = (props) => {
       }</div>
     );
   })
-
+  
+  const changeKeyColour = (key, colour) => {
+    const button = document.getElementById(key)
+    button.classList.add(colour)
+  }
   const flipTile = () => {
 
     let userGuess = board[pos.row]
-    let answer = solution.split('')
+    let answer = solution
+    let checkSolution = answer
+    let guess = []
 
 
-    userGuess.forEach((letter, index) => {
-      const tile = document.getElementById(pos.row.toString() + index.toString())
+    userGuess.forEach((tile, index) => {
+      tile = document.getElementById(pos.row.toString() + index.toString())
+      guess.push({lett: tile.textContent, colour: 'grey-overlay'})
+  
+      guess.forEach((guess, index)=>{
+        if (guess.lett === answer[index]) {
+          guess.colour = 'green-overlay'
+          checkSolution = checkSolution.replace(guess.lett, '')
+        }
+      })
+  
+      guess.forEach(guess => {
+        if (checkSolution.includes(guess.lett)) {
+          guess.colour = 'yellow-overlay'
+          checkSolution = checkSolution.replace(guess.lett, '')
+        }
+    })
 
-      if (letter === answer[index]) {
-        setTimeout(()=>{
-          tile.classList.add('green-overlay')
-        }, 500 * index)
-      } else if (answer.includes(letter)) {
-        setTimeout(()=>{
-          tile.classList.add('yellow-overlay')
-        }, 500 * index)
-      } else {
-        setTimeout(()=>{
-          tile.classList.add('grey-overlay')
-        }, 500 * index)
-      }
+      setTimeout(()=>{
+        tile.classList.add('flip')
+        tile.classList.add(guess[index].colour)
+      }, 500 * index)
+
+      setTimeout(()=>{
+        changeKeyColour(guess[index].lett, guess[index].colour)
+      }, 2500)
+
     })
   };
 
-  const flipKey = (key) => {
-    
-  }
   
   const handleKeypress = (key) => {
     
-    console.log("KEY: ", key)
-
     const copyBoard = [...board];
 
     const handleDelete = () => {

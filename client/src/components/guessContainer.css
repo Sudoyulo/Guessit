@@ -45,17 +45,29 @@
 .grey-overlay {
   background-color: #3a3a3c !important;
   border: none !important;
-  animation: 0.5s linear flipping;
+  /* animation: 0.5s linear flipping; */
+}
+.key-grey-overlay {
+  background-color: #3a3a3c !important;
+  border: none !important;
 }
 
 .yellow-overlay {
   background-color: #b59f3a !important;
   border: none !important;
-  animation: 0.5s linear flipping;
+  /* animation: 0.5s linear flipping; */
+}
+.key-yellow-overlay {
+  background-color: #b59f3a !important;
+  border: none !important;
 }
 
 .green-overlay {
   background-color: #538d4e !important;
   border: none !important;
-  animation: 0.5s linear flipping;
+  /* animation: 0.5s linear flipping; */
+}
+.key-green-overlay {
+  background-color: #538d4e !important;
+  border: none !important;
 }
