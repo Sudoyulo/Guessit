@@ -45,7 +45,7 @@ const GameTitle = (props) => {
   };
 
   const getUser = () => {
-    axios('http://localhost:5001/users/2')
+    axios('http://localhost:5001/users/1')
       .then(res => {
         // console.log("RES USER: ", res.data)
         setUser(res.data)
@@ -146,6 +146,7 @@ const GameTitle = (props) => {
         </div>
 
       </div >
+
       <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
     </div>
   );

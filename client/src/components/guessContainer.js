@@ -152,7 +152,7 @@ const GuessContainer = (props) => {
                 setPos({ ...pos, row: pos.row + 1, col: 0 })
                 console.log("moving on")
 
-                if (pos.row < 5) {
+                if (pos.row < 6) {
                   console.log("more guesses left ugid row", userGame, pos.row + 1)
                   //move on
                   setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
