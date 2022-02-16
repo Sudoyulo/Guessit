@@ -7,7 +7,7 @@ const Settings = (props) => {
   const [gameAmount, setGameAmount] = useState([]);
   const [search, setSearch] = useState(1);
   const [completedGames, setCompletedGames] = useState([]);
-  const { getGame, resetBoard, user } = props;
+  const { getGame, resetBoard, resetKeys, user } = props;
 
   const getGames = () => {
     axios('http://localhost:5001/games')
@@ -69,7 +69,7 @@ const Settings = (props) => {
         <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); resetBoard(); }}>Load</button>
+        <button onClick={() => { getGame(search); resetBoard(); resetKeys(); }}>Load</button>
       </div>
       <div className="setting-container">
         Create a game

@@ -3,14 +3,12 @@ import axios from "axios";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
 
-
 const GuessContainer = (props) => {
 
   const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
 
   const [message, setMessage] = useState("");
   const [userGame, setUserGame] = useState([]);
-
 
   const guessRows = board.map((row, rowIndex) => {
     return (
@@ -29,6 +27,7 @@ const GuessContainer = (props) => {
     const button = document.getElementById(key)
     button.classList.add(colour)
   }
+
   const flipTile = () => {
 
     let userGuess = board[pos.row]
@@ -67,9 +66,8 @@ const GuessContainer = (props) => {
     })
   };
 
-
   const getUserGame = (user, gid) => {
-    // console.log("getting game", user, gid)
+    // console.log("getting game", user, gid) //causses memory leak
 
     if (user[0] && gid) {
       // console.log("fetching", user[0].user_id, gameId)
@@ -93,11 +91,7 @@ const GuessContainer = (props) => {
           setUserGame(res.data.rows)
         })
     }
-
   }
-
-  // console.log("user", user);
-  //  console.log("cg gid", completedGames, gameId)
 
   const saveGuess = (guess) => {
     console.log("guess, row num, ugid", guess, userGame[0].id)
@@ -117,22 +111,17 @@ const GuessContainer = (props) => {
       })
   };
 
-
-
   useEffect(() => {
     getUserGame(user, gameId);
   }, [userGame])
 
-
   const handleKeypress = (key) => {
-
-    console.log("KEY: ", key)
-
+    // console.log("KEY: ", key)
     const copyBoard = [...board];
 
     const handleDelete = () => {
       if (pos.col > 0) {
-        console.log("backspace")
+        // console.log("backspace")
         setPos({ ...pos, col: pos.col - 1 })
         copyBoard[pos.row][pos.col - 1] = " "
         setBoard(copyBoard)
@@ -143,35 +132,30 @@ const GuessContainer = (props) => {
     }
 
     const handleEnter = () => {
-
       //saveGuess(userGuess, pos.row + 1)
-
 
       if (pos.col === 5) {
         flipTile()
         let userGuess = board[pos.row].join('')
         let goodGuess = true; // this is a real word
-        console.log("solution guess", solution, userGuess)
+        // console.log("solution guess", solution, userGuess)
 
         if (goodGuess) {
 
           if (!completedGames.includes(gameId)) { //not completed game
 
             if (userGame.length === 0) { // user_game doesnt exist
-              console.log("create new user_game and guesses", user[0].user_id, gameId)
+              // console.log("create new user_game and guesses", user[0].user_id, gameId)
               makeUserGame(user, gameId, userGuess)
               getUserGame(user, gameId)
-              console.log("first guess, making new guesses table", userGame)
-
+              // console.log("first guess, making new guesses table", userGame)
 
               if (solution === userGuess) {
-                //correct
-                console.log("FIRST GUESS WIN??!?!?")
+                //correct on first guess
                 setMessage("Perfect")
                 saveGuess(userGuess)
                 saveWin(pos.row + 1)
                 //setTimeout(() => { setMessage("") }, 2000)
-
               }
 
             } else { //continuing a game
@@ -181,55 +165,29 @@ const GuessContainer = (props) => {
                 setMessage("Perfect")
                 saveGuess(userGuess)
                 saveWin(pos.row + 1)
-                //setTimeout(() => { setMessage("") }, 2000)
-
               } else { // move on
                 setPos({ ...pos, row: pos.row + 1, col: 0 })
-                console.log("moving on")
-
                 if (pos.row < 6) {
-                  console.log("more guesses left ugid row", userGame, pos.row + 1)
+                  // console.log("more guesses left ugid row", userGame, pos.row + 1)
                   //move on
                   setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
                   saveGuess(userGuess)
-                  console.log("saved guess to existing guesses row")
+                  // console.log("saved guess to existing guesses row")
                   //update guesses
                   setTimeout(() => { setMessage("") }, 2000)
                 } else {
                   setMessage("Game over")
                 } //end row < 5
               }
-
             }
-
-
           } else {
-            console.log("You have finished this game already")
-          }
-
-
-        } else {
-          console.log("not a good word")
-        }
-
-        /////////////
-        if (solution === userGuess) {
-          console.log("pos", pos)
-          //correct
-          setMessage("Perfect")
-          //setTimeout(() => { setMessage("") }, 2000)
-        } else {
-          setPos({ ...pos, row: pos.row + 1, col: 0 })
-
-          if (pos.row < 5) {
-            //move on
-            setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
+            setMessage("You have completed this game already")
             setTimeout(() => { setMessage("") }, 2000)
-          } else {
-            setMessage("Game over")
           }
+        } else {
+          setMessage("Not a word in our dictionary")
+          setTimeout(() => { setMessage("") }, 2000)
         }
-        /////////////
       } else { //reject the enter button
         setMessage("need a 5 letter word")
         setTimeout(() => { setMessage("") }, 2000)
@@ -274,7 +232,7 @@ const GuessContainer = (props) => {
         {guessRows}
       </div>
 
-      <Keyboard onKeypress={handleKeypress} />
+      <Keyboard onKeypress={handleKeypress} keys={props.keys} setKeys={props.setKeys} />
 
     </Fragment>
 

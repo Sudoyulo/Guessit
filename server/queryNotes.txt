@@ -48,3 +48,11 @@ WHERE user_id = 2 AND game_id = 2;
 INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp) VALUES (3, 'HOUSE', NOW());
 
 select id, user_game_id, row1guess, row1timestamp from guesses;
+
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (2,1, NOW());
+SELECT id FROM user_game ORDER BY id desc LIMIT 1; <-- last item
+INSERT INTO guesses (user_game_id) VALUES (99); <-- not 99, the last item
+
+select * from user_game where user_id = 1 AND game_id = 1;
+
+UPDATE user_game SET turns_taken = 4, won_on = NOW() WHERE id = 1;

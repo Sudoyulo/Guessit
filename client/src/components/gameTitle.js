@@ -20,6 +20,8 @@ const GameTitle = (props) => {
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
+  const [hangingGames, setHangingGames] = useState([]);
+  const [gameCount, setGameCount] = useState(0)
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -31,6 +33,13 @@ const GameTitle = (props) => {
   ])
 
   const [pos, setPos] = useState({ row: 0, col: 0 })
+
+  const [keys, setKeys] = useState([
+    "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+    "A", "S", "D", "F", "G", "H", "J", "K", "L"
+    , "ENTER", "Z", "X", "C", "V", "B", "N", "M", "<<"
+  ])
+
 
   const resetBoard = () => {
     setBoard([
@@ -44,8 +53,19 @@ const GameTitle = (props) => {
     setPos({ row: 0, col: 0 })
   };
 
+  const resetKeys = () => {
+
+    setKeys([
+      "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
+      "A", "S", "D", "F", "G", "H", "J", "K", "L"
+      , "ENTER", "Z", "X", "C", "V", "B", "N", "M", "<<"
+    ])
+
+  }
+
+
   const getUser = () => {
-    axios('http://localhost:5001/users/2')
+    axios('http://localhost:5001/users/1')
       .then(res => {
         // console.log("RES USER: ", res.data)
         setUser(res.data)
@@ -66,13 +86,24 @@ const GameTitle = (props) => {
   }
 
   const readCompletedgames = (user) => {
-
-    let list = [];
+    let tbd = []
+    let complete = [];
+    let gCount = 0;
     user.forEach((game) => {
-      list.push(game.id);
-    })
+      // console.log("each game", game);
+      gCount++;
+      if (game.won_on) {
+        // console.log("win")
+        complete.push(game.game_id)
+      } else {
+        // console.log("inprogress")
+        tbd.push(game.game_id)
+      }
 
-    setCompletedGames(list)
+    })
+    setCompletedGames(complete);
+    setHangingGames(tbd);
+    setGameCount(gCount);
   }
 
   useEffect(() => {
@@ -105,7 +136,7 @@ const GameTitle = (props) => {
     if (leftSidebar.type.name === "Stats") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Stats user={user} />)
+      setLeftSidebar(<Stats user={user} completedGames={completedGames} gameCount={gameCount} />)
     }
   }
 
@@ -113,7 +144,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings user={user} resetBoard={resetBoard} getGame={getGame} />)
+      setRightSidebar(<Settings user={user} resetBoard={resetBoard} resetKeys={resetKeys} getGame={getGame} />)
     }
   }
   //user[0].player_id
@@ -147,7 +178,7 @@ const GameTitle = (props) => {
 
       </div >
 
-      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
+      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} keys={keys} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
     </div>
   );
 }
