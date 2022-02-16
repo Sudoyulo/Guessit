@@ -4,10 +4,10 @@ import axios from "axios";
 
 const Followers = (props) => {
 
-  const { userAvatar, userInitials, user_id } = props;
+  const { userAvatar, userInitials, user_id, userinfo } = props;
 
   const [allAvatars, setAllAvatars] = useState([]);
-  const [user, setUser] = useState([])
+  const [user, setUser] = useState([userinfo])
 
 
   const getAvatars = () => {
@@ -50,7 +50,7 @@ const Followers = (props) => {
   const [myAvatar, setMyAvatar] = useState(userAvatar);
   const [myInitials, setInitials] = useState(userInitials);
 
-  //called here because of reload issues
+  // called here because of reload issues
   useEffect(() => {
     getUser();
   }, [])
