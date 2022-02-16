@@ -9,7 +9,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const pool = new Pool(dbParams);
-const { getUsers, getUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveWin, saveGuess } = require('./query_helpers')
+const { getUsers, getUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveOneWin, saveWin, saveGuess } = require('./query_helpers')
 
 app.use(cors());
 app.use(express.json()); //req,.body
@@ -158,6 +158,22 @@ app.get('/user_game/:uid/:gid', (req, res) => {
 
 });
 
+app.put('/win_one_turn/:uid/:gid/:guess', (req, res) => {
+
+  const { uid, gid, guess } = req.params;
+
+  saveOneWin(uid, gid, guess)
+    .then(response => {
+      res.status(200).send(response);
+
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+
+});
+
+
 //set game as completed in x turns
 app.put('/win_user_game/:turns/:ugid', (req, res) => {
 
@@ -172,7 +188,6 @@ app.put('/win_user_game/:turns/:ugid', (req, res) => {
     })
 
 });
-
 
 //update an existing guess row
 app.put('/guesses/:user_game_id/:guess', (req, res) => {

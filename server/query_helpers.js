@@ -97,11 +97,11 @@ const createUserGame = (uid, gid, guess) => {
 
       pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
         .then(results => {
-
+          return results;
         })
-
+      return results;
     })
-
+  return results;
 }
 
 
@@ -111,6 +111,22 @@ const getUserStats = (uid, gid) => {
       return results;
     })
 }
+
+const saveOneWin = (uid, gid, guess) => {
+
+  pool.query("INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES ($1,$2,1, NOW(), NOW()) returning *;", [uid, gid])
+    .then(results => {
+
+      pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
+        .then(results => {
+          return results;
+        })
+
+    })
+
+}
+
+
 
 const saveWin = (turns, ugid) => {
 
@@ -131,17 +147,6 @@ const saveGuess = (id, guess) => {
 
 }
 
-// const saveNewGuess = (ugid, guess) => {
-//   console.log("saving new", ugid, guess)
-
-//   return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [ugid, guess])
-//     .then(results => {
-//       return results;
-//     })
-
-// }
-
-
 module.exports = {
   getUsers,
   getUser,
@@ -153,6 +158,7 @@ module.exports = {
   setInitials,
   createUserGame,
   getUserStats,
+  saveOneWin,
   saveWin,
   saveGuess,
 }
