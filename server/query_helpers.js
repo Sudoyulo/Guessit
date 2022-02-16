@@ -26,6 +26,18 @@ const getUser = (id) => {
   })
 }
 
+const newUser = (id) => {
+
+  return pool.query('INSERT INTO users (date_started, player_id) VALUES (NOW(), $1) returning *;', [id])
+    .then(results => {
+
+      console.log("added new user", results.rows[0].id)
+      return results.rows;
+    })
+
+}
+
+
 const getGames = () => {
   return new Promise(function (resolve, reject) {
     pool.query('SELECT * FROM games', (error, results) => {
@@ -150,6 +162,7 @@ const saveGuess = (id, guess) => {
 module.exports = {
   getUsers,
   getUser,
+  newUser,
   getGames,
   getGame,
   makeGame,

@@ -9,7 +9,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const pool = new Pool(dbParams);
-const { getUsers, getUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveOneWin, saveWin, saveGuess } = require('./query_helpers')
+const { getUsers, getUser, newUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveOneWin, saveWin, saveGuess } = require('./query_helpers')
 
 app.use(cors());
 app.use(express.json()); //req,.body
@@ -38,6 +38,23 @@ app.get("/users/:id", (req, res) => {
       res.status(500).send(error);
     })
 })
+
+app.put("/new_users/:id", (req, res) => {
+  console.log("new user?")
+  const { id } = req.params;
+
+  newUser(id)
+    .then(response => {
+      // console.log("resp", response)
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      console.log("Error in new user insert")
+      res.status(500).send("Not created");
+    })
+
+})
+
 
 app.put("/users/:id/avatar/:avatar_id", (req, res) => {
 

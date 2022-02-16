@@ -46,7 +46,7 @@ const Settings = (props) => {
   useEffect(() => {
     // readCompletedgames(user);
     getGames();
-  }, [])
+  }, [resetBoard])
 
   const gameLinks = gameAmount.map((gameid) => {
     let icon = "🛑 New";

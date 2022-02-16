@@ -82,26 +82,26 @@ const GuessContainer = (props) => {
   }
 
   const makeUserGame = (user, gid, guess) => {
-    console.log("making game", user, gid, guess)
+    // console.log("making game", user, gid, guess)
 
     if (user[0] && gid && guess) {
-      console.log("making", user[0].user_id, gameId, guess)
+      // console.log("making", user[0].user_id, gameId, guess)
       axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess)
         .then(res => {
-          console.log("make", res.data.rows)
+          // console.log("make", res.data.rows)
           setUserGame(res.data.rows)
         })
     }
   }
 
   const winOneTurn = (user, gid, guess) => {
-    console.log("making one turn win game", user, gid, guess)
+    // console.log("making one turn win game", user, gid, guess)
 
     if (user[0] && gid && guess) {
-      console.log("won in one turn", user[0].user_id, gameId, guess)
+      // console.log("won in one turn", user[0].user_id, gameId, guess)
       axios.put('http://localhost:5001/win_one_turn/' + user[0].user_id + "/" + gid + "/" + guess)
         .then(res => {
-          console.log("make", res.data.rows)
+          // console.log("make", res.data.rows)
           setUserGame(res.data.rows)
         })
     }
@@ -114,17 +114,17 @@ const GuessContainer = (props) => {
     if (userGame[0]) {
       axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess)
         .then(res => {
-          console.log("inserted new guess")
+          // console.log("inserted new guess")
         })
     }
   };
 
   const saveWin = (turns) => {
-    console.log("saving won game", turns);
+    // console.log("saving won game", turns);
 
     axios.put('http://localhost:5001/win_user_game/' + turns + "/" + userGame[0].id)
       .then(res => {
-        console.log("inserted new win")
+        // console.log("inserted new win")
       })
   };
 
@@ -161,7 +161,7 @@ const GuessContainer = (props) => {
 
             if (userGame.length === 0) { // user_game doesnt exist
               // console.log("create new user_game and guesses", user[0].user_id, gameId)
-              console.log("new first guess")
+              // console.log("new first guess")
 
               setPos({ ...pos, row: pos.row + 1, col: 0 })
 
@@ -178,12 +178,13 @@ const GuessContainer = (props) => {
               }
 
             } else { //continuing a game
-              console.log("continuing")
+              // console.log("continuing")
               if (solution === userGuess) {
                 //correct
                 setMessage("Perfect")
                 saveGuess(userGuess)
                 saveWin(pos.row + 1)
+
               } else { // move on
                 setPos({ ...pos, row: pos.row + 1, col: 0 })
                 if (pos.row < 6) {

@@ -16,7 +16,7 @@ import GuessContainer from './guessContainer';
 
 const GameTitle = (props) => {
 
-  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
+  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, userId } = props;
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
@@ -45,7 +45,6 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
-
 
   const getUser = () => {
     axios('http://localhost:5001/users/1')
@@ -93,11 +92,13 @@ const GameTitle = (props) => {
     getUser();
     getGames();
     getGame();
+
   }, []);
 
   useEffect(() => {
+
     readCompletedgames(user);
-  }, [user]);
+  }, [game]);
 
   const helpOnOff = () => {
     if (rightSidebar.type.name === "Help") {

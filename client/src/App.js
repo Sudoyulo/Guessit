@@ -7,6 +7,8 @@ import GameTitle from './components/gameTitle';
 import Blank from './components/blank';
 import Landing from './components/Landing';
 
+import axios from "axios";
+
 function App() {
 
   const Paths = () => {
@@ -30,6 +32,28 @@ function App() {
     }
   }
 
+  const [userId, setUserId] = useState(0);
+  let refresh = false;
+
+  const newUser = () => {
+
+    if (refresh) {
+
+      axios.put('http://localhost:5001/new_users/kevin')
+        .then(res => {
+          // console.log("RES USER: ", res.data)
+          console.log("I am user", res.data[0].id)
+          setUserId(res.data[0].id)
+          refresh = false;
+        })
+    }
+  }
+
+  useEffect(() => {
+    newUser()
+    console.log(userId)
+  }, [])
+
   useEffect(() => {
     readCookie()
   }, [])
@@ -46,7 +70,8 @@ function App() {
           {leftSidebar}
         </div>
         <div className='main-view' >
-          <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />
+          <button onClick={() => { newUser(); refresh = true; }}>new</button>
+          <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} userId={userId} />
         </div>
         <div className='right-sidebar'>
           {rightSidebar}
