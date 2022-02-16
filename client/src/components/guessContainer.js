@@ -232,7 +232,7 @@ const GuessContainer = (props) => {
         {guessRows}
       </div>
 
-      <Keyboard onKeypress={handleKeypress} keys={props.keys} setKeys={props.setKeys} />
+      <Keyboard onKeypress={handleKeypress} />
 
     </Fragment>
 

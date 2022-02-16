@@ -34,13 +34,6 @@ const GameTitle = (props) => {
 
   const [pos, setPos] = useState({ row: 0, col: 0 })
 
-  const [keys, setKeys] = useState([
-    "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
-    "A", "S", "D", "F", "G", "H", "J", "K", "L"
-    , "ENTER", "Z", "X", "C", "V", "B", "N", "M", "<<"
-  ])
-
-
   const resetBoard = () => {
     setBoard([
       [" ", " ", " ", " ", " "],
@@ -52,16 +45,6 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
-
-  const resetKeys = () => {
-
-    setKeys([
-      "Q", "W", "E", "R", "T", "Y", "U", "I", "O", "P",
-      "A", "S", "D", "F", "G", "H", "J", "K", "L"
-      , "ENTER", "Z", "X", "C", "V", "B", "N", "M", "<<"
-    ])
-
-  }
 
 
   const getUser = () => {
@@ -144,7 +127,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings user={user} resetBoard={resetBoard} resetKeys={resetKeys} getGame={getGame} />)
+      setRightSidebar(<Settings user={user} resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} gameCount={gameCount} hangingGames={hangingGames} />)
     }
   }
   //user[0].player_id
@@ -178,7 +161,7 @@ const GameTitle = (props) => {
 
       </div >
 
-      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} keys={keys} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
+      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
     </div>
   );
 }

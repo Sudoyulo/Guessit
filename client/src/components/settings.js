@@ -6,8 +6,8 @@ const Settings = (props) => {
 
   const [gameAmount, setGameAmount] = useState([]);
   const [search, setSearch] = useState(1);
-  const [completedGames, setCompletedGames] = useState([]);
-  const { getGame, resetBoard, resetKeys, user } = props;
+  // const [completedGames, setCompletedGames] = useState([]);
+  const { getGame, resetBoard, resetKeys, user, completedGames, hangingGames, gameCount } = props;
 
   const getGames = () => {
     axios('http://localhost:5001/games')
@@ -29,30 +29,30 @@ const Settings = (props) => {
       })
   }
 
+  // const readCompletedgames = (userId) => {
 
+  //   let list = [];
+  //   userId.forEach((game) => {
+  //     list.push(game.game_id);
+  //   })
 
-  const readCompletedgames = (userId) => {
-
-    let list = [];
-    userId.forEach((game) => {
-      list.push(game.game_id);
-    })
-
-    setCompletedGames(list)
-    console.log(completedGames)
-  }
+  //   setCompletedGames(list)
+  //   console.log(completedGames)
+  // }
 
 
   useEffect(() => {
-    readCompletedgames(user);
+    // readCompletedgames(user);
     getGames();
   }, [])
 
   const gameLinks = gameAmount.map((gameid) => {
-    let icon = "🛑 Not yet";
+    let icon = "🛑 New";
 
     if (completedGames.includes(gameid)) {
       icon = "✅ Done";
+    } else if (hangingGames.includes(gameid)) {
+      icon = "⚠️ Failed";
     }
 
     return (
