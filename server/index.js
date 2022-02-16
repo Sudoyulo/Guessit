@@ -9,7 +9,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const pool = new Pool(dbParams);
-const { getUsers, getUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveGuess, saveNewGuess } = require('./query_helpers')
+const { getUsers, getUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveWin, saveGuess } = require('./query_helpers')
 
 app.use(cors());
 app.use(express.json()); //req,.body
@@ -135,9 +135,7 @@ app.put('/new_user_game/:uid/:gid/:guess', (req, res) => {
   createUserGame(uid, gid, guess)
     .then(response => {
       res.status(200).send(response);
-      console.log("do you still continue here?")
-      //get user_game id
-      //make guesses table
+
     })
     .catch(error => {
       res.status(500).send(error);
@@ -160,12 +158,28 @@ app.get('/user_game/:uid/:gid', (req, res) => {
 
 });
 
+//set game as completed in x turns
+app.put('/win_user_game/:turns/:ugid', (req, res) => {
+
+  const { turns, ugid } = req.params;
+
+  saveWin(turns, ugid)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+
+});
+
+
 //update an existing guess row
-app.put('/guesses/:user_game_id/:row/:guess', (req, res) => {
+app.put('/guesses/:user_game_id/:guess', (req, res) => {
 
-  const { user_game_id, row, guess } = req.params;
+  const { user_game_id, guess } = req.params;
 
-  saveGuess(user_game_id, row, guess)
+  saveGuess(user_game_id, guess)
     .then(response => {
       res.status(200).send(response);
     })
@@ -176,19 +190,19 @@ app.put('/guesses/:user_game_id/:row/:guess', (req, res) => {
 });
 
 //make new guesses data
-app.put("/guess/new/:user_game_id/:guess", (req, res) => {
+// app.put("/guess/new/:user_game_id/:guess", (req, res) => {
 
-  const { user_game_id, guess } = req.params;
+//   const { user_game_id, guess } = req.params;
 
-  saveNewGuess(user_game_id, guess)
-    .then(response => {
-      res.status(200).send(response);
-    })
-    .catch(error => {
-      res.status(500).send(error);
-    })
+//   saveNewGuess(user_game_id, guess)
+//     .then(response => {
+//       res.status(200).send(response);
+//     })
+//     .catch(error => {
+//       res.status(500).send(error);
+//     })
 
-});
+// });
 
 
 app.listen(5001, () => {

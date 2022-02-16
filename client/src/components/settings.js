@@ -9,12 +9,11 @@ const Settings = (props) => {
 
   const [gameAmount, setGameAmount] = useState([]);
   const [search, setSearch] = useState(1);
-  const [completedGames, setCompletedGames] = useState([]);
-  const { getGame, resetBoard, user } = props;
+  const { getGame, resetBoard, completedGames, hangingGames } = props;
 
   const resetKeyboard = () => {
-    const keys = [ 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
-    'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+    const keys = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+      'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
 
     keys.forEach(key => {
       const colours = ['green-overlay', 'yellow-overlay', 'grey-overlay']
@@ -44,30 +43,18 @@ const Settings = (props) => {
       })
   }
 
-
-
-  const readCompletedgames = (userId) => {
-
-    let list = [];
-    userId.forEach((game) => {
-      list.push(game.game_id);
-    })
-
-    setCompletedGames(list)
-    console.log(completedGames)
-  }
-
-
   useEffect(() => {
-    readCompletedgames(user);
+    // readCompletedgames(user);
     getGames();
   }, [])
 
   const gameLinks = gameAmount.map((gameid) => {
-    let icon = "🛑 Not yet";
+    let icon = "🛑 New";
 
     if (completedGames.includes(gameid)) {
       icon = "✅ Done";
+    } else if (hangingGames.includes(gameid)) {
+      icon = "⚠️ Tried";
     }
 
     return (
@@ -80,7 +67,7 @@ const Settings = (props) => {
     <div className="right-sidebar">
       <p className="stat-title">Settings </p>
       <div className="setting-container">
-        Find a game
+        Load a game
         <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>

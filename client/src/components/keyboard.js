@@ -13,7 +13,7 @@ const Keyboard = (props) => {
     let color = "gray";
     return (
       <button id={key} key={key} className={"key-" + key} onClick={
-        () => { props.onKeypress(key) }} style={{ backgroundColor: color }} > {key} </ button >
+        () => props.onKeypress(key)} style={{ backgroundColor: color }} > {key} </ button >
     );
   })
 

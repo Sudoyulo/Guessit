@@ -27,23 +27,48 @@ INSERT INTO games (solution) VALUES ('CREAM');
 INSERT INTO games (solution) VALUES ('PAPER');
 INSERT INTO games (solution) VALUES ('BOARD');
 
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 1, 4, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 2, 2, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 3, 6, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 4, 6, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 5, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 6, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 7, 5, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (1, 8, 7, '2022-01-01 01:10:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (1, 1, 4, '2022-01-01 01:30:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (1, 2, 2, '2022-01-01 01:30:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (1, 3, 6, '2022-01-01 01:30:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (1, 4, '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (1, 5, 5, '2022-01-01 01:30:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (1, 6, 5, '2022-01-01 01:30:45', '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (1, 7, '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (1, 8, '2022-01-01 01:25:45');
 
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 2, 3, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 4, 3, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (2, 5, 4, '2022-01-01 01:20:23', '2022-01-01 01:45:15');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (2, 2, 3, '2022-01-01 01:50:23', '2022-01-01 01:45:15');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (2, 4, 3, '2022-01-01 01:50:23', '2022-01-01 01:45:15');
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (2, 5, '2022-01-01 01:45:15');
 
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 1, 4, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 2, 6, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 3, 1, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 4, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
-INSERT INTO user_game (user_id, game_id, turns_taken, completed_on, started_on) VALUES (3, 5, 7, '2022-01-01 01:11:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (3, 1, 4, '2022-01-01 01:35:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (3, 2, 6, '2022-01-01 01:35:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES (3, 3, 1, '2022-01-01 01:35:55', '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (3, 4, '2022-01-01 01:30:35');
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (3, 5, '2022-01-01 01:30:35');
 
-INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp, row2Guess, row2Timestamp) VALUES (1, 'HOUSE', '2022-01-01 01:11:55', 'WATER', '2022-01-01 01:14:55')
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (1, 'HOUSE', '2022-01-01 01:12:00');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (1, 'LAKES', '2022-01-01 01:12:05');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (1, 'ABBEY', '2022-01-01 01:12:10');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (1, 'LIGHT', '2022-01-01 01:12:15');
+
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (2, 'HOUSE', '2022-01-01 01:12:00');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (2, 'LIGHT', '2022-01-01 01:12:05');
+
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'HOUSE', '2022-01-01 01:12:00');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'LAKES', '2022-01-01 01:12:05');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'ABBEY', '2022-01-01 01:12:10');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'SEVEN', '2022-01-01 01:12:15');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'EIGHT', '2022-01-01 01:12:20');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'LIGHT', '2022-01-01 01:12:25');
+
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'LAKES', '2022-01-01 01:12:05');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'ABBEY', '2022-01-01 01:12:10');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'SEVEN', '2022-01-01 01:12:15');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'EIGHT', '2022-01-01 01:12:20');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'LIGHT', '2022-01-01 01:12:25');
+
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'LAKES', '2022-01-01 01:12:05');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'ABBEY', '2022-01-01 01:12:10');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'SEVEN', '2022-01-01 01:12:15');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'EIGHT', '2022-01-01 01:12:20');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'LIGHT', '2022-01-01 01:12:25');
