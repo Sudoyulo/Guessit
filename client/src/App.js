@@ -16,9 +16,9 @@ function App() {
     }
     return (
       <Routes>
-        {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate}/>} />)}
-        {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />} /> )}
-        <Route path='*' element={<Navigate to={auth? '/' : 'landing'}/>}/>
+        {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} />} />)}
+        {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />} />)}
+        <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
       </Routes>
     )
   }
@@ -30,7 +30,7 @@ function App() {
     }
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     readCookie()
   }, [])
 
@@ -40,18 +40,18 @@ function App() {
 
   return (
     <Fragment>
-      
-        <Router>
-          <div className='left-sidebar' >
-            {leftSidebar}
-          </div>
-          <div className='main-view' >
-            <Paths />
-          </div>
-          <div className='right-sidebar'>
-            {rightSidebar}
-          </div>
-        </Router>
+
+      <Router>
+        <div className='left-sidebar' >
+          {leftSidebar}
+        </div>
+        <div className='main-view' >
+          <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />
+        </div>
+        <div className='right-sidebar'>
+          {rightSidebar}
+        </div>
+      </Router>
 
     </Fragment>
   );
