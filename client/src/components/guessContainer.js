@@ -130,7 +130,7 @@ const GuessContainer = (props) => {
 
   useEffect(() => {
     getUserGame(user, gameId);
-  }, [userGame])
+  }, [pos])
 
   const handleKeypress = (key) => {
     // console.log("KEY: ", key)

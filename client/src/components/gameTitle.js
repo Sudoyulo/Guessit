@@ -91,8 +91,7 @@ const GameTitle = (props) => {
   useEffect(() => {
     getUser();
     getGames();
-    getGame();
-    readCompletedgames(user);
+    getGame();;
   }, []);
 
   useEffect(() => {

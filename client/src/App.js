@@ -32,39 +32,6 @@ function App() {
     }
   }
 
-
-  // const [user, setUser] = useState([]);
-
-  // const getUser = () => {
-  //   axios('http://localhost:5001/users/1')
-  //     .then(res => {
-  //       // console.log("RES USER: ", res.data)
-  //       setUser(res.data)
-  //     })
-  // }
-
-
-  // let refresh = false;
-
-  // const newUser = () => {
-
-  //   if (refresh) {
-
-  //     axios.put('http://localhost:5001/new_users/kevin')
-  //       .then(res => {
-  //         // console.log("RES USER: ", res.data)
-  //         console.log("I am user", res.data)
-  //         setUser(res.data)
-  //         refresh = false;
-  //       })
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getUser()
-  //   newUser()
-  // }, [])
-
   useEffect(() => {
     readCookie()
   }, [])
@@ -81,10 +48,7 @@ function App() {
           {leftSidebar}
         </div>
         <div className='main-view' >
-          {/* <button onClick={() => { newUser(); refresh = true; }}>new</button> */}
-          <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar}
-          // user={user} 
-          />
+          <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />
         </div>
         <div className='right-sidebar'>
           {rightSidebar}
