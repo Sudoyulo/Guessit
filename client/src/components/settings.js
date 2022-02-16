@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import './rightSidebar.css'
+import './rightSidebar.css';
+// import './keyboard.css';
+import './guessContainer.css';
+import { getRandomWord } from "../words/wordList";
 
 const Settings = (props) => {
 
@@ -8,6 +11,18 @@ const Settings = (props) => {
   const [search, setSearch] = useState(1);
   const [completedGames, setCompletedGames] = useState([]);
   const { getGame, resetBoard, user } = props;
+
+  const resetKeyboard = () => {
+    const keys = [ 'Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
+    'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'Z', 'X', 'C', 'V', 'B', 'N', 'M']
+
+    keys.forEach(key => {
+      const colours = ['green-overlay', 'yellow-overlay', 'grey-overlay']
+      colours.forEach(colour => {
+        document.getElementById(key).classList.remove(colour)
+      })
+    })
+  }
 
   const getGames = () => {
     axios('http://localhost:5001/games')
@@ -69,11 +84,11 @@ const Settings = (props) => {
         <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); resetBoard(); }}>Search</button>
+        <button onClick={() => { getGame(search); resetBoard(); resetKeyboard() }}>Search</button>
       </div>
       <div className="setting-container">
         Create a game
-        <button onClick={() => makeGame("HELLO")}>Create!</button>
+        <button onClick={() => makeGame(getRandomWord())}>Create!</button>
       </div>
 
 
