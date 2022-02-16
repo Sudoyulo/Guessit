@@ -56,7 +56,7 @@ const Settings = (props) => {
         <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); resetBoard(); }}>Load</button>
+        <button onClick={() => { getGame(search); resetBoard(); }}>Load it!</button>
       </div>
       <div className="setting-container">
         Create a game
