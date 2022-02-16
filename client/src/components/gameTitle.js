@@ -16,7 +16,7 @@ import GuessContainer from './guessContainer';
 
 const GameTitle = (props) => {
 
-  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, userId } = props;
+  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
@@ -92,7 +92,7 @@ const GameTitle = (props) => {
     getUser();
     getGames();
     getGame();
-
+    readCompletedgames(user);
   }, []);
 
   useEffect(() => {
