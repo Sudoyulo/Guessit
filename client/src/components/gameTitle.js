@@ -127,7 +127,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings user={user} resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} gameCount={gameCount} hangingGames={hangingGames} />)
+      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} />)
     }
   }
   //user[0].player_id

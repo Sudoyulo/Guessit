@@ -96,10 +96,12 @@ const GuessContainer = (props) => {
   const saveGuess = (guess) => {
     console.log("guess, row num, ugid", guess, userGame[0].id)
 
-    axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess)
-      .then(res => {
-        console.log("inserted new guess")
-      })
+    if (userGame[0]) {
+      axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess)
+        .then(res => {
+          console.log("inserted new guess")
+        })
+    }
   };
 
   const saveWin = (turns) => {
@@ -148,10 +150,10 @@ const GuessContainer = (props) => {
               // console.log("create new user_game and guesses", user[0].user_id, gameId)
               makeUserGame(user, gameId, userGuess)
               getUserGame(user, gameId)
-              // console.log("first guess, making new guesses table", userGame)
+              setPos({ ...pos, row: pos.row + 1, col: 0 })
 
               if (solution === userGuess) {
-                //correct on first guess
+                //correct on first guess still buggy
                 setMessage("Perfect")
                 saveGuess(userGuess)
                 saveWin(pos.row + 1)

@@ -6,8 +6,7 @@ const Settings = (props) => {
 
   const [gameAmount, setGameAmount] = useState([]);
   const [search, setSearch] = useState(1);
-  // const [completedGames, setCompletedGames] = useState([]);
-  const { getGame, resetBoard, resetKeys, user, completedGames, hangingGames, gameCount } = props;
+  const { getGame, resetBoard, completedGames, hangingGames } = props;
 
   const getGames = () => {
     axios('http://localhost:5001/games')
@@ -29,18 +28,6 @@ const Settings = (props) => {
       })
   }
 
-  // const readCompletedgames = (userId) => {
-
-  //   let list = [];
-  //   userId.forEach((game) => {
-  //     list.push(game.game_id);
-  //   })
-
-  //   setCompletedGames(list)
-  //   console.log(completedGames)
-  // }
-
-
   useEffect(() => {
     // readCompletedgames(user);
     getGames();
@@ -52,7 +39,7 @@ const Settings = (props) => {
     if (completedGames.includes(gameid)) {
       icon = "✅ Done";
     } else if (hangingGames.includes(gameid)) {
-      icon = "⚠️ Failed";
+      icon = "⚠️ Tried";
     }
 
     return (
@@ -69,7 +56,7 @@ const Settings = (props) => {
         <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); resetBoard(); resetKeys(); }}>Load</button>
+        <button onClick={() => { getGame(search); resetBoard(); }}>Load</button>
       </div>
       <div className="setting-container">
         Create a game
