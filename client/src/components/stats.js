@@ -19,6 +19,8 @@ const Stats = (props) => {
     calculateWinTimes(user);
   }, [])
 
+  console.log("gc", gameCount)
+
   // let totalWins = winTimes.reduce((sum, i) => sum + i, 0);
   let totalWinPercent = Math.round((completedGames.length / gameCount) * 100); //minimum 30 to fill bar
   let maxWin = Math.max(...winTimes) //highest to get percentage of max

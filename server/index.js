@@ -9,7 +9,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const pool = new Pool(dbParams);
-const { getUsers, getUser, newUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveOneWin, saveWin, saveGuess } = require('./query_helpers')
+const { getUsers, getUser, newUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveOneWin, saveWin, saveGuess, getGuesses } = require('./query_helpers')
 
 app.use(cors());
 app.use(express.json()); //req,.body
@@ -40,7 +40,7 @@ app.get("/users/:id", (req, res) => {
 })
 
 app.put("/new_users/:id", (req, res) => {
-  console.log("new user?")
+  // console.log("new user?")
   const { id } = req.params;
 
   newUser(id)
@@ -49,7 +49,7 @@ app.put("/new_users/:id", (req, res) => {
       res.status(200).send(response);
     })
     .catch(error => {
-      console.log("Error in new user insert")
+      // console.log("Error in new user insert")
       res.status(500).send("Not created");
     })
 
@@ -65,7 +65,7 @@ app.put("/users/:id/avatar/:avatar_id", (req, res) => {
       res.status(200).send("Updated");
     })
     .catch(error => {
-      console.log("Error in avatar update")
+      // console.log("Error in avatar update")
       res.status(500).send("Not updated");
     })
 
@@ -80,7 +80,7 @@ app.put("/users/:id/initials/:str", (req, res) => {
       res.status(200).send("Updated");
     })
     .catch(error => {
-      console.log("Error in avatar update")
+      // console.log("Error in avatar update")
       res.status(500).send("Not updated");
     })
 
@@ -145,11 +145,13 @@ app.get('/avatars', (req, res) => {
 });
 
 
-app.put('/new_user_game/:uid/:gid/:guess', (req, res) => {
+app.put('/new_user_game/:uid/:gid/:guess/:time', (req, res) => {
 
-  const { uid, gid, guess } = req.params;
+  const { uid, gid, guess, time } = req.params;
 
-  createUserGame(uid, gid, guess)
+  // console.log("new ug", time)
+
+  createUserGame(uid, gid, guess, time)
     .then(response => {
       res.status(200).send(response);
 
@@ -207,11 +209,13 @@ app.put('/win_user_game/:turns/:ugid', (req, res) => {
 });
 
 //update an existing guess row
-app.put('/guesses/:user_game_id/:guess', (req, res) => {
+app.put('/guesses/:user_game_id/:guess/:time', (req, res) => {
 
-  const { user_game_id, guess } = req.params;
 
-  saveGuess(user_game_id, guess)
+  const { user_game_id, guess, time } = req.params;
+  // console.log("new time added", user_game_id, guess, time);
+
+  saveGuess(user_game_id, guess, time)
     .then(response => {
       res.status(200).send(response);
     })
@@ -221,20 +225,19 @@ app.put('/guesses/:user_game_id/:guess', (req, res) => {
 
 });
 
-//make new guesses data
-// app.put("/guess/new/:user_game_id/:guess", (req, res) => {
+app.get('/guesslog/:ugid', (req, res) => {
 
-//   const { user_game_id, guess } = req.params;
+  const { ugid } = req.params;
 
-//   saveNewGuess(user_game_id, guess)
-//     .then(response => {
-//       res.status(200).send(response);
-//     })
-//     .catch(error => {
-//       res.status(500).send(error);
-//     })
+  getGuesses(ugid)
+    .then(response => {
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
 
-// });
+});
 
 
 app.listen(5001, () => {

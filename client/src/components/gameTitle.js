@@ -21,7 +21,9 @@ const GameTitle = (props) => {
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
-  const [gameCount, setGameCount] = useState(0)
+  const [gameCount, setGameCount] = useState(0);
+  const [timestamp, setTimestamp] = useState([]);
+  const [guessList, setGuessList] = useState([]);
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -35,6 +37,7 @@ const GameTitle = (props) => {
   const [pos, setPos] = useState({ row: 0, col: 0 })
 
   const resetBoard = () => {
+    console.log("resetBoard")
     setBoard([
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
@@ -45,6 +48,32 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
+
+  const loadBoard = (stats) => {
+    // console.log("load board", stats)
+    let listOfGuesses = [];
+    let guesses = [];
+    let gamestamp = [];
+
+    stats.forEach((entry) => {
+      listOfGuesses.push(entry.guess)
+      guesses.push(entry.guess.split(''))
+      gamestamp.push(entry.guesstimestamp)
+    })
+
+    setGuessList(listOfGuesses)
+    setPos({ row: guesses.length, col: 0 })
+
+    for (let i = guesses.length; i < 6; i++) {
+      guesses.push([" ", " ", " ", " ", " "])
+    }
+
+    console.log(gamestamp)
+
+    setBoard(guesses)
+    setTimestamp(gamestamp)
+  };
+
 
   const getUser = () => {
     axios('http://localhost:5001/users/1')
@@ -57,6 +86,8 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/games')
       .then(res => {
         setGame(res.data[0])
+
+
       })
   }
 
@@ -64,6 +95,7 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/game/' + id)
       .then(res => {
         setGame(res.data)
+        // console.log("get game", res)
       })
   }
 
@@ -83,6 +115,8 @@ const GameTitle = (props) => {
       }
 
     })
+    // console.log("completed games", complete, "hanging", tbd)
+
     setCompletedGames(complete);
     setHangingGames(tbd);
     setGameCount(gCount);
@@ -90,14 +124,18 @@ const GameTitle = (props) => {
 
   useEffect(() => {
     getUser();
-    getGames();
-    getGame();;
   }, []);
+
+
+  useEffect(() => {
+    getGames();
+    getGame();
+  }, [user]);
 
   useEffect(() => {
 
     readCompletedgames(user);
-  }, [game]);
+  }, [user]);
 
   const helpOnOff = () => {
     if (rightSidebar.type.name === "Help") {
@@ -127,7 +165,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} />)
+      setRightSidebar(<Settings user={user} resetBoard={resetBoard} loadBoard={loadBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} />)
     }
   }
   //user[0].player_id
@@ -160,8 +198,12 @@ const GameTitle = (props) => {
         </div>
 
       </div >
+      <div className="middle-containers">
 
-      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
+
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} timestamp={timestamp} guessList={guessList} />
+
+      </div>
     </div>
   );
 }

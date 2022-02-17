@@ -9,7 +9,7 @@ const Settings = (props) => {
 
   const [gameAmount, setGameAmount] = useState([]);
   const [search, setSearch] = useState(1);
-  const { getGame, resetBoard, completedGames, hangingGames } = props;
+  const { user, getGame, resetBoard, loadBoard, completedGames, hangingGames } = props;
 
   const resetKeyboard = () => {
     const keys = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -38,10 +38,47 @@ const Settings = (props) => {
   const makeGame = (word) => {
     axios.put('http://localhost:5001/games/' + word)
       .then(res => {
-        console.log("inserted new game")
+        console.log("inserted new game", res)
         getGames();
       })
   }
+
+  const loadOrReset = () => {
+    // console.log("load or reset game:", user[0].user_id, search)
+
+    if (completedGames.includes(search)) {
+      console.log("completed game")
+      getGuesses();
+      // loadBoard();
+    } else if (hangingGames.includes(search)) {
+      getGuesses();
+      console.log("hanging game")
+      // loadBoard();
+    } else {
+      console.log("new game")
+      resetBoard();
+    }
+
+  }
+
+  const getGuesses = () => {
+    // console.log("trying to load guesses", user[0].user_id, search)
+
+    if (user[0] && search) {
+      // console.log("fetching", user[0].user_id, gameId)
+      axios('http://localhost:5001/user_game/' + user[0].user_id + "/" + search)
+        .then(res => {
+          // console.log("usergame", res.data.rows[0])
+
+          axios('http://localhost:5001/guesslog/' + res.data.rows[0].id)
+            .then(res => {
+              // console.log("loaded guesses", res.data.rows)
+              loadBoard(res.data.rows);
+            })
+        })
+    }
+  }
+
 
   useEffect(() => {
     // readCompletedgames(user);
@@ -68,10 +105,10 @@ const Settings = (props) => {
       <p className="stat-title">Settings </p>
       <div className="setting-container">
         Load a game
-        <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
+        <select value={search} onChange={(e) => { setSearch(Number(e.target.value)) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); resetBoard(); resetKeyboard() }}>Load</button>
+        <button onClick={() => { getGame(search); loadOrReset(); resetKeyboard(); }}>Load</button>
       </div>
       <div className="setting-container">
         Create a game
