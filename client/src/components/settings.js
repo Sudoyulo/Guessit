@@ -9,7 +9,7 @@ const Settings = (props) => {
 
   const [gameAmount, setGameAmount] = useState([]);
   const [search, setSearch] = useState(1);
-  const { getGame, resetBoard, completedGames, hangingGames } = props;
+  const { getGame, resetBoard, completedGames, hangingGames, getUser } = props;
 
   const resetKeyboard = () => {
     const keys = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -71,7 +71,7 @@ const Settings = (props) => {
         <select value={search} onChange={(e) => { setSearch(e.target.value) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); resetBoard(); resetKeyboard() }}>Load</button>
+        <button onClick={() => { getGame(search); resetBoard(); resetKeyboard(); }}>Load</button>
       </div>
       <div className="setting-container">
         Create a game

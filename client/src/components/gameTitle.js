@@ -57,6 +57,7 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/games')
       .then(res => {
         setGame(res.data[0])
+
       })
   }
 
@@ -64,6 +65,7 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/game/' + id)
       .then(res => {
         setGame(res.data)
+
       })
   }
 
@@ -90,14 +92,18 @@ const GameTitle = (props) => {
 
   useEffect(() => {
     getUser();
+  }, []);
+
+
+  useEffect(() => {
     getGames();
     getGame();;
-  }, []);
+  }, [user]);
 
   useEffect(() => {
 
     readCompletedgames(user);
-  }, [game]);
+  }, [user]);
 
   const helpOnOff = () => {
     if (rightSidebar.type.name === "Help") {
@@ -127,7 +133,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} />)
+      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} getUser={getUser} />)
     }
   }
   //user[0].player_id
