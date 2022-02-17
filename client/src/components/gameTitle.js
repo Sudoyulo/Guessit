@@ -46,7 +46,6 @@ const GameTitle = (props) => {
     setPos({ row: 0, col: 0 })
   };
 
-
   const getUser = () => {
     axios('http://localhost:5001/users/1')
       .then(res => {
@@ -92,12 +91,13 @@ const GameTitle = (props) => {
   useEffect(() => {
     getUser();
     getGames();
-    getGame();
+    getGame();;
   }, []);
 
   useEffect(() => {
+
     readCompletedgames(user);
-  }, [user]);
+  }, [game]);
 
   const helpOnOff = () => {
     if (rightSidebar.type.name === "Help") {
@@ -111,7 +111,7 @@ const GameTitle = (props) => {
     if (leftSidebar.type.name === "Followers") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Followers user_id={user[0].user_id} userAvatar={user[0].avatar_url} userInitials={user[0].initials} />)
+      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} />)
     }
   }
 

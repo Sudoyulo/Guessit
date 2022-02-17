@@ -7,6 +7,8 @@ import GameTitle from './components/gameTitle';
 import Blank from './components/blank';
 import Landing from './components/Landing';
 
+import axios from "axios";
+
 function App() {
 
   const Paths = () => {
