@@ -159,6 +159,17 @@ const saveGuess = (id, guess) => {
 
 }
 
+const getGuesses = (ugid) => {
+
+  return pool.query("SELECT guess, guesstimestamp FROM guesses INNER JOIN user_game ON user_game.id = guesses.user_game_id WHERE user_game.id = $1;", [ugid])
+    .then(results => {
+      return results;
+    })
+
+}
+
+
+
 module.exports = {
   getUsers,
   getUser,
@@ -174,4 +185,5 @@ module.exports = {
   saveOneWin,
   saveWin,
   saveGuess,
+  getGuesses
 }

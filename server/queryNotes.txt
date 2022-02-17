@@ -62,6 +62,14 @@ INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES
 
 INSERT INTO users (date_started, player_id) VALUES (NOW(), 'kevin');
 
+SELECT guess, guesstimestamp
+FROM guesses
+INNER JOIN user_game ON user_game.id = guesses.user_game_id
+WHERE user_game.id = 1;
+
+
+
+
 
   // const [user, setUser] = useState([]);
 

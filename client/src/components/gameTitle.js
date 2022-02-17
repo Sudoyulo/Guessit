@@ -35,6 +35,7 @@ const GameTitle = (props) => {
   const [pos, setPos] = useState({ row: 0, col: 0 })
 
   const resetBoard = () => {
+    console.log("resetBoard")
     setBoard([
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
@@ -45,6 +46,20 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
+
+  const loadBoard = () => {
+    console.log("load board")
+    setBoard([
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "]
+    ])
+    setPos({ row: 0, col: 0 })
+  };
+
 
   const getUser = () => {
     axios('http://localhost:5001/users/1')
@@ -58,6 +73,7 @@ const GameTitle = (props) => {
       .then(res => {
         setGame(res.data[0])
 
+
       })
   }
 
@@ -65,7 +81,7 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/game/' + id)
       .then(res => {
         setGame(res.data)
-
+        // console.log("get game", res)
       })
   }
 
@@ -85,6 +101,8 @@ const GameTitle = (props) => {
       }
 
     })
+    // console.log("completed games", complete, "hanging", tbd)
+
     setCompletedGames(complete);
     setHangingGames(tbd);
     setGameCount(gCount);
@@ -97,7 +115,7 @@ const GameTitle = (props) => {
 
   useEffect(() => {
     getGames();
-    getGame();;
+    getGame();
   }, [user]);
 
   useEffect(() => {
@@ -133,7 +151,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} getUser={getUser} />)
+      setRightSidebar(<Settings user={user} resetBoard={resetBoard} loadBoard={loadBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} />)
     }
   }
   //user[0].player_id
