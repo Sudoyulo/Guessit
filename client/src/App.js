@@ -41,13 +41,13 @@ function App() {
           {leftSidebar}
         </div>
         <div className='main-view' >
-          {/* <Paths/> */}
+
           <Routes>
             {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} />} />)}
             {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />} />)}
             <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
           </Routes>
-          {/* <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} /> */}
+
         </div>
         <div className='right-sidebar'>
           {rightSidebar}
