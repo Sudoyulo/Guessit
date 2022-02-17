@@ -71,3 +71,9 @@
   background-color: #538d4e !important;
   border: none !important;
 }
+
+.middles {
+  display: flex;
+  justify-content: center;
+  align-items: baseline;
+}

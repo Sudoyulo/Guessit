@@ -1,8 +1,11 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
+import ReplayContainer from "./replayContainer";
+import BlankReplay from "./blankReplay";
 import { checkWord } from "../words/wordList";
+
 
 const GuessContainer = (props) => {
 
@@ -247,21 +250,26 @@ const GuessContainer = (props) => {
   }
 
   return (
-    <Fragment >
+    <div className="tile-keyboard" >
+      <div >
 
-      <div className="message">
-        {message}
-        <p>&nbsp;</p>
+        <div className="message">
+          {message}
+          <p>&nbsp;</p>
+        </div>
+
+        <div className="middles">
+          <BlankReplay />
+          <div className="tile-container">
+            {guessRows}
+          </div>
+          <ReplayContainer timestamp={props.timestamp} guessList={props.guessList} />
+        </div>
+
+        <Keyboard onKeypress={handleKeypress} />
+
       </div>
-
-      <div className="tile-container">
-        {guessRows}
-      </div>
-
-      <Keyboard onKeypress={handleKeypress} />
-
-    </Fragment>
-
+    </div >
   );
 
 }

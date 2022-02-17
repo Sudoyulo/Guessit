@@ -23,6 +23,7 @@ const GameTitle = (props) => {
   const [hangingGames, setHangingGames] = useState([]);
   const [gameCount, setGameCount] = useState(0);
   const [timestamp, setTimestamp] = useState([]);
+  const [guessList, setGuessList] = useState([]);
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -50,14 +51,17 @@ const GameTitle = (props) => {
 
   const loadBoard = (stats) => {
     // console.log("load board", stats)
+    let listOfGuesses = [];
     let guesses = [];
     let gamestamp = [];
 
     stats.forEach((entry) => {
+      listOfGuesses.push(entry.guess)
       guesses.push(entry.guess.split(''))
       gamestamp.push(entry.guesstimestamp)
     })
 
+    setGuessList(listOfGuesses)
     setPos({ row: guesses.length, col: 0 })
 
     for (let i = guesses.length; i < 6; i++) {
@@ -65,14 +69,6 @@ const GameTitle = (props) => {
     }
 
     console.log(gamestamp)
-    console.log("0, 1", gamestamp[1], gamestamp[0])
-
-
-    // Date().toLocaleTimeString([], {     minute: "2-digit",     second: "2-digit",   })
-
-
-
-
 
     setBoard(guesses)
     setTimestamp(gamestamp)
@@ -202,8 +198,12 @@ const GameTitle = (props) => {
         </div>
 
       </div >
+      <div className="middle-containers">
 
-      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
+
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} timestamp={timestamp} guessList={guessList} />
+
+      </div>
     </div>
   );
 }
