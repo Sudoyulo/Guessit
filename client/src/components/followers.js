@@ -8,6 +8,8 @@ const Followers = (props) => {
 
   const [allAvatars, setAllAvatars] = useState([]);
   const [user, setUser] = useState([userinfo])
+  const [myAvatar, setMyAvatar] = useState(userAvatar);
+  const [myInitials, setInitials] = useState(userInitials);
 
 
   const getAvatars = () => {
@@ -47,12 +49,20 @@ const Followers = (props) => {
       })
   }
 
-  const [myAvatar, setMyAvatar] = useState(userAvatar);
-  const [myInitials, setInitials] = useState(userInitials);
+  const getMyFriends = () => {
+    console.log("getting my friends", user_id)
+    axios('http://localhost:5001/getmyfriends/' + user_id)
+      .then(res => {
+        console.log("client, get my friends", res.data.rows)
+      })
+  }
+
+
 
   // called here because of reload issues
   useEffect(() => {
     getUser();
+    getMyFriends();
   }, [])
 
   useEffect(() => {

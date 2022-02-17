@@ -169,6 +169,23 @@ const getGuesses = (ugid) => {
 }
 
 
+const getMyFriends = (myid) => {
+
+  // console.log("entered get my friends query", myid)
+  let myFriendsId = []
+
+  return pool.query("SELECT you_are AS friendid FROM follows WHERE i_am = $1;", [myid])
+    .then(results => {
+
+      results.rows.forEach(entry => myFriendsId.push(entry["you_are"]))
+      // console.log("ids only", myFriendsId, results.rows)
+      return results
+
+    })
+
+}
+
+
 
 module.exports = {
   getUsers,
@@ -185,5 +202,6 @@ module.exports = {
   saveOneWin,
   saveWin,
   saveGuess,
-  getGuesses
+  getGuesses,
+  getMyFriends
 }

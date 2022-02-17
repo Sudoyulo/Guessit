@@ -74,3 +74,8 @@ INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'ABBEY', '
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'SEVEN', '12:10');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'EIGHT', '12:15');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'LIGHT', '12:20');
+
+INSERT INTO follows (i_am, you_are) VALUES (1,2); --1,2
+INSERT INTO follows (i_am, you_are) VALUES (1,3); --1,3
+INSERT INTO follows (i_am, you_are) VALUES (2,1); --2,1
+INSERT INTO follows (i_am, you_are) VALUES (3,1); --3,1
