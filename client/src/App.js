@@ -11,19 +11,12 @@ import axios from "axios";
 
 function App() {
 
-  const Paths = () => {
-    const authenticate = () => {
-      setAuth(true)
-      Cookies.set("user", "authTrue")
-    }
-    return (
-      <Routes>
-        {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} />} />)}
-        {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />} />)}
-        <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
-      </Routes>
-    )
+
+  const authenticate = () => {
+    setAuth(true)
+    Cookies.set("user", "authTrue")
   }
+
 
   const readCookie = () => {
     const user = Cookies.get('user')
@@ -48,7 +41,13 @@ function App() {
           {leftSidebar}
         </div>
         <div className='main-view' >
-          <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />
+          {/* <Paths/> */}
+          <Routes>
+            {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} />} />)}
+            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} />} />)}
+            <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
+          </Routes>
+          {/* <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} /> */}
         </div>
         <div className='right-sidebar'>
           {rightSidebar}
