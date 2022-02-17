@@ -45,7 +45,9 @@ SELECT *
 from user_game
 WHERE user_id = 2 AND game_id = 2;
 
-INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp) VALUES (3, 'HOUSE', NOW());
+
+INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES (3, 'HOUSE', CURTIME());
+
 
 select id, user_game_id, row1guess, row1timestamp from guesses;
 
@@ -105,3 +107,11 @@ WHERE user_game.id = 1;
 
   {/* <button onClick={() => { newUser(); refresh = true; }}>new</button> */}
   <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} user={user} />
+
+
+
+  CREATE TABLE times (
+  id SERIAL PRIMARY KEY NOT NULL,
+  time VARCHAR(255)
+);
+INSERT INTO times (time) VALUES (23:19);

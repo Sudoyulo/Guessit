@@ -84,9 +84,12 @@ const GuessContainer = (props) => {
   const makeUserGame = (user, gid, guess) => {
     // console.log("making game", user, gid, guess)
 
+    let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
+    console.log("date", date)
+
     if (user[0] && gid && guess) {
       // console.log("making", user[0].user_id, gameId, guess)
-      axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess)
+      axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess + "/" + date)
         .then(res => {
           // console.log("make", res.data.rows)
           setUserGame(res.data.rows)
@@ -111,8 +114,11 @@ const GuessContainer = (props) => {
   const saveGuess = (guess) => {
     // console.log("guess, row num, ugid", guess, userGame[0].id)
 
+    let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
+    console.log("date", date)
+
     if (userGame[0]) {
-      axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess)
+      axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess + "/" + date)
         .then(res => {
           // console.log("inserted new guess")
         })

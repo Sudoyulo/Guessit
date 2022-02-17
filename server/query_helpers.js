@@ -31,7 +31,7 @@ const newUser = (id) => {
   return pool.query('INSERT INTO users (date_started, player_id) VALUES (NOW(), $1) returning *;', [id])
     .then(results => {
 
-      console.log("added new user", results.rows[0].id)
+      // console.log("added new user", results.rows[0].id)
       return results.rows;
     })
 
@@ -102,12 +102,12 @@ const setInitials = (uid, key) => {
     })
 }
 
-const createUserGame = (uid, gid, guess) => {
+const createUserGame = (uid, gid, guess, time) => {
 
   pool.query("INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1,$2, NOW()) RETURNING *;", [uid, gid])
     .then(results => {
 
-      pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
+      pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, $3)", [results.rows[0].id, guess, time])
         .then(results => {
           return results;
         })
@@ -150,9 +150,9 @@ const saveWin = (turns, ugid) => {
 }
 
 
-const saveGuess = (id, guess) => {
+const saveGuess = (id, guess, time) => {
 
-  return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [id, guess])
+  return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, $3)", [id, guess, time])
     .then(results => {
       return results;
     })

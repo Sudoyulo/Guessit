@@ -37,5 +37,5 @@ CREATE TABLE guesses (
   id SERIAL PRIMARY KEY NOT NULL,
   user_game_id INTEGER REFERENCES user_game(id) ON DELETE CASCADE,
   guess VARCHAR(255),
-  guessTimestamp TIMESTAMP
+  guessTimestamp VARCHAR(255)
 );

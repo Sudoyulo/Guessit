@@ -21,7 +21,8 @@ const GameTitle = (props) => {
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
-  const [gameCount, setGameCount] = useState(0)
+  const [gameCount, setGameCount] = useState(0);
+  const [timestamp, setTimestamp] = useState([]);
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -47,17 +48,34 @@ const GameTitle = (props) => {
     setPos({ row: 0, col: 0 })
   };
 
-  const loadBoard = () => {
-    console.log("load board")
-    setBoard([
-      [" ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " "],
-      [" ", " ", " ", " ", " "]
-    ])
-    setPos({ row: 0, col: 0 })
+  const loadBoard = (stats) => {
+    // console.log("load board", stats)
+    let guesses = [];
+    let gamestamp = [];
+
+    stats.forEach((entry) => {
+      guesses.push(entry.guess.split(''))
+      gamestamp.push(entry.guesstimestamp)
+    })
+
+    setPos({ row: guesses.length, col: 0 })
+
+    for (let i = guesses.length; i < 6; i++) {
+      guesses.push([" ", " ", " ", " ", " "])
+    }
+
+    console.log(gamestamp)
+    console.log("0, 1", gamestamp[1], gamestamp[0])
+
+
+    // Date().toLocaleTimeString([], {     minute: "2-digit",     second: "2-digit",   })
+
+
+
+
+
+    setBoard(guesses)
+    setTimestamp(gamestamp)
   };
 
 

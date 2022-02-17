@@ -44,17 +44,16 @@ const Settings = (props) => {
   }
 
   const loadOrReset = () => {
-    console.log("load or reset game:", user[0].user_id, search)
-
+    // console.log("load or reset game:", user[0].user_id, search)
 
     if (completedGames.includes(search)) {
       console.log("completed game")
       getGuesses();
-      loadBoard();
+      // loadBoard();
     } else if (hangingGames.includes(search)) {
       getGuesses();
       console.log("hanging game")
-      loadBoard();
+      // loadBoard();
     } else {
       console.log("new game")
       resetBoard();
@@ -62,23 +61,8 @@ const Settings = (props) => {
 
   }
 
-  // const getUserGame = (user, gid) => {
-  //   // console.log("getting game", user, gid) //causses memory leak
-
-  //   if (user[0] && gid) {
-  //     // console.log("fetching", user[0].user_id, gameId)
-  //     axios('http://localhost:5001/user_game/' + user[0].user_id + "/" + gid)
-  //       .then(res => {
-  //         // console.log("usergame", res.data.rows)
-  //         setUserGame(res.data.rows)
-  //       })
-  //   }
-
-  // }
-
-
   const getGuesses = () => {
-    console.log("trying to load guesses", user[0].user_id, search)
+    // console.log("trying to load guesses", user[0].user_id, search)
 
     if (user[0] && search) {
       // console.log("fetching", user[0].user_id, gameId)
@@ -88,10 +72,9 @@ const Settings = (props) => {
 
           axios('http://localhost:5001/guesslog/' + res.data.rows[0].id)
             .then(res => {
-              console.log("loaded guesses", res.data.rows)
+              // console.log("loaded guesses", res.data.rows)
+              loadBoard(res.data.rows);
             })
-
-
         })
     }
   }
