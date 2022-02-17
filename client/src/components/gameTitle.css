@@ -1,4 +1,5 @@
 .gameNav {
+  
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -10,7 +11,7 @@ p {
 }
 
 .gameNav button {
-  background-color: black;
+  background-color: rgb(18, 18, 19);
   border: none;
 }
 
