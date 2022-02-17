@@ -16,12 +16,15 @@ import GuessContainer from './guessContainer';
 
 const GameTitle = (props) => {
 
-  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
+  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, newUserData } = props;
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
   const [gameCount, setGameCount] = useState(0)
+
+  // console.log("user", user)
+  // console.log("newUserData", newUserData)
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -45,11 +48,11 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
-
+  
   const getUser = () => {
     axios('http://localhost:5001/users/1')
       .then(res => {
-        // console.log("RES USER: ", res.data)
+        console.log("RES USER: ", res.data)
         setUser(res.data)
       })
   }
