@@ -157,6 +157,7 @@ app.put('/new_user_game/:uid/:gid/:guess/:time', (req, res) => {
 
     })
     .catch(error => {
+      console.log("NEW USERGAME ERROR HERE")
       res.status(500).send(error);
     })
 

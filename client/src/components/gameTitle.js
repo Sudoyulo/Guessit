@@ -25,6 +25,9 @@ const GameTitle = (props) => {
   const [timestamp, setTimestamp] = useState([]);
   const [guessList, setGuessList] = useState([]);
 
+  // console.log("user", user)
+  // console.log("newUserData", newUserData)
+
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
     [" ", " ", " ", " ", " "],
@@ -168,6 +171,8 @@ const GameTitle = (props) => {
     }
   }
   //user[0].player_id
+
+  // console.log("USER: ", user)
 
   return (
 

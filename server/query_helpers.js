@@ -26,6 +26,17 @@ const getUser = (id) => {
   })
 }
 
+// const newUser = (id) => {
+
+//   return pool.query('INSERT INTO users (date_started, player_id) VALUES (NOW(), $1) returning *;', [id])
+//     .then(results => {
+
+//       console.log("added new user", results.rows[0].id)
+//       return results.rows;
+//     })
+
+// }
+
 const newUser = (id) => {
 
   return pool.query("INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('LHL', 1, NOW(), $1) returning *;", [id])
@@ -106,14 +117,15 @@ const createUserGame = (uid, gid, guess, time) => {
 
   pool.query("INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1,$2, NOW()) RETURNING *;", [uid, gid])
     .then(results => {
-
-      pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, $3)", [results.rows[0].id, guess, time])
-        .then(results => {
-          return results;
-        })
-      return results;
+      console.log("results 2: ", results.rows[0].id)
+      return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
+        // .then(results => {
+        //   console.log("results 1: ", results)
+        //   return results;
+        // })
+      // return results;
     })
-  return results;
+  // return results;
 }
 
 
