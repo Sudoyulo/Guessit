@@ -28,9 +28,9 @@ const getUser = (id) => {
 
 const newUser = (id) => {
 
-  return pool.query('INSERT INTO users (date_started, player_id) VALUES (NOW(), $1) returning *;', [id])
+  return pool.query("INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('LHL', 1, NOW(), $1) returning *;", [id])
     .then(results => {
-
+      pool.query('INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1, 1, NOW());', [results.rows[0].id])
       // console.log("added new user", results.rows[0].id)
       return results.rows;
     })
@@ -169,6 +169,23 @@ const getGuesses = (ugid) => {
 }
 
 
+const getMyFriends = (myid) => {
+
+  // console.log("entered get my friends query", myid)
+  let myFriendsId = []
+
+  return pool.query("SELECT you_are AS friendid FROM follows WHERE i_am = $1;", [myid])
+    .then(results => {
+
+      results.rows.forEach(entry => myFriendsId.push(entry["you_are"]))
+      // console.log("ids only", myFriendsId, results.rows)
+      return results
+
+    })
+
+}
+
+
 
 module.exports = {
   getUsers,
@@ -185,5 +202,6 @@ module.exports = {
   saveOneWin,
   saveWin,
   saveGuess,
-  getGuesses
+  getGuesses,
+  getMyFriends
 }

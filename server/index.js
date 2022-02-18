@@ -9,7 +9,7 @@ const cors = require("cors");
 const { Pool } = require("pg");
 const dbParams = require("./lib/db");
 const pool = new Pool(dbParams);
-const { getUsers, getUser, newUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveOneWin, saveWin, saveGuess, getGuesses } = require('./query_helpers')
+const { getUsers, getUser, newUser, getGames, makeGame, getGame, getAvatars, setAvatar, setInitials, createUserGame, getUserStats, saveOneWin, saveWin, saveGuess, getGuesses, getMyFriends } = require('./query_helpers')
 
 app.use(cors());
 app.use(express.json()); //req,.body
@@ -238,6 +238,24 @@ app.get('/guesslog/:ugid', (req, res) => {
     })
 
 });
+
+
+app.get('/getmyfriends/:myid', (req, res) => {
+
+  const { myid } = req.params;
+
+  getMyFriends(myid)
+    .then(response => {
+      // console.log("after friends", response)
+      res.status(200).send(response);
+    })
+    .catch(error => {
+      res.status(500).send(error);
+    })
+
+});
+
+
 
 
 app.listen(5001, () => {

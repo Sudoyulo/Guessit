@@ -115,3 +115,8 @@ WHERE user_game.id = 1;
   time VARCHAR(255)
 );
 INSERT INTO times (time) VALUES (23:19);
+
+
+SELECT you_are 
+FROM follows
+WHERE i_am = 1;

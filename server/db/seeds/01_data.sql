@@ -14,6 +14,8 @@ INSERT INTO avatars (avatar_url) VALUES ('https://img.icons8.com/cotton/344/owl-
 INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('MGS', 1, '2022-01-01 00:00:00', 'x7d3k6');
 INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('DCS', 2, '2022-01-02 00:00:00', 'h6m2b5');
 INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('PBH', 3, '2022-01-03 00:00:00', 'j7m3d6');
+INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('LHL', 1, '2022-01-03 00:00:00', 'fourth');
+INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('LHL', 1, '2022-01-03 00:00:00', 'fiveth');
 
 INSERT INTO games (solution) VALUES ('LIGHT');
 INSERT INTO games (solution) VALUES ('ADORE');
@@ -74,3 +76,11 @@ INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'ABBEY', '
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'SEVEN', '12:10');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'EIGHT', '12:15');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'LIGHT', '12:20');
+
+INSERT INTO follows (i_am, you_are) VALUES (1,2); --1,2
+INSERT INTO follows (i_am, you_are) VALUES (1,3); --1,3
+INSERT INTO follows (i_am, you_are) VALUES (2,1); --2,1
+INSERT INTO follows (i_am, you_are) VALUES (3,1); --3,1
+
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (4, 1, '2022-01-01 01:25:45');
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (5, 1, '2022-01-01 01:25:45');
