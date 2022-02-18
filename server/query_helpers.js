@@ -26,12 +26,23 @@ const getUser = (id) => {
   })
 }
 
+// const newUser = (id) => {
+
+//   return pool.query('INSERT INTO users (date_started, player_id) VALUES (NOW(), $1) returning *;', [id])
+//     .then(results => {
+
+//       console.log("added new user", results.rows[0].id)
+//       return results.rows;
+//     })
+
+// }
+
 const newUser = (id) => {
 
-  return pool.query('INSERT INTO users (date_started, player_id) VALUES (NOW(), $1) returning *;', [id])
+  return pool.query("INSERT INTO users (initials, avatar_id, date_started, player_id) VALUES ('LHL', 1, NOW(), $1) returning *;", [id])
     .then(results => {
-
-      console.log("added new user", results.rows[0].id)
+      pool.query('INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1, 1, NOW());', [results.rows[0].id])
+      // console.log("added new user", results.rows[0].id)
       return results.rows;
     })
 
@@ -102,18 +113,19 @@ const setInitials = (uid, key) => {
     })
 }
 
-const createUserGame = (uid, gid, guess) => {
+const createUserGame = (uid, gid, guess, time) => {
 
   pool.query("INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1,$2, NOW()) RETURNING *;", [uid, gid])
     .then(results => {
-
-      pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
-        .then(results => {
-          return results;
-        })
-      return results;
+      console.log("results 2: ", results.rows[0].id)
+      return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
+      // .then(results => {
+      //   console.log("results 1: ", results)
+      //   return results;
+      // })
+      // return results;
     })
-  return results;
+  // return results;
 }
 
 
@@ -150,14 +162,57 @@ const saveWin = (turns, ugid) => {
 }
 
 
-const saveGuess = (id, guess) => {
+const saveGuess = (id, guess, time) => {
 
-  return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [id, guess])
+  return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, $3)", [id, guess, time])
     .then(results => {
       return results;
     })
 
 }
+
+const getGuesses = (ugid) => {
+
+  return pool.query("SELECT guess, guesstimestamp FROM guesses INNER JOIN user_game ON user_game.id = guesses.user_game_id WHERE user_game.id = $1;", [ugid])
+    .then(results => {
+      return results;
+    })
+
+}
+
+
+const getMyFriends = (myid) => {
+
+  // console.log("entered get my friends query", myid)
+  let myFriendsId = []
+
+  return pool.query("SELECT you_are AS friendid FROM follows WHERE i_am = $1;", [myid])
+    .then(results => {
+      // return results.rows.map(() => { })
+      results.rows.forEach(entry => myFriendsId.push(entry["you_are"]))
+      // console.log("ids only", myFriendsId, results.rows)
+      return results
+
+    })
+
+}
+
+const addFollower = (me, you) => {
+  //check if you is an invalid users
+  if (me !== you) {
+    pool.query("SELECT * FROM follows WHERE i_am= $1 AND you_are=$2;", [me, you])
+      .then(results => {
+
+        if (results.rows.length === 0) {
+          pool.query("INSERT INTO follows (i_am, you_are) VALUES ($1,$2)", [me, you])
+
+        }
+
+      })
+  }
+
+}
+
 
 module.exports = {
   getUsers,
@@ -174,4 +229,7 @@ module.exports = {
   saveOneWin,
   saveWin,
   saveGuess,
+  getGuesses,
+  getMyFriends,
+  addFollower
 }

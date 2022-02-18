@@ -1,12 +1,17 @@
-import React, { Fragment, useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
+import ReplayContainer from "./replayContainer";
+import BlankReplay from "./blankReplay";
 import { checkWord } from "../words/wordList";
+
 
 const GuessContainer = (props) => {
 
-  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
+  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames, boardCSS } = props;
+  // console.log("USER++++++: ", user)
+  // console.log('NEW USER: ', newUser)
 
   const [message, setMessage] = useState("");
   const [userGame, setUserGame] = useState([]);
@@ -84,12 +89,18 @@ const GuessContainer = (props) => {
   const makeUserGame = (user, gid, guess) => {
     // console.log("making game", user, gid, guess)
 
+    let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
+    console.log("date", date)
+
     if (user[0] && gid && guess) {
       // console.log("making", user[0].user_id, gameId, guess)
-      axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess)
+      axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess + "/" + date)
         .then(res => {
-          // console.log("make", res.data.rows)
+          console.log("res.data.rows: ", res.data.rows)
           setUserGame(res.data.rows)
+        })
+        .catch(error => {
+          console.log("NEW USERGAME ERROR HERE", error)
         })
     }
   }
@@ -111,8 +122,11 @@ const GuessContainer = (props) => {
   const saveGuess = (guess) => {
     // console.log("guess, row num, ugid", guess, userGame[0].id)
 
+    let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
+    console.log("date", date)
+
     if (userGame[0]) {
-      axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess)
+      axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess + "/" + date)
         .then(res => {
           // console.log("inserted new guess")
         })
@@ -241,21 +255,26 @@ const GuessContainer = (props) => {
   }
 
   return (
-    <Fragment >
+    <div className="tile-keyboard" >
+      <div >
 
-      <div className="message">
-        {message}
-        <p>&nbsp;</p>
+        <div className="message">
+          {message}
+          <p>&nbsp;</p>
+        </div>
+
+        <div className="middles">
+          <BlankReplay />
+          <div className="tile-container">
+            {guessRows}
+          </div>
+          <ReplayContainer timestamp={props.timestamp} guessList={props.guessList} board={board} solution={solution} flipTiles={flipTile}/>
+        </div>
+
+        <Keyboard onKeypress={handleKeypress} />
+
       </div>
-
-      <div className="tile-container">
-        {guessRows}
-      </div>
-
-      <Keyboard onKeypress={handleKeypress} />
-
-    </Fragment>
-
+    </div >
   );
 
 }

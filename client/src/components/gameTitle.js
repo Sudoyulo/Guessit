@@ -17,11 +17,14 @@ import GuessContainer from './guessContainer';
 const GameTitle = (props) => {
 
   const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
+  const [allGames, setAllGames] = useState([])
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
-  const [gameCount, setGameCount] = useState(0)
+  const [gameCount, setGameCount] = useState(0);
+  const [timestamp, setTimestamp] = useState([]);
+  const [guessList, setGuessList] = useState([]);
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -35,6 +38,7 @@ const GameTitle = (props) => {
   const [pos, setPos] = useState({ row: 0, col: 0 })
 
   const resetBoard = () => {
+    console.log("resetBoard")
     setBoard([
       [" ", " ", " ", " ", " "],
       [" ", " ", " ", " ", " "],
@@ -45,18 +49,90 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
+  const changeKeyColour = (key, colour) => {
+    const button = document.getElementById(key)
+    button.classList.add(colour)
+  }
+  
+  const loadBoard = (stats) => {
+
+    let listOfGuesses = [];
+    let guesses = [];
+    let gamestamp = [];
+
+    stats.forEach((entry) => {
+      listOfGuesses.push(entry.guess)
+      guesses.push(entry.guess.split(''))
+      gamestamp.push(entry.guesstimestamp)
+    })
+
+    setGuessList(listOfGuesses)
+    console.log("listOfGuesses: ", listOfGuesses)
+    setPos({ row: guesses.length, col: 0 })
+
+    for (let i = guesses.length; i < 6; i++) {
+      guesses.push([" ", " ", " ", " ", " "])
+    }
+
+    setBoard(guesses)
+    setTimestamp(gamestamp)
+    boardCSS(board, "LIGHT")
+  };
+
+  const boardCSS = (guesses, solution) => {
+
+    guesses.forEach((userGuess, rowindex) => {
+
+      let answer = solution
+      let checkSolution = answer
+      let guess = []
+
+      userGuess.forEach((tile, colIndex) => {
+
+        tile = document.getElementById(rowindex.toString() + colIndex.toString())
+
+        if (!tile.textContent) {
+          tile.classList.add('default')
+        }
+        guess.push({ letter: tile.textContent, colour: 'grey-overlay' })
+
+        guess.forEach((guess, index) => {
+          if (guess.letter === answer[index]) {
+            guess.colour = 'green-overlay'
+            checkSolution = checkSolution.replace(guess.letter, '')
+          }
+
+          if (checkSolution.includes(guess.letter)) {
+            guess.colour = 'yellow-overlay'
+            checkSolution = checkSolution.replace(guess.letter, '')
+          }
+
+          if (guess.letter === ' ') {
+            guess.colour = 'default'
+
+          }
+        })
+
+        tile.classList.add(guess[colIndex].colour)
+        changeKeyColour(guess[colIndex].letter, guess[colIndex].colour)
+
+      })
+    })
+  };
+
 
   const getUser = () => {
     axios('http://localhost:5001/users/1')
       .then(res => {
-        // console.log("RES USER: ", res.data)
         setUser(res.data)
       })
   }
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
+        setAllGames(res.data)
         setGame(res.data[0])
+
       })
   }
 
@@ -83,6 +159,8 @@ const GameTitle = (props) => {
       }
 
     })
+    // console.log("completed games", complete, "hanging", tbd)
+
     setCompletedGames(complete);
     setHangingGames(tbd);
     setGameCount(gCount);
@@ -90,14 +168,18 @@ const GameTitle = (props) => {
 
   useEffect(() => {
     getUser();
-    getGames();
-    getGame();;
   }, []);
+
+
+  useEffect(() => {
+    getGames();
+    getGame();
+  }, [user]);
 
   useEffect(() => {
 
     readCompletedgames(user);
-  }, [game]);
+  }, [user]);
 
   const helpOnOff = () => {
     if (rightSidebar.type.name === "Help") {
@@ -111,7 +193,7 @@ const GameTitle = (props) => {
     if (leftSidebar.type.name === "Followers") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} />)
+      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} gameid={game.id} />)
     }
   }
 
@@ -127,10 +209,12 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings resetBoard={resetBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} />)
+      setRightSidebar(<Settings user={user} resetBoard={resetBoard} loadBoard={loadBoard} setCSS={boardCSS} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} board={board} />)
     }
   }
-  //user[0].player_id
+ 
+
+
 
   return (
 
@@ -143,7 +227,7 @@ const GameTitle = (props) => {
           <button onClick={() => { followerOnOff() }} >
             <img className="nav-icon" src={friendIcon} alt="follower" />
           </button>
-          <div className="game-info"> Your id: <br /> {user[0] ? user[0].player_id : ""} </div>
+          <div className="game-info"> You: <br /> <div>{user[0] ? user[0].initials : ""}</div> </div>
         </div>
 
 
@@ -160,8 +244,12 @@ const GameTitle = (props) => {
         </div>
 
       </div >
+      <div className="middle-containers">
 
-      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
+
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} boardCSS={boardCSS}/>
+
+      </div>
     </div>
   );
 }

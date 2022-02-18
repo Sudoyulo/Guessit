@@ -31,6 +31,7 @@
 
 .message {
   display: flex;
+  justify-content: center;
 }
 @keyframes flipping {
   0% {
@@ -46,7 +47,9 @@
 .flip {
   animation: 0.5s linear flipping;
 }
-
+.default {
+  background-color: black !important;
+}
 .grey-overlay {
   background-color: #3a3a3c !important;
   border: none !important;
@@ -75,4 +78,15 @@
 .key-green-overlay {
   background-color: #538d4e !important;
   border: none !important;
+}
+
+.middles {
+  /* display: flex;
+  justify-content: center;
+  align-items: baseline; */
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: row;
+  align-content: stretch;
 }
