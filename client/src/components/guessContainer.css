@@ -41,7 +41,9 @@
 .flip {
   animation: 0.5s linear flipping;
 }
-
+.default {
+  background-color: rgb(24, 24, 219) !important;
+}
 .grey-overlay {
   background-color: #3a3a3c !important;
   border: none !important;
