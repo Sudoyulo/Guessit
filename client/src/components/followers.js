@@ -138,22 +138,6 @@ const Followers = (props) => {
 
   })
 
-  //query with user avatar, initials, game completed, turns
-  // const followersList = [
-  //   { user_id: 1, initials: "KEV", avatar: allAvatars[2], completed: true },
-  //   { user_id: 2, initials: "LHL", avatar: allAvatars[8], completed: false }
-  // ];
-
-  // const followers = followersList.map((user) => {
-  //   return (
-  //     <div key={user.id} className="friend-info">
-  //       <img className="avatar" src={user.avatar} alt="img" />
-  //       <p > {user.initials}#{user.user_id}</p>
-  //       {user.completed ? <button className="complete">Completed in 4</button> : <button className="complete">Not yet complete</button>}
-  //     </div>
-  //   );
-  // })
-  //{ changeInitials(e.target.value) 
   return (
 
     <div className="left-sidebar">

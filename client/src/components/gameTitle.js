@@ -76,7 +76,7 @@ const GameTitle = (props) => {
 
 
   const getUser = () => {
-    axios('http://localhost:5001/users/1')
+    axios('http://localhost:5001/users/4')
       .then(res => {
         // console.log("RES USER: ", res.data)
         setUser(res.data)
@@ -86,7 +86,6 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/games')
       .then(res => {
         setGame(res.data[0])
-
 
       })
   }
