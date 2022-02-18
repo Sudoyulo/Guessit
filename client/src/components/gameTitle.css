@@ -1,9 +1,12 @@
 .gameNav {
   
   display: flex;
+  background-color: rgb(18, 18, 19);
   justify-content: space-between;
   align-items: center;
-  width: 50vw;
+  width: 100vw;
+  z-index: 10;
+  border-bottom: 1px solid rgb(58, 58, 60);
 }
 
 p {
@@ -33,12 +36,15 @@ button:hover {
   width: 30px;
   height: auto;
   margin: 5px;
+  color: white;
 }
 
 .left-icons{
   display: flex;
+  padding-left: 1em;
 }
 
 .right-icons {
   display: flex;
+  padding-right: 1em;
 }

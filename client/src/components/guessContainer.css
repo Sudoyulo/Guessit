@@ -8,6 +8,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-weight: 900;
+  
 
   
 }
@@ -19,14 +21,14 @@
 
 .tile-container .col {
   background-color: rgb(18, 18, 19);
-  width: 50px;
-  height: 50px;
-  border: 2px solid grey;
+  width: 4em;
+  height: 4em;
+  border: 3px solid rgb(58, 58, 60);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2px;
+  margin: 3px;
 }
 
 .message {
@@ -48,7 +50,7 @@
   animation: 0.5s linear flipping;
 }
 .default {
-  background-color: black !important;
+  background-color: rgb(18, 18, 19) !important;
 }
 .grey-overlay {
   background-color: #3a3a3c !important;
@@ -89,4 +91,6 @@
   align-items: stretch;
   flex-direction: row;
   align-content: stretch;
+  font-weight: 900 !important;
+  font-size: large;
 }
