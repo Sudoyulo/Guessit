@@ -45,7 +45,9 @@ SELECT *
 from user_game
 WHERE user_id = 2 AND game_id = 2;
 
-INSERT INTO guesses (user_game_id, row1Guess, row1Timestamp) VALUES (3, 'HOUSE', NOW());
+
+INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES (3, 'HOUSE', CURTIME());
+
 
 select id, user_game_id, row1guess, row1timestamp from guesses;
 
@@ -61,6 +63,14 @@ INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES
 
 
 INSERT INTO users (date_started, player_id) VALUES (NOW(), 'kevin');
+
+SELECT guess, guesstimestamp
+FROM guesses
+INNER JOIN user_game ON user_game.id = guesses.user_game_id
+WHERE user_game.id = 1;
+
+
+
 
 
   // const [user, setUser] = useState([]);
@@ -97,3 +107,16 @@ INSERT INTO users (date_started, player_id) VALUES (NOW(), 'kevin');
 
   {/* <button onClick={() => { newUser(); refresh = true; }}>new</button> */}
   <GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} user={user} />
+
+
+
+  CREATE TABLE times (
+  id SERIAL PRIMARY KEY NOT NULL,
+  time VARCHAR(255)
+);
+INSERT INTO times (time) VALUES (23:19);
+
+
+SELECT you_are 
+FROM follows
+WHERE i_am = 1;

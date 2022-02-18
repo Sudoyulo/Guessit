@@ -113,7 +113,7 @@ const setInitials = (uid, key) => {
     })
 }
 
-const createUserGame = (uid, gid, guess) => {
+const createUserGame = (uid, gid, guess, time) => {
 
   pool.query("INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1,$2, NOW()) RETURNING *;", [uid, gid])
     .then(results => {
@@ -162,14 +162,42 @@ const saveWin = (turns, ugid) => {
 }
 
 
-const saveGuess = (id, guess) => {
+const saveGuess = (id, guess, time) => {
 
-  return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [id, guess])
+  return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, $3)", [id, guess, time])
     .then(results => {
       return results;
     })
 
 }
+
+const getGuesses = (ugid) => {
+
+  return pool.query("SELECT guess, guesstimestamp FROM guesses INNER JOIN user_game ON user_game.id = guesses.user_game_id WHERE user_game.id = $1;", [ugid])
+    .then(results => {
+      return results;
+    })
+
+}
+
+
+const getMyFriends = (myid) => {
+
+  // console.log("entered get my friends query", myid)
+  let myFriendsId = []
+
+  return pool.query("SELECT you_are AS friendid FROM follows WHERE i_am = $1;", [myid])
+    .then(results => {
+
+      results.rows.forEach(entry => myFriendsId.push(entry["you_are"]))
+      // console.log("ids only", myFriendsId, results.rows)
+      return results
+
+    })
+
+}
+
+
 
 module.exports = {
   getUsers,
@@ -186,4 +214,6 @@ module.exports = {
   saveOneWin,
   saveWin,
   saveGuess,
+  getGuesses,
+  getMyFriends
 }

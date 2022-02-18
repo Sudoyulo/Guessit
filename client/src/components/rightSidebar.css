@@ -52,6 +52,10 @@
   justify-content: flex-end;
 }
 
+.replay-box {
+  width: 100px;
+}
+
 .setting-container {
   margin-top: 50px;
   display: flex;
