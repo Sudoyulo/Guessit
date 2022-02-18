@@ -77,13 +77,6 @@ const GameTitle = (props) => {
       guesses.push([" ", " ", " ", " ", " "])
     }
 
-    // console.log(gamestamp)
-    // console.log("LIST OF GUESSES: ", listOfGuesses)
-    // console.log("GUESSES: ", guesses)
-    // console.log("COMPLETED GAMES", completedGames)
-    // console.log("GAME COUNT", gameCount)
-    // console.log("GAMES :", allGames[0].solution)
-
     setBoard(guesses)
     setTimestamp(gamestamp)
 
@@ -93,9 +86,6 @@ const GameTitle = (props) => {
       console.log("USERGUESS: ", userGuess)
       // console.log("POS", pos)
 
-
-
-
       let answer = allGames[0].solution
       let checkSolution = answer
       let guess = []
@@ -103,7 +93,7 @@ const GameTitle = (props) => {
       userGuess.forEach((tile, colIndex) => {
 
         tile = document.getElementById(rowindex.toString() + colIndex.toString())
-        
+
         if (!tile.textContent) {
           tile.classList.add('default')
         }
@@ -124,8 +114,6 @@ const GameTitle = (props) => {
         })
 
         tile.classList.add(guess[colIndex].colour)
-        
-        
 
         // setTimeout(() => {
         // tile.classList.add('flip')
@@ -145,11 +133,8 @@ const GameTitle = (props) => {
 
 
 
-
-
-
   const getUser = () => {
-    axios('http://localhost:5001/users/4')
+    axios('http://localhost:5001/users/1')
       .then(res => {
         // console.log("RES USER: ", res.data)
         setUser(res.data)

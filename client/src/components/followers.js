@@ -11,6 +11,7 @@ const Followers = (props) => {
   const [myAvatar, setMyAvatar] = useState(userAvatar);
   const [myInitials, setInitials] = useState(userInitials);
   const [followsList, setFollowsList] = useState([]);
+  const [friendInput, setFriendInput] = useState("");
 
 
   const getAvatars = () => {
@@ -81,6 +82,17 @@ const Followers = (props) => {
       })
   }
 
+  const addFriend = (friendId) => {
+
+    console.log("adding friend", user_id, friendId)
+    axios.put('http://localhost:5001/newfollow/' + user_id + '/' + friendId)
+      .then(res => {
+        console.log(res)
+      })
+
+    setFriendInput("")
+  }
+
 
   useEffect(() => {
 
@@ -111,7 +123,6 @@ const Followers = (props) => {
       setInitials(value.slice(0, 3).toUpperCase())
     }
   }
-
 
   const followers = followsList.map((friend, index) => {
     // console.log("fl friend", friend)
@@ -169,8 +180,8 @@ const Followers = (props) => {
       </div>
 
       <div className="add-a-friend" >
-        <input className="add-input" placeholder="Enter follower id:" ></input>
-        <button className="add-button"> Add friend </button>
+        <input className="add-input" placeholder="Enter follower id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input>
+        <button className="add-button" onClick={() => { addFriend(friendInput) }}> Add friend </button>
       </div>
 
     </div >
