@@ -119,10 +119,10 @@ const createUserGame = (uid, gid, guess, time) => {
     .then(results => {
       console.log("results 2: ", results.rows[0].id)
       return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, NOW())", [results.rows[0].id, guess])
-        // .then(results => {
-        //   console.log("results 1: ", results)
-        //   return results;
-        // })
+      // .then(results => {
+      //   console.log("results 1: ", results)
+      //   return results;
+      // })
       // return results;
     })
   // return results;
@@ -188,7 +188,7 @@ const getMyFriends = (myid) => {
 
   return pool.query("SELECT you_are AS friendid FROM follows WHERE i_am = $1;", [myid])
     .then(results => {
-
+      // return results.rows.map(() => { })
       results.rows.forEach(entry => myFriendsId.push(entry["you_are"]))
       // console.log("ids only", myFriendsId, results.rows)
       return results
@@ -197,6 +197,21 @@ const getMyFriends = (myid) => {
 
 }
 
+const addFollower = (me, you) => {
+  //check if you is an invalid users
+  if (me !== you) {
+    pool.query("SELECT * FROM follows WHERE i_am= $1 AND you_are=$2;", [me, you])
+      .then(results => {
+
+        if (results.rows.length === 0) {
+          pool.query("INSERT INTO follows (i_am, you_are) VALUES ($1,$2)", [me, you])
+
+        }
+
+      })
+  }
+
+}
 
 
 module.exports = {
@@ -215,5 +230,6 @@ module.exports = {
   saveWin,
   saveGuess,
   getGuesses,
-  getMyFriends
+  getMyFriends,
+  addFollower
 }
