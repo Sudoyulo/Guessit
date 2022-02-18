@@ -26,6 +26,7 @@
 
 .message {
   display: flex;
+  justify-content: center;
 }
 @keyframes flipping {
   0% {
