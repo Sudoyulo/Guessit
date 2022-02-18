@@ -149,7 +149,7 @@ const GameTitle = (props) => {
     if (leftSidebar.type.name === "Followers") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} />)
+      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} gameid={game.id} />)
     }
   }
 
