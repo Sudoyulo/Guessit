@@ -76,7 +76,12 @@
 }
 
 .middles {
-  display: flex;
+  /* display: flex;
   justify-content: center;
-  align-items: baseline;
+  align-items: baseline; */
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-direction: row;
+  align-content: stretch;
 }

@@ -250,7 +250,7 @@ const GameTitle = (props) => {
       <div className="middle-containers">
 
 
-        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} />
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} boardCSS={boardCSS}/>
 
       </div>
     </div>
