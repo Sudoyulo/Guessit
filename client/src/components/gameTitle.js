@@ -17,6 +17,7 @@ import GuessContainer from './guessContainer';
 const GameTitle = (props) => {
 
   const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
+  const [allGames, setAllGames] = useState([])
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
@@ -48,6 +49,10 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
+  const changeKeyColour = (key, colour) => {
+    const button = document.getElementById(key)
+    button.classList.add(colour)
+  }
 
   const loadBoard = (stats) => {
     // console.log("load board", stats)
@@ -62,17 +67,82 @@ const GameTitle = (props) => {
     })
 
     setGuessList(listOfGuesses)
+    console.log("listOfGuesses: ", listOfGuesses)
     setPos({ row: guesses.length, col: 0 })
 
     for (let i = guesses.length; i < 6; i++) {
       guesses.push([" ", " ", " ", " ", " "])
     }
 
-    console.log(gamestamp)
+    // console.log(gamestamp)
+    // console.log("LIST OF GUESSES: ", listOfGuesses)
+    // console.log("GUESSES: ", guesses)
+    // console.log("COMPLETED GAMES", completedGames)
+    // console.log("GAME COUNT", gameCount)
+    // console.log("GAMES :", allGames[0].solution)
 
     setBoard(guesses)
     setTimestamp(gamestamp)
+
+    console.log("guesses: ", guesses)
+
+    guesses.forEach((userGuess, rowindex) => {
+      console.log("USERGUESS: ", userGuess)
+      // console.log("POS", pos)
+
+
+
+
+      let answer = allGames[0].solution
+      let checkSolution = answer
+      let guess = []
+
+      userGuess.forEach((tile, colIndex) => {
+
+        tile = document.getElementById(rowindex.toString() + colIndex.toString())
+        
+        if (!tile.textContent) {
+          tile.classList.add('default')
+        }
+        guess.push({ letter: tile.textContent, colour: 'grey-overlay' })
+
+        guess.forEach((guess, index) => {
+          if (guess.letter === answer[index]) {
+            guess.colour = 'green-overlay'
+            checkSolution = checkSolution.replace(guess.letter, '')
+          }
+        })
+
+        guess.forEach(guess => {
+          if (checkSolution.includes(guess.letter)) {
+            guess.colour = 'yellow-overlay'
+            checkSolution = checkSolution.replace(guess.letter, '')
+          }
+        })
+
+        tile.classList.add(guess[colIndex].colour)
+        
+        
+
+        // setTimeout(() => {
+        // tile.classList.add('flip')
+        // console.log("guess[colIndex].colour: ", guess[colIndex].colour)
+        // }, 500 * colIndex)
+
+        // setTimeout(() => {
+        changeKeyColour(guess[colIndex].letter, guess[colIndex].colour)
+        // }, 2500)
+        // console.log("guess: ", guess)
+
+      })
+
+
+    })
   };
+
+
+
+
 
 
   const getUser = () => {
@@ -85,6 +155,8 @@ const GameTitle = (props) => {
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
+        // console.log("res.data[0]", res.data)
+        setAllGames(res.data)
         setGame(res.data[0])
 
 
