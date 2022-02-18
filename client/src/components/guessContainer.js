@@ -7,6 +7,8 @@ import { checkWord } from "../words/wordList";
 const GuessContainer = (props) => {
 
   const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
+  // console.log("USER++++++: ", user)
+  // console.log('NEW USER: ', newUser)
 
   const [message, setMessage] = useState("");
   const [userGame, setUserGame] = useState([]);
@@ -88,8 +90,11 @@ const GuessContainer = (props) => {
       // console.log("making", user[0].user_id, gameId, guess)
       axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess)
         .then(res => {
-          // console.log("make", res.data.rows)
+          console.log("res.data.rows: ", res.data.rows)
           setUserGame(res.data.rows)
+        })
+        .catch(error => {
+          console.log("NEW USERGAME ERROR HERE", error)
         })
     }
   }

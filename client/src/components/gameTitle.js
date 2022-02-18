@@ -16,7 +16,7 @@ import GuessContainer from './guessContainer';
 
 const GameTitle = (props) => {
 
-  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, newUserData } = props;
+  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
@@ -50,9 +50,9 @@ const GameTitle = (props) => {
   };
   
   const getUser = () => {
-    axios('http://localhost:5001/users/1')
+    axios('http://localhost:5001/users/4')
       .then(res => {
-        console.log("RES USER: ", res.data)
+        // console.log("RES USER: ", res.data)
         setUser(res.data)
       })
   }
@@ -135,6 +135,8 @@ const GameTitle = (props) => {
   }
   //user[0].player_id
 
+  // console.log("USER: ", user)
+
   return (
 
     <div className="main-view">
@@ -164,7 +166,7 @@ const GameTitle = (props) => {
 
       </div >
 
-      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} />
+      <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id}  />
     </div>
   );
 }

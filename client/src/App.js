@@ -37,7 +37,7 @@ function App() {
 
   const newUser = () => {
 
-    axios.put('http://localhost:5001/new_users/xxxxxx')
+    axios.put('http://localhost:5001/new_users/BRENON')
       .then(res => {
         console.log("PUT RES USER: ", res.data)
         console.log("I am user", res.data)

@@ -146,7 +146,7 @@ app.get('/avatars', (req, res) => {
 
 
 app.put('/new_user_game/:uid/:gid/:guess', (req, res) => {
-
+  console.log("REQ.PARAMS: ", req.params)
   const { uid, gid, guess } = req.params;
 
   createUserGame(uid, gid, guess)
@@ -155,6 +155,7 @@ app.put('/new_user_game/:uid/:gid/:guess', (req, res) => {
 
     })
     .catch(error => {
+      console.log("NEW USERGAME ERROR HERE")
       res.status(500).send(error);
     })
 
