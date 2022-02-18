@@ -26,9 +26,6 @@ const GameTitle = (props) => {
   const [timestamp, setTimestamp] = useState([]);
   const [guessList, setGuessList] = useState([]);
 
-  // console.log("user", user)
-  // console.log("newUserData", newUserData)
-
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
     [" ", " ", " ", " ", " "],
@@ -56,9 +53,9 @@ const GameTitle = (props) => {
     const button = document.getElementById(key)
     button.classList.add(colour)
   }
-
+  
   const loadBoard = (stats) => {
-    // console.log("load board", stats)
+
     let listOfGuesses = [];
     let guesses = [];
     let gamestamp = [];
@@ -77,33 +74,23 @@ const GameTitle = (props) => {
       guesses.push([" ", " ", " ", " ", " "])
     }
 
-    // console.log(gamestamp)
-    // console.log("LIST OF GUESSES: ", listOfGuesses)
-    // console.log("GUESSES: ", guesses)
-    // console.log("COMPLETED GAMES", completedGames)
-    // console.log("GAME COUNT", gameCount)
-    // console.log("GAMES :", allGames[0].solution)
-
     setBoard(guesses)
     setTimestamp(gamestamp)
+    boardCSS(board, "LIGHT")
+  };
 
-    console.log("guesses: ", guesses)
+  const boardCSS = (guesses, solution) => {
 
     guesses.forEach((userGuess, rowindex) => {
-      console.log("USERGUESS: ", userGuess)
-      // console.log("POS", pos)
 
-
-
-
-      let answer = allGames[0].solution
+      let answer = solution
       let checkSolution = answer
       let guess = []
 
       userGuess.forEach((tile, colIndex) => {
 
         tile = document.getElementById(rowindex.toString() + colIndex.toString())
-        
+
         if (!tile.textContent) {
           tile.classList.add('default')
         }
@@ -114,51 +101,38 @@ const GameTitle = (props) => {
             guess.colour = 'green-overlay'
             checkSolution = checkSolution.replace(guess.letter, '')
           }
-        })
 
-        guess.forEach(guess => {
           if (checkSolution.includes(guess.letter)) {
             guess.colour = 'yellow-overlay'
             checkSolution = checkSolution.replace(guess.letter, '')
           }
+
+          if (guess.letter === ' ') {
+            guess.colour = 'default'
+
+          }
         })
 
         tile.classList.add(guess[colIndex].colour)
-        
-        
-
-        // setTimeout(() => {
-        // tile.classList.add('flip')
-        // console.log("guess[colIndex].colour: ", guess[colIndex].colour)
-        // }, 500 * colIndex)
-
-        // setTimeout(() => {
         changeKeyColour(guess[colIndex].letter, guess[colIndex].colour)
-        // }, 2500)
-        // console.log("guess: ", guess)
 
       })
-
-
     })
   };
 
-
-
-
-
+  // useEffect(()=>{
+  //   boardCSS(board, game.solution)
+  // },[])
 
   const getUser = () => {
-    axios('http://localhost:5001/users/4')
+    axios('http://localhost:5001/users/1')
       .then(res => {
-        // console.log("RES USER: ", res.data)
         setUser(res.data)
       })
   }
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
-        // console.log("res.data[0]", res.data)
         setAllGames(res.data)
         setGame(res.data[0])
 
@@ -169,7 +143,6 @@ const GameTitle = (props) => {
     axios('http://localhost:5001/game/' + id)
       .then(res => {
         setGame(res.data)
-        // console.log("get game", res)
       })
   }
 
@@ -239,12 +212,12 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings user={user} resetBoard={resetBoard} loadBoard={loadBoard} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} />)
+      setRightSidebar(<Settings user={user} resetBoard={resetBoard} loadBoard={loadBoard} setCSS={boardCSS} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} board={board} />)
     }
   }
-  //user[0].player_id
+ 
 
-  // console.log("USER: ", user)
+
 
   return (
 
@@ -277,7 +250,7 @@ const GameTitle = (props) => {
       <div className="middle-containers">
 
 
-        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} gameId={game.id} timestamp={timestamp} guessList={guessList} />
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} />
 
       </div>
     </div>
