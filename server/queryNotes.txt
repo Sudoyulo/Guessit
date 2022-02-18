@@ -120,3 +120,5 @@ INSERT INTO times (time) VALUES (23:19);
 SELECT you_are 
 FROM follows
 WHERE i_am = 1;
+
+INSERT INTO user_game (user_id, game_id, started_on) VALUES (4, 1, '2022-01-01 01:25:45');

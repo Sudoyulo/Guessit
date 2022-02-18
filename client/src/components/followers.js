@@ -124,26 +124,24 @@ const Followers = (props) => {
     }
   }
 
-  const followers = followsList.map((friend, index) => {
-    // console.log("fl friend", friend)
-    const firstFriend = friend[0];
+  const followers = followsList.map((friendsGames, index) => {
+    console.log("fl friend", friendsGames)
+    const firstFriend = friendsGames[0];
     if (!firstFriend) { //vertify that is it not undefined
       return ""
     }
 
     let turnsWin = 0;
-    friend.forEach(gamedata => {
-      if (gamedata.id === gameid) {
-        turnsWin = gamedata.turns_taken
-      }
-    })
+    const friendPlayed = friendsGames.find(game => game.id === gameid)
+
+    turnsWin = friendPlayed ? friendPlayed.turns_taken : 0
 
     return (
       <div key={index} className="friend-info" >
 
         <img className="avatar" src={firstFriend.avatar_url} alt="friend avatar" />
         <p> {firstFriend.initials}#{firstFriend.user_id}</p>
-        {turnsWin ? <button className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
+        {turnsWin ? <button className="complete">See my {turnsWin} turn replay</button> : <button className="complete"> #{gameid} incomplete</button>}
       </div>
     )
 
@@ -170,8 +168,13 @@ const Followers = (props) => {
         </div>
         <br />
         <div className="initial-container" >
-          Set Initials: &nbsp;
-          <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
+          <div>
+
+            Set Initials: &nbsp;
+            <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
+
+          </div>
+          <div> Your id: {user_id} </div>
         </div>
       </div>
 

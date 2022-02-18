@@ -188,7 +188,7 @@ const getMyFriends = (myid) => {
 
   return pool.query("SELECT you_are AS friendid FROM follows WHERE i_am = $1;", [myid])
     .then(results => {
-
+      // return results.rows.map(() => { })
       results.rows.forEach(entry => myFriendsId.push(entry["you_are"]))
       // console.log("ids only", myFriendsId, results.rows)
       return results
@@ -198,7 +198,7 @@ const getMyFriends = (myid) => {
 }
 
 const addFollower = (me, you) => {
-
+  //check if you is an invalid users
   if (me !== you) {
     pool.query("SELECT * FROM follows WHERE i_am= $1 AND you_are=$2;", [me, you])
       .then(results => {

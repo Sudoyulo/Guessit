@@ -242,7 +242,7 @@ const GameTitle = (props) => {
           <button onClick={() => { followerOnOff() }} >
             <img className="nav-icon" src={friendIcon} alt="follower" />
           </button>
-          <div className="game-info"> Your id: <br /> {user[0] ? user[0].player_id : ""} </div>
+          <div className="game-info"> You: <br /> <div>{user[0] ? user[0].initials : ""}</div> </div>
         </div>
 
 

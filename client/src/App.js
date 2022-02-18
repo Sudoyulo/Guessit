@@ -54,7 +54,7 @@ function App() {
   //       setUser(res.data)
   //     })
   // }
-  console.log("APP USER: ", user)
+  // console.log("APP USER: ", user)
 
   return (
     <Fragment>
@@ -66,8 +66,8 @@ function App() {
         <div className='main-view' >
 
           <Routes>
-            {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} addUser={newUser}/>} />)}
-            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={user}/>} />)}
+            {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} addUser={newUser} />} />)}
+            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={user} />} />)}
             <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
           </Routes>
 
