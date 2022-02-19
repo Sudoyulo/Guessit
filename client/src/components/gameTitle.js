@@ -18,7 +18,7 @@ const GameTitle = (props) => {
 
   const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, newUserData } = props;
   const [allGames, setAllGames] = useState([])
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(newUserData);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
@@ -120,15 +120,18 @@ const GameTitle = (props) => {
       })
     })
   };
-
+// const setNewUser = () => {setUser(newUserData)}
+//   useEffect(()=>{
+//     setNewUser()
+//   }, [])
   console.log("user ", user)
-  const getUser = () => {
-    // axios(`http://localhost:5001/users/${user[0].id}`)
-    axios(`http://localhost:5001/users/1`)
-      .then(res => {
-        setUser(res.data)
-      })
-  }
+  // const getUser = () => {
+  //   axios(`http://localhost:5001/users/${user[0].id}`)
+  //   // axios(`http://localhost:5001/users/1`)
+  //     .then(res => {
+  //       setUser(res.data)
+  //     })
+  // }
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
@@ -168,9 +171,9 @@ const GameTitle = (props) => {
     setGameCount(gCount);
   }
 
-  useEffect(() => {
-    getUser();
-  }, []);
+  // useEffect(() => {
+  //   getUser();
+  // }, []);
 
 
   useEffect(() => {

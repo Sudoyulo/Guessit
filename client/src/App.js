@@ -12,18 +12,24 @@ import axios from "axios";
 function App() {
 
 
-  const authenticate = () => {
-    setAuth(true)
-    Cookies.set("user", "authTrue")
-  }
+  // const authenticate = () => {
+  //   setAuth(true)
+  //   Cookies.set("cookie", "authTrue")
+  // }
 
 
   const readCookie = () => {
-    const user = Cookies.get('user')
+    const user = Cookies.get('cookie')
+    console.log("COOKIE USER: ", user)
     if (user) {
-      setAuth(true)
+      axios(`http://localhost:5001/users/${user}`)
+        .then(res => {
+          setNewUser(res.data)
+          setAuth(true)
+        })
     }
   }
+
 
   useEffect(() => {
     readCookie()
@@ -37,11 +43,17 @@ function App() {
 
 
   const addNewUser = () => {
+    
+    const generateRandomString = function() {
+      return Math.random().toString(20).substring(2, 8)
+    }
 
-    axios.put('http://localhost:5001/new_users/BRENON')
+    axios.put(`http://localhost:5001/new_users/${generateRandomString()}`)
       .then(res => {
+        Cookies.set("cookie", res.data[0].id)
         console.log("PUT RES USER: ", res.data)
         setNewUser(res.data)
+        setAuth(true)
       })
       .catch(err => {
         console.log(err.message)
@@ -49,18 +61,6 @@ function App() {
 
   }
 
-  // useEffect(()=>{
-  //   addNewUser()
-   
-  // }, [])
-  // const getUser = () => {
-  //   axios.get(`http://localhost:5001/users/`)
-  //     .then(res => {
-  //       console.log("GET RES USER: ", res.data)
-  //       setUser(res.data)
-  //     })
-  // }
-  // console.log("APP USER: ", user)
 
   return (
     <Fragment>
@@ -72,8 +72,8 @@ function App() {
         <div className='main-view' >
 
           <Routes>
-            {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} addNewUser={addNewUser} />} />)}
-            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={newUser}/>} />)}
+            {!auth && (<Route path='/landing' element={<Landing addNewUser={addNewUser} />} />)}
+            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={newUser} />} />)}
             <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
           </Routes>
 
