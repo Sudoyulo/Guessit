@@ -9,7 +9,7 @@ import { checkWord } from "../words/wordList";
 
 const GuessContainer = (props) => {
 
-  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames, boardCSS } = props;
+  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames, boardCSS, vsUgid } = props;
   // console.log("USER++++++: ", user)
   // console.log('NEW USER: ', newUser)
 
@@ -275,7 +275,9 @@ const GuessContainer = (props) => {
           <div className="tile-container">
             {guessRows}
           </div>
-          <ReplayContainer timestamp={props.timestamp} guessList={props.guessList} board={board} solution={solution} flipTiles={flipTile} />
+
+          <ReplayContainer timestamp={props.timestamp} guessList={props.guessList} board={board} solution={solution} flipTiles={flipTile} vsUgid={vsUgid} />
+
         </div>
 
         <Keyboard onKeypress={handleKeypress} />

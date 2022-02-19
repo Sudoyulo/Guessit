@@ -1,12 +1,43 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import './replayContainer.css'
 
 
 const ReplayContainer = (props) => {
 
-  const {board, solution, timestamp, guessList, flipTiles} = props
-  console.log("guessList: ", guessList)
-  console.log("Im in the replay", props.timestamp, props.guessList) //and solution
+  const { board, solution, flipTiles, vsUgid } = props;
+  const [timestamp, setTimestamp] = useState([])
+  const [guessList, setGuessList] = useState([])
+
+
+  const getVs = (ugid) => {
+    console.log("getting game:", ugid)
+
+    axios('http://localhost:5001/guesslog/' + ugid)
+      .then(res => {
+        // console.log("loaded guesses", res.data.rows)
+        let guesses = [];
+        let gamestamp = [];
+        console.log("guesslog?", res.data.rows)
+
+        res.data.rows.forEach((entry) => {
+          guesses.push(entry.guess)
+          gamestamp.push(entry.guesstimestamp)
+        })
+
+        setGuessList(guesses)
+        setTimestamp(gamestamp)
+
+      })
+  }
+
+  useEffect(() => {
+    getVs(vsUgid)
+  }, [vsUgid])
+
+
+  // console.log("guessList: ", guessList)
+  // console.log("Im in the replay", props.timestamp, props.guessList) //and solution
   //convert min and s to ms. find the difference. map props.timestamp, set timeout and css for each line dont reveal words on replay.
   const guessRows = board.map((row, rowIndex) => {
     return (
@@ -17,21 +48,16 @@ const ReplayContainer = (props) => {
           )
         })
       }</div>
-      );
-    })
-    
-  
+    );
+  })
+
+
 
   return (
 
     <div className="replay-box">
-      {/* <div className="col"> 1</div>
-      <div className="col"> 2</div>
-      <div className="col"> 3</div>
-      <div className="col"> 4</div>
-      <div className="col"> 5</div>
-      <div className="col"> 6</div> */}
       {/* {guessRows} */}
+      {guessList}{timestamp}
     </div >
   );
 
