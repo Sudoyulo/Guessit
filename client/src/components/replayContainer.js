@@ -5,6 +5,8 @@ import './replayContainer.css'
 
 const ReplayContainer = (props) => {
 
+
+
   const { board, solution, flipTiles, vsUgid } = props;
   const [timestamp, setTimestamp] = useState([])
   const [guessList, setGuessList] = useState([])
@@ -34,6 +36,7 @@ const ReplayContainer = (props) => {
   useEffect(() => {
     getVs(vsUgid)
   }, [vsUgid])
+
 
 
   // console.log("guessList: ", guessList)
