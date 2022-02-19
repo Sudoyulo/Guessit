@@ -35,6 +35,16 @@
   display: flex;
   justify-content: center;
 }
+
+@keyframes bounce {
+  0%   { transform: scale(1,1) translateY(0); }
+  10%  { transform: scale(1.1,.9) translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-55px);}
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  58%  { transform: scale(1,1) translateY(-7px); }
+  65%  { transform: scale(1,1) translateY(0);}
+  100% { transform: scale(1,1) translateY(0);}
+}
 @keyframes flipping {
   0% {
     transform: rotateX(0deg);
@@ -48,6 +58,10 @@
 }
 .flip {
   animation: 0.5s linear flipping;
+  
+}
+.bounce {
+  animation: bounce 1s ease infinite !important;
 }
 .default {
   background-color: rgb(18, 18, 19) !important;
