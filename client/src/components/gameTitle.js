@@ -25,6 +25,7 @@ const GameTitle = (props) => {
   const [gameCount, setGameCount] = useState(0);
   const [timestamp, setTimestamp] = useState([]);
   const [guessList, setGuessList] = useState([]);
+  const [vsUgid, setVsUgid] = useState(0);
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -53,7 +54,7 @@ const GameTitle = (props) => {
     const button = document.getElementById(key)
     button.classList.add(colour)
   }
-  
+
   const loadBoard = (stats) => {
 
     let listOfGuesses = [];
@@ -75,7 +76,7 @@ const GameTitle = (props) => {
     }
 
     setBoard(guesses)
-    setTimestamp(gamestamp)
+    setTimestamp(gamestamp) //dont need this here
     boardCSS(board, "LIGHT")
   };
 
@@ -193,7 +194,7 @@ const GameTitle = (props) => {
     if (leftSidebar.type.name === "Followers") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} gameid={game.id} />)
+      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} gameid={game.id} setVsUgid={setVsUgid} />)
     }
   }
 
@@ -212,7 +213,7 @@ const GameTitle = (props) => {
       setRightSidebar(<Settings user={user} resetBoard={resetBoard} loadBoard={loadBoard} setCSS={boardCSS} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} board={board} />)
     }
   }
- 
+
 
 
 
@@ -247,7 +248,7 @@ const GameTitle = (props) => {
       <div className="middle-containers">
 
 
-        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} boardCSS={boardCSS}/>
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} boardCSS={boardCSS} vsUgid={vsUgid} />
 
       </div>
     </div>
