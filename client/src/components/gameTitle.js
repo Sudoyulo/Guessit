@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './gameTitle.css'
 import friendIcon from '../images/friendIcon.png'
 import help from '../images/help.png'
-import stats from '../images/stats.png'
+import stats from '../images/graph.png' 
 import settings from '../images/settings.png'
 import axios from 'axios';
 

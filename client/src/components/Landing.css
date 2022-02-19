@@ -1,0 +1,203 @@
+/* body {
+  height: 88vh;
+  align-items: center;
+  justify-content:center;
+  display: flex;
+  background-color: rgb(18, 18, 19); 
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+
+} */
+
+.bouncing-text {
+  position: relative;
+  display: flex;
+  font-size: 70px;
+  font-weight: 900;
+  font-family: 'Arial Black', 'Arial Bold', Gadget, sans-serif; 
+}
+
+.b, .o, .u, .n, .c, .e, .r, .d {
+  position: relative;
+  color: #538d4e;
+  text-shadow: 0 3px #b59f3a, 0 5px #b59f3a, 0 7px #b59f3a;
+}
+
+.b {
+  animation: bounce 1s ease infinite;
+  -webkit-animation: bounce 1s ease infinite;
+}
+
+.o {
+  animation: bounce 1s ease infinite .1s;
+  -webkit-animation: bounce 1s ease infinite .1s;
+}
+
+.u {
+  animation: bounce 1s ease infinite .2s;
+  -webkit-animation: bounce 1s ease infinite .2s;
+}
+
+.n {
+  animation: bounce 1s ease infinite .3s;
+  -webkit-animation: bounce 1s ease infinite .3s;
+}
+
+.c {
+  animation: bounce 1s ease infinite .4s;
+  -webkit-animation: bounce 1s ease infinite .4s;
+}
+
+.e {
+  animation: bounce 1s ease infinite .5s;
+ -webkit-animation: bounce 1s ease infinite .5s;
+}
+
+.r {
+  animation: bounce 1s ease infinite .5s;
+ -webkit-animation: bounce 1s ease infinite .6s;
+}
+.d {
+  animation: bounce 1s ease infinite .5s;
+ -webkit-animation: bounce 1s ease infinite .7s;
+}
+
+ @keyframes bounce {
+        0%   { transform: scale(1,1) translateY(0); }
+        10%  { transform: scale(1.1,.9) translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-55px);}
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        58%  { transform: scale(1,1) translateY(-7px); }
+        65%  { transform: scale(1,1) translateY(0);}
+        100% { transform: scale(1,1) translateY(0);}
+    }
+
+@-webkit-keyframes bounce {
+       0%   { transform: scale(1,1) translateY(0); }
+        10%  { transform: scale(1.1,.9) translateY(0); }
+        30%  { transform: scale(.9,1.1)   translateY(-55px);}
+        50%  { transform: scale(1.05,.95) translateY(0); }
+        58%  { transform: scale(1,1) translateY(-7px);}
+        65%  { transform: scale(1,1) translateY(0);}
+        100% { transform: scale(1,1) translateY(0);} 
+}
+
+
+.bouncing-text:before, .bouncing-text:after {
+  content:"";
+  position: absolute;
+  background-color: rgba(0,0,0,0.4);
+  width: 50px;
+  height:5px;
+  border-radius:50%;
+  top:82px;
+  z-index:-1;
+}
+
+.shadow, .shadow-two {
+  position: absolute;
+  top:82px;
+  z-index: -1;
+}
+
+.shadow:before, .shadow:after, .shadow-two:before, .shadow-two:after {
+  content:"";
+  position: absolute;
+  background-color: rgba(0,0,0,0.4);
+  width: 50px;
+  height:5px;
+  border-radius:50%;
+  top:0;  
+}
+
+.bouncing-text:before {
+  left:0;
+  animation: scale 1s linear infinite;
+  -webkit-animation: scale 1s linear infinite;
+}
+
+@keyframes scale {
+  0% {transform: scaleX(1);}
+  25% {transform: scaleX(0.4);}
+  50% {transform: scaleX(1);}
+  75% {transform: scaleX(0.9);}
+  100% {transform: scaleX(1);}
+}
+
+@-webkit-keyframes scale {
+   0% {transform: scaleX(1);}
+  25% {transform: scaleX(0.4);}
+  50% {transform: scaleX(1);}
+  75% {transform: scaleX(0.9);}
+  100% {transform: scaleX(1);}
+}
+
+.bouncing-text:after {
+  left: 57px;
+  animation: scale 1s linear infinite .1s;
+  -webkit-animation: scale 1s linear infinite .1s;
+}
+
+.shadow:before {
+  left: 116px;
+  animation: scale 1s linear infinite .2s;
+  -webkit-animation: scale 1s linear infinite .2s;
+}
+
+.shadow:after {
+  left:175px;
+  animation: scale 1s linear infinite .3s;
+  -webkit-animation: scale 1s linear infinite .3s;
+}
+
+.shadow-two:before {
+  left:232px;
+  animation: scale 1s linear infinite .4s;
+  -webkit-animation: scale 1s linear infinite .4s;
+}
+
+.shadow-two:after {
+  left: 285px;
+  animation: scale 1s linear infinite .5s;
+  -webkit-animation: scale 1s linear infinite .5s;
+}
+
+.landing {
+  background: linear-gradient(-45deg, #414141, #727e74, #121213, #2a2d2a);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+
+  width: 100vw;
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: -2;
+}
+
+.howto {
+  height: 60vh !important;
+  border-radius: 15px;
+  border: 3px solid;
+  border-color: rgb(58, 58, 60);
+  
+  box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
+}
+
+.btn {
+  margin-top: 20px;
+  font-weight: 700;
+  background-color: #538d4e;
+  border: none;
+  border-radius: 7px;
+  box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
+  color: white;
+  height: 3em;
+  width: 8em;
+  font-size: larger;
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: 900;
+  
+}
