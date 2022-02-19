@@ -3,6 +3,8 @@ import axios from "axios";
 import './rightSidebar.css';
 // import './keyboard.css';
 import './guessContainer.css';
+import complete from '../images/complete.png'
+import incomplete from '../images/incomplete.png'
 import { getRandomWord } from "../words/wordList";
 
 const Settings = (props) => {
@@ -86,34 +88,35 @@ const Settings = (props) => {
   }, [resetBoard])
 
   const gameLinks = gameAmount.map((gameid) => {
-    let icon = "🟢 New";
+    let icon = "❎ Un-Played";
 
     if (completedGames.includes(gameid)) {
-      icon = "💯 Done";
+      icon = "✅ Played";
     } else if (hangingGames.includes(gameid)) {
-      icon = "⚠️ Tried";
+      icon = "⌛ Ongoing";
     }
 
     return (
-      <option key={gameid} value={gameid}> {gameid} {icon} </option>
+
+      <option key={gameid} value={gameid}>{`GAME #${gameid}`} {icon} </option>
     )
   })
 
   return (
 
     <div className="right-sidebar">
-      <p className="stat-title">Settings </p>
+      <p className="game-title">GAME SETTINGS </p>
+      <p className="choose-game">Load previous game <br/> - or - <br/> Create a new one!</p>
       <div className="setting-container">
-        Load a game
-        <select value={search} onChange={(e) => { setSearch(Number(e.target.value)) }}>
+        <select className="games-list" value={search} onChange={(e) => { setSearch(Number(e.target.value)) }}>
           {gameLinks}
         </select>
-        <button onClick={() => { getGame(search); loadOrReset(); resetKeyboard(); }}>Load</button>
+        <button className='play-button' onClick={() => { getGame(search); loadOrReset(); resetKeyboard(); }}>Load Game</button>
+        <button className='create-button' onClick={() => makeGame(getRandomWord())}>Create!</button>
       </div>
-      <div className="setting-container">
-        Create a game
-        <button onClick={() => makeGame(getRandomWord())}>Create!</button>
-      </div>
+      {/* <div className="setting-container">
+        <p className="make-game">MAKE A GAME!</p>
+      </div> */}
 
 
     </div >

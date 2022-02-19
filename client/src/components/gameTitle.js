@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './gameTitle.css'
 import friendIcon from '../images/friendIcon.png'
 import help from '../images/help.png'
-import stats from '../images/graph.png' 
+import stats from '../images/graph.png'
 import settings from '../images/settings.png'
 import axios from 'axios';
 
@@ -232,7 +232,18 @@ const GameTitle = (props) => {
         </div>
 
 
-        <h1 className="title"> miniWord </h1>
+        <div class="bouncing-text">
+          <div class="b">m</div>
+          <div class="o">i</div>
+          <div class="u">n</div>
+          <div class="n">i</div>
+          <div class="c">W</div>
+          <div class="e">O</div>
+          <div class="r">R</div>
+          <div class="d">D</div>
+          <div class="shadow"></div>
+          <div class="shadow-two"></div>
+        </div>
 
         <div className="right-icons">
           <div className="game-info"> Game id: <br /> <div>#{game.id}</div> </div>
