@@ -1,12 +1,12 @@
 
 .blank-sidebar{
-  background-color: rgb(18, 18, 19);
+  
   width: 22vw;
   height: 100vh;
 }
 
 .right-sidebar{
-  background-color: rgb(18, 18, 19);
+  
   width: 22vw;
   height: 90vh;
   display: flex;
