@@ -1,5 +1,8 @@
 import React from "react";
 import './leftSidebar.css'
+import howTo from '../images/howTo.png'
+import examples from '../images/examples.png'
+
 
 
 const Help = () => {
@@ -12,9 +15,10 @@ const Help = () => {
       </div>
       <div className="help-container" >
         <div>
-          Guess the five letter word using the keypad below! <br />
-          Click enter to check your results!
+          Each guess must be a valid five-letter word <br />
+          Hit the 'ENTER' button to submit your guess!
         </div>
+        <img className="help" src={examples} alt="How to play"/>
         <div>
           Green letters mean the letter is in the exact position as the answer.
           <br /><br />
