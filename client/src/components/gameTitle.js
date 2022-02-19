@@ -123,7 +123,7 @@ const GameTitle = (props) => {
 
 
   const getUser = () => {
-    axios('http://localhost:5001/users/1')
+    axios('http://localhost:5001/users/2')
       .then(res => {
         setUser(res.data)
       })

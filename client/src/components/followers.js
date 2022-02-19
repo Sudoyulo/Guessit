@@ -168,8 +168,11 @@ const Followers = (props) => {
         </div>
         <br />
         <div className="initial-container" >
-          Set Initials: &nbsp;
-          <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
+          <div>
+
+            Set Initials: &nbsp;
+            <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
+          </div>
           <div>I am: {user_id}</div>
         </div>
       </div>
