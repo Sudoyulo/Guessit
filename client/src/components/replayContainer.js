@@ -31,8 +31,6 @@ const ReplayContainer = (props) => {
       })
   }
 
-
-
   useEffect(() => {
     getVs(vsUgid)
   }, [vsUgid])
@@ -58,7 +56,7 @@ const ReplayContainer = (props) => {
   return (
 
     <div className="replay-box">
-      {guessRows}
+      {/* {guessRows} */}
       {guessList}{timestamp}
     </div >
   );

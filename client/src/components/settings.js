@@ -86,10 +86,10 @@ const Settings = (props) => {
   }, [resetBoard])
 
   const gameLinks = gameAmount.map((gameid) => {
-    let icon = "🆕 New";
+    let icon = "🟢 New";
 
     if (completedGames.includes(gameid)) {
-      icon = "✅ Done";
+      icon = "💯 Done";
     } else if (hangingGames.includes(gameid)) {
       icon = "⚠️ Tried";
     }

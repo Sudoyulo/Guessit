@@ -21,7 +21,7 @@ INSERT INTO games (solution) VALUES ('LIGHT');
 INSERT INTO games (solution) VALUES ('ADORE');
 INSERT INTO games (solution) VALUES ('HONOR');
 INSERT INTO games (solution) VALUES ('METAL');
-INSERT INTO games (solution) VALUES ('STEPS');
+INSERT INTO games (solution) VALUES ('DRESS');
 
 INSERT INTO games (solution) VALUES ('WATER');
 INSERT INTO games (solution) VALUES ('JOUST');
