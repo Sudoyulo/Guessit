@@ -1,32 +1,49 @@
 
 
 .tile-container {
+  background-color: rgb(18, 18, 19);
   width: 330px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  font-weight: 900;
+  
+
+  
 }
 
 .tile-container .row {
+  background-color: rgb(18, 18, 19) ;
   display: flex;
 }
 
 .tile-container .col {
-  width: 50px;
-  height: 50px;
-  border: 2px solid grey;
+  background-color: rgb(18, 18, 19);
+  width: 4em;
+  height: 4em;
+  border: 3px solid rgb(58, 58, 60);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 2px;
+  margin: 3px;
 }
 
 .message {
   display: flex;
   justify-content: center;
+}
+
+@keyframes bounce {
+  0%   { transform: scale(1,1) translateY(0); }
+  10%  { transform: scale(1.1,.9) translateY(0); }
+  30%  { transform: scale(.9,1.1)   translateY(-55px);}
+  50%  { transform: scale(1.05,.95) translateY(0); }
+  58%  { transform: scale(1,1) translateY(-7px); }
+  65%  { transform: scale(1,1) translateY(0);}
+  100% { transform: scale(1,1) translateY(0);}
 }
 @keyframes flipping {
   0% {
@@ -41,9 +58,13 @@
 }
 .flip {
   animation: 0.5s linear flipping;
+  
+}
+.bounce {
+  animation: bounce 1s ease infinite !important;
 }
 .default {
-  background-color: black !important;
+  background-color: rgb(18, 18, 19) !important;
 }
 .grey-overlay {
   background-color: #3a3a3c !important;
@@ -84,4 +105,6 @@
   align-items: stretch;
   flex-direction: row;
   align-content: stretch;
+  font-weight: 900 !important;
+  font-size: large;
 }

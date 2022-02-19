@@ -20,9 +20,9 @@ const GuessContainer = (props) => {
     return (
       <div key={row + rowIndex} className={"row row-" + rowIndex}> {
         row.map((col, colIndex) => {
-          let color = "black";
+          // let color = "black";
           return (
-            <div id={rowIndex.toString() + colIndex.toString()} key={col + colIndex} style={{ backgroundColor: color }} className={"col col-" + colIndex}>{col}</div>
+            <div id={rowIndex.toString() + colIndex.toString()} key={col + colIndex} className={"col col-" + colIndex}>{col}</div>
           )
         })
       }</div>
@@ -59,7 +59,14 @@ const GuessContainer = (props) => {
           checkSolution = checkSolution.replace(guess.lett, '')
         }
       })
-
+      
+      console.log("solution: ", solution)
+      if (userGuess.join('') === solution) {
+        setTimeout(() => {
+          tile.classList.add('green-overlay')
+          tile.classList.add('bounce')
+        }, 500 / index)
+      }
       setTimeout(() => {
         tile.classList.add('flip')
         tile.classList.add(guess[index].colour)
@@ -268,7 +275,7 @@ const GuessContainer = (props) => {
           <div className="tile-container">
             {guessRows}
           </div>
-          <ReplayContainer timestamp={props.timestamp} guessList={props.guessList} board={board} solution={solution} flipTiles={flipTile}/>
+          <ReplayContainer timestamp={props.timestamp} guessList={props.guessList} board={board} solution={solution} flipTiles={flipTile} />
         </div>
 
         <Keyboard onKeypress={handleKeypress} />

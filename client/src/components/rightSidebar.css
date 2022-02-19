@@ -1,17 +1,18 @@
 
 .blank-sidebar{
-  background-color: black;
-  width: 25vw;
+  
+  width: 22vw;
   height: 100vh;
 }
 
 .right-sidebar{
-  background-color: black;
-  width: 25vw;
+  
+  width: 22vw;
   height: 90vh;
   display: flex;
   align-items: center;
   flex-direction: column;
+  justify-content: space-evenly;
 }
 
 .stat-title {
