@@ -11,13 +11,6 @@ import axios from "axios";
 
 function App() {
 
-
-  // const authenticate = () => {
-  //   setAuth(true)
-  //   Cookies.set("cookie", "authTrue")
-  // }
-
-
   const readCookie = () => {
     const user = Cookies.get('cookie')
     console.log("COOKIE USER: ", user)
@@ -36,14 +29,13 @@ function App() {
   }, [])
 
   const [auth, setAuth] = useState(false)
-  // const [user, setUser] = useState([]);
   const [newUser, setNewUser] = useState([]);
   const [leftSidebar, setLeftSidebar] = useState(<Blank />)
   const [rightSidebar, setRightSidebar] = useState(<Blank />)
 
 
   const addNewUser = () => {
-    
+
     const generateRandomString = function() {
       return Math.random().toString(20).substring(2, 8)
     }

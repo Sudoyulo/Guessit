@@ -120,18 +120,7 @@ const GameTitle = (props) => {
       })
     })
   };
-// const setNewUser = () => {setUser(newUserData)}
-//   useEffect(()=>{
-//     setNewUser()
-//   }, [])
-  console.log("user ", user)
-  // const getUser = () => {
-  //   axios(`http://localhost:5001/users/${user[0].id}`)
-  //   // axios(`http://localhost:5001/users/1`)
-  //     .then(res => {
-  //       setUser(res.data)
-  //     })
-  // }
+
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
@@ -170,11 +159,6 @@ const GameTitle = (props) => {
     setHangingGames(tbd);
     setGameCount(gCount);
   }
-
-  // useEffect(() => {
-  //   getUser();
-  // }, []);
-
 
   useEffect(() => {
     getGames();
@@ -233,7 +217,7 @@ const GameTitle = (props) => {
           <button onClick={() => { followerOnOff() }} >
             <img className="nav-icon" src={friendIcon} alt="follower" />
           </button>
-          <div className="game-info"> You: <br /> <div>{user[0] ? user[0].player_id : ""}</div> </div>
+          <div className="game-info"> You: <br /> <div>{user[0] ? user[0].initials : ""}</div> </div>
         </div>
 
 
