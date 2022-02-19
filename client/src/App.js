@@ -30,25 +30,31 @@ function App() {
   }, [])
 
   const [auth, setAuth] = useState(false)
-  const [user, setUser] = useState([]);
+  // const [user, setUser] = useState([]);
+  const [newUser, setNewUser] = useState([]);
   const [leftSidebar, setLeftSidebar] = useState(<Blank />)
   const [rightSidebar, setRightSidebar] = useState(<Blank />)
 
 
-  const newUser = () => {
+  const addNewUser = () => {
 
     axios.put('http://localhost:5001/new_users/BRENON')
       .then(res => {
         console.log("PUT RES USER: ", res.data)
-        console.log("I am user", res.data)
-        setUser(res.data)
-
+        setNewUser(res.data)
+      })
+      .catch(err => {
+        console.log(err.message)
       })
 
   }
 
+  // useEffect(()=>{
+  //   addNewUser()
+   
+  // }, [])
   // const getUser = () => {
-  //   axios.get('http://localhost:5001/users/LLOYD')
+  //   axios.get(`http://localhost:5001/users/`)
   //     .then(res => {
   //       console.log("GET RES USER: ", res.data)
   //       setUser(res.data)
@@ -66,8 +72,8 @@ function App() {
         <div className='main-view' >
 
           <Routes>
-            {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} addUser={newUser} />} />)}
-            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={user} />} />)}
+            {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} addNewUser={addNewUser} />} />)}
+            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={newUser}/>} />)}
             <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
           </Routes>
 

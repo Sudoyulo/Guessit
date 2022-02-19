@@ -5,8 +5,8 @@ import './replayContainer.css'
 const ReplayContainer = (props) => {
 
   const {board, solution, timestamp, guessList, flipTiles} = props
-  console.log("guessList: ", guessList)
-  console.log("Im in the replay", props.timestamp, props.guessList) //and solution
+  // console.log("guessList: ", guessList)
+  // console.log("Im in the replay", props.timestamp, props.guessList) //and solution
   //convert min and s to ms. find the difference. map props.timestamp, set timeout and css for each line dont reveal words on replay.
   const guessRows = board.map((row, rowIndex) => {
     return (

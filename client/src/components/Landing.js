@@ -1,12 +1,12 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
 
-export default function Landing({authenticate, addUser}) {
+export default function Landing({authenticate, addNewUser}) {
   const navigate = useNavigate();
   const onClick = () => {
     authenticate();
-    addUser();
-    navigate('/')
+    addNewUser();
+    navigate('/');
   }
   // useEffect(()=>{
   //   navigate('/')

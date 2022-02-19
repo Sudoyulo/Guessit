@@ -16,7 +16,7 @@ import GuessContainer from './guessContainer';
 
 const GameTitle = (props) => {
 
-  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
+  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, newUserData } = props;
   const [allGames, setAllGames] = useState([])
   const [user, setUser] = useState([]);
   const [game, setGame] = useState([]);
@@ -49,6 +49,7 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
+
   const changeKeyColour = (key, colour) => {
     const button = document.getElementById(key)
     button.classList.add(colour)
@@ -120,9 +121,10 @@ const GameTitle = (props) => {
     })
   };
 
-
+  console.log("user ", user)
   const getUser = () => {
-    axios('http://localhost:5001/users/1')
+    // axios(`http://localhost:5001/users/${user[0].id}`)
+    axios(`http://localhost:5001/users/1`)
       .then(res => {
         setUser(res.data)
       })
@@ -174,6 +176,7 @@ const GameTitle = (props) => {
   useEffect(() => {
     getGames();
     getGame();
+   
   }, [user]);
 
   useEffect(() => {
@@ -227,7 +230,7 @@ const GameTitle = (props) => {
           <button onClick={() => { followerOnOff() }} >
             <img className="nav-icon" src={friendIcon} alt="follower" />
           </button>
-          <div className="game-info"> You: <br /> <div>{user[0] ? user[0].initials : ""}</div> </div>
+          <div className="game-info"> You: <br /> <div>{user[0] ? user[0].player_id : ""}</div> </div>
         </div>
 
 
