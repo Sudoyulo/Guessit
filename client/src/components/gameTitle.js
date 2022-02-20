@@ -13,7 +13,6 @@ import Blank from "./blank";
 import Settings from "./settings";
 import GuessContainer from './guessContainer';
 
-
 const GameTitle = (props) => {
 
   const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, newUserData } = props;
@@ -23,9 +22,8 @@ const GameTitle = (props) => {
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
   const [gameCount, setGameCount] = useState(0);
-  const [timestamp, setTimestamp] = useState([]);
   const [guessList, setGuessList] = useState([]);
-  const [vsUgid, setVsUgid] = useState(0);
+  const [pos, setPos] = useState({ row: 0, col: 0 })
 
   const [board, setBoard] = useState([
     [" ", " ", " ", " ", " "],
@@ -35,8 +33,6 @@ const GameTitle = (props) => {
     [" ", " ", " ", " ", " "],
     [" ", " ", " ", " ", " "]
   ])
-
-  const [pos, setPos] = useState({ row: 0, col: 0 })
 
   const resetBoard = () => {
     console.log("resetBoard")
@@ -56,20 +52,11 @@ const GameTitle = (props) => {
     button.classList.add(colour)
   }
 
+  //if continuing or loading a previous game, set board with guesses
   const loadBoard = (stats) => {
 
-    let listOfGuesses = [];
     let guesses = [];
-    let gamestamp = [];
-
-    stats.forEach((entry) => {
-      listOfGuesses.push(entry.guess)
-      guesses.push(entry.guess.split(''))
-      gamestamp.push(entry.guesstimestamp)
-    })
-
-    setGuessList(listOfGuesses)
-    console.log("listOfGuesses: ", listOfGuesses)
+    stats.forEach((entry) => { guesses.push(entry.guess.split('')) })
     setPos({ row: guesses.length, col: 0 })
 
     for (let i = guesses.length; i < 6; i++) {
@@ -77,7 +64,6 @@ const GameTitle = (props) => {
     }
 
     setBoard(guesses)
-    setTimestamp(gamestamp) //dont need this here
     boardCSS(board, "LIGHT")
   };
 
@@ -111,7 +97,6 @@ const GameTitle = (props) => {
 
           if (guess.letter === ' ') {
             guess.colour = 'default'
-
           }
         })
 
@@ -122,18 +107,16 @@ const GameTitle = (props) => {
     })
   };
 
-
-
-
+  //get list of all games. On load, loads the latest game.
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
         setAllGames(res.data)
         setGame(res.data[0])
-
       })
   }
 
+  //get game with id
   const getGame = (id) => {
     axios('http://localhost:5001/game/' + id)
       .then(res => {
@@ -141,23 +124,19 @@ const GameTitle = (props) => {
       })
   }
 
+  //sort all played games between complete and incomplete games for the stats page
   const readCompletedgames = (user) => {
     let tbd = []
     let complete = [];
     let gCount = 0;
     user.forEach((game) => {
-      // console.log("each game", game);
       gCount++;
       if (game.won_on) {
-        // console.log("win")
         complete.push(game.game_id)
       } else {
-        // console.log("inprogress")
         tbd.push(game.game_id)
       }
-
     })
-    // console.log("completed games", complete, "hanging", tbd)
 
     setCompletedGames(complete);
     setHangingGames(tbd);
@@ -167,11 +146,6 @@ const GameTitle = (props) => {
   useEffect(() => {
     getGames();
     getGame();
-
-  }, [newUserData]);
-
-  useEffect(() => {
-
     readCompletedgames(newUserData);
   }, [newUserData]);
 
@@ -182,14 +156,12 @@ const GameTitle = (props) => {
       setRightSidebar(<Help />)
     }
   }
-  console.log("USER: ", newUserData)
+
   const followerOnOff = () => {
     if (leftSidebar.type.name === "Followers") {
       setLeftSidebar(<Blank />)
     } else {
-
-      setLeftSidebar(<Followers user_id={newUserData[0].user_id} userinfo={newUserData} userAvatar={newUserData[0].avatar_url} userInitials={newUserData[0].initials} gameid={game.id} setVsUgid={setVsUgid} />)
-
+      setLeftSidebar(<Followers user_id={newUserData[0].user_id} userinfo={newUserData} userAvatar={newUserData[0].avatar_url} userInitials={newUserData[0].initials} gameid={game.id} />)
     }
   }
 
@@ -209,9 +181,6 @@ const GameTitle = (props) => {
     }
   }
 
-
-
-
   return (
 
     <div className="main-view">
@@ -227,6 +196,7 @@ const GameTitle = (props) => {
         </div>
 
 
+
         <div className="nav-bouncing-text">
           <div className="nav-b">m</div>
           <div className="nav-o">i</div>
@@ -238,6 +208,7 @@ const GameTitle = (props) => {
           <div className="nav-d">D</div>
           <div className="nav-shadow"></div>
           <div className="nav-shadow-two"></div>
+
         </div>
 
         <div className="right-icons">
@@ -253,10 +224,7 @@ const GameTitle = (props) => {
       </div >
       <div className="middle-containers">
 
-
-
-        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={newUserData} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} boardCSS={boardCSS} vsUgid={vsUgid} />
-
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={newUserData} game={game} gameId={game.id} guessList={guessList} boardCSS={boardCSS} />
 
       </div>
     </div>

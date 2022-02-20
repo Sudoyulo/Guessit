@@ -7,6 +7,7 @@
   justify-content: space-between;
   align-items: center;
   width: 22vw;
+  padding-top: 50px;
 }
 
 .side-title {
@@ -47,11 +48,6 @@
   width: 280px;
 }
 
-.initial-container {
-  display: flex;
-  justify-content: space-between;
-}
-
 .initials-box {
   width:35px;
 }
@@ -69,6 +65,9 @@
   padding: 10px;
   height: 200px;
   width: 250px;
+  display: inline-block;
+  white-space: nowrap;
+  overflow: auto;
 }
 
 .friend-info {
@@ -84,9 +83,8 @@
 .add-a-friend{
   /* background-color: rgb(18, 18, 19); */
   display: flex;
-  flex-direction: column;
   align-items: center;
-  width: 140px;
+  /* width: 180px; */
 }
 
 .add-input {

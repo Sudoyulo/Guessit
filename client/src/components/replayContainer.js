@@ -45,8 +45,6 @@ const ReplayContainer = (props) => {
     getVs(vsUgid)
   }, [vsUgid])
 
-
-
   const convertIntoMiliseconds = (time) => {
 
     let msTime = []
@@ -80,9 +78,6 @@ const ReplayContainer = (props) => {
       }, [time])
 
     })
-
-
-
   }
 
   let guessRows = board.map((row, rowIndex) => {
@@ -97,9 +92,6 @@ const ReplayContainer = (props) => {
     );
   })
 
-
-
-
   return (
 
     <div className="replay-box">
@@ -111,4 +103,5 @@ const ReplayContainer = (props) => {
   );
 
 }
+
 export default ReplayContainer;

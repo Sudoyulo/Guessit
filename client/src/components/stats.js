@@ -15,11 +15,12 @@ const Stats = (props) => {
       setWinTimes(calcTimes)
     })
   }
+
   useEffect(() => {
     calculateWinTimes(user);
   }, [])
 
-  console.log("gc", gameCount)
+  // console.log("gc", gameCount)
 
   // let totalWins = winTimes.reduce((sum, i) => sum + i, 0);
   let totalWinPercent = Math.round((completedGames.length / gameCount) * 100); //minimum 30 to fill bar

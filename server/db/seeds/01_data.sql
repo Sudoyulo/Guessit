@@ -81,6 +81,3 @@ INSERT INTO follows (i_am, you_are) VALUES (1,2); --1,2
 INSERT INTO follows (i_am, you_are) VALUES (1,3); --1,3
 INSERT INTO follows (i_am, you_are) VALUES (2,1); --2,1
 INSERT INTO follows (i_am, you_are) VALUES (3,1); --3,1
-
-INSERT INTO user_game (user_id, game_id, started_on) VALUES (4, 1, '2022-01-01 01:25:45');
-INSERT INTO user_game (user_id, game_id, started_on) VALUES (5, 1, '2022-01-01 01:25:45');
