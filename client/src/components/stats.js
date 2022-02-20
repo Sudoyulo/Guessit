@@ -30,7 +30,7 @@ const Stats = (props) => {
 
     <div className="right-sidebar">
       <div className="stat-title">
-        Statistics
+        STATISTICS
       </div>
       <div className="stats-container" >
         <div className="games-played">Games played: {totalGames}</div>
