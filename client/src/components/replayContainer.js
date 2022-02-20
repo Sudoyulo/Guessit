@@ -6,11 +6,19 @@ import './replayContainer.css'
 const ReplayContainer = (props) => {
 
 
+  const { solution, flipTiles, vsUgid } = props;
 
-  const { board, solution, flipTiles, vsUgid } = props;
   const [timestamp, setTimestamp] = useState([])
   const [guessList, setGuessList] = useState([])
 
+  const [board, setBoard] = useState([
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "]
+  ])
 
   const getVs = (ugid) => {
     console.log("getting game:", ugid)
@@ -39,9 +47,43 @@ const ReplayContainer = (props) => {
 
 
 
-  // console.log("guessList: ", guessList)
-  // console.log("Im in the replay", props.timestamp, props.guessList) //and solution
-  //convert min and s to ms. find the difference. map props.timestamp, set timeout and css for each line dont reveal words on replay.
+  const convertIntoMiliseconds = (time) => {
+
+    let msTime = []
+    let zeroTime = 0;
+    let splitGuess = []
+
+    time.forEach((record) => {
+      const minute = Number(record.slice(0, 2)) * 60000
+      const second = Number(record.slice(3)) * 1000
+      msTime.push(Number(minute + second))
+    })
+
+    zeroTime = msTime[0];
+    msTime = msTime.map((spot) => Number(spot) - Number(zeroTime))
+
+    // console.log("convert times", time)
+    splitGuess = guessList.map(guess => guess.split(''))
+    console.log("msTime", msTime, splitGuess)
+
+    msTime.forEach((time, index) => {
+      setTimeout(() => {
+        console.log(guessList[index])
+      }, [time])
+
+    })
+
+    setBoard(splitGuess)
+
+
+
+  }
+
+
+
+
+
+
   const guessRows = board.map((row, rowIndex) => {
     return (
       <div key={row + rowIndex} className={"row row-" + rowIndex}> {
@@ -59,8 +101,10 @@ const ReplayContainer = (props) => {
   return (
 
     <div className="replay-box">
-      {/* {guessRows} */}
-      {guessList}{timestamp}
+      <button onClick={() => { convertIntoMiliseconds(timestamp) }}>Play</button>
+      {guessRows}
+      {/* {guessList}{timestamp} */}
+      {solution}
     </div >
   );
 
