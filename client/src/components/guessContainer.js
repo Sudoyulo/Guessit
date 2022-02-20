@@ -9,8 +9,12 @@ import { checkWord } from "../words/wordList";
 
 const GuessContainer = (props) => {
 
+
+  
+
   const { board, setBoard, solution, pos, setPos, user, gameId, completedGames, boardCSS, vsUgid } = props;
   // console.log("USER++++++: ", user)
+
   // console.log('NEW USER: ', newUser)
 
   const [message, setMessage] = useState("");
@@ -81,7 +85,7 @@ const GuessContainer = (props) => {
 
   const getUserGame = (user, gid) => {
     // console.log("getting game", user, gid) //causses memory leak
-
+    console.log("USER++++++: ", user)
     if (user[0] && gid) {
       // console.log("fetching", user[0].user_id, gameId)
       axios('http://localhost:5001/user_game/' + user[0].user_id + "/" + gid)

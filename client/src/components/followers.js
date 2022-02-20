@@ -4,10 +4,12 @@ import axios from "axios";
 
 const Followers = (props) => {
 
+
   const { userAvatar, userInitials, user_id, userinfo, gameid, setVsUgid } = props;
 
+
   const [allAvatars, setAllAvatars] = useState([]);
-  const [user, setUser] = useState([userinfo])
+  const [user, setUser] = useState(userinfo)
   const [myAvatar, setMyAvatar] = useState(userAvatar);
   const [myInitials, setInitials] = useState(userInitials);
   const [followsList, setFollowsList] = useState([]);
@@ -16,7 +18,7 @@ const Followers = (props) => {
   const getAvatars = () => {
     axios('http://localhost:5001/avatars')
       .then(res => {
-        // console.log("RES AVATAR: ", res.data)
+        console.log("RES AVATAR: ", res.data)
         const list = []
         res.data.forEach((id) => {
           list.push(id.avatar_url)
@@ -24,9 +26,9 @@ const Followers = (props) => {
         setAllAvatars(list);
       })
   }
-
+  console.log("FOLLOWERS USER: ", user)
   const getUser = () => {
-    axios('http://localhost:5001/users/' + user_id)
+    axios('http://localhost:5001/users/' + user[0].user_id)
       .then(res => {
         setMyAvatar(res.data[0].avatar_url)
         setInitials(res.data[0].initials)
@@ -82,6 +84,22 @@ const Followers = (props) => {
   }
 
 
+  const addFriend = (friendId) => {
+
+    // console.log("adding friend", user_id, friendId)
+    axios.put('http://localhost:5001/newfollow/' + user_id + '/' + friendId)
+      .then(res => {
+        console.log(res)
+      })
+      .catch(err => {
+        console.log("ERROR MESSAGE: ",err.message)
+      })
+
+    setFriendInput("")
+  }
+
+
+
   useEffect(() => {
 
     // console.log("fl", followsList)
@@ -100,7 +118,7 @@ const Followers = (props) => {
   //this is a list of all avatars source code
   //setMyAvatar(avatar)
   const selectAvatar = allAvatars.map((avatar, index) => {
-    return (<button key={index} onClick={() => { setUserAvatar(user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
+    return (<button key={index} onClick={() => { setUserAvatar(user[0].user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
   })
 
   //max three

@@ -17,7 +17,8 @@ CREATE TABLE users (
   initials VARCHAR(255),
   avatar_id INTEGER REFERENCES avatars(id) ON DELETE CASCADE,
   date_started TIMESTAMP,
-  player_id VARCHAR(255)
+  player_id VARCHAR(255),
+  user_id SERIAL NOT NULL
 );
 
 CREATE TABLE games (
