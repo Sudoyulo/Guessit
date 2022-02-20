@@ -10,10 +10,10 @@ const Keyboard = (props) => {
   ])
 
   const allKeys = keys.map((key) => {
-    let color = "gray";
+   
     return (
       <button id={key} key={key} className={"key-" + key} onClick={
-        () => props.onKeypress(key)} style={{ backgroundColor: color }} > {key} </ button >
+        () => props.onKeypress(key)} > {key} </ button >
     );
   })
 

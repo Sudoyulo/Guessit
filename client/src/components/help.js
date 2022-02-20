@@ -20,9 +20,7 @@ const Help = () => {
         </div>
         <img className="help" src={examples} alt="How to play"/>
         <div>
-          Green letters mean the letter is in the exact position as the answer.
-          <br /><br />
-          Yellow letters mean the letter is within the word!
+       
         </div>
       </div>
     </div >
