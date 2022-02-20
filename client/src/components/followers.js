@@ -5,7 +5,7 @@ import axios from "axios";
 const Followers = (props) => {
 
 
-  const { userAvatar, userInitials, user_id, userinfo, gameid, setVsUgid } = props;
+  const { userAvatar, userInitials, user_id, userinfo, gameid} = props;
 
 
   const [allAvatars, setAllAvatars] = useState([]);
@@ -27,7 +27,8 @@ const Followers = (props) => {
         setAllAvatars(list);
       })
   }
-  console.log("FOLLOWERS USER: ", user)
+
+ 
   const getUser = () => {
     axios('http://localhost:5001/users/' + user[0].user_id)
       .then(res => {
@@ -84,7 +85,6 @@ const Followers = (props) => {
       })
   }
 
-
   const addFriend = (friendId) => {
 
     // console.log("adding friend", user_id, friendId)
@@ -98,7 +98,6 @@ const Followers = (props) => {
 
     setFriendInput("")
   }
-
 
 
   useEffect(() => {
@@ -131,7 +130,6 @@ const Followers = (props) => {
     }
   }
 
-
   const followers = followsList.map((friend, index) => {
     // console.log("fl friend", friend)
     const firstFriend = friend[0];
@@ -140,10 +138,10 @@ const Followers = (props) => {
     }
 
     let turnsWin = 0;
-    let challengeId = 0;
+    
     friend.forEach(gamedata => {
       if (gamedata.id === gameid) {
-        challengeId = gamedata.ugid
+       
         turnsWin = gamedata.turns_taken
       }
     })
@@ -153,17 +151,11 @@ const Followers = (props) => {
 
         <img className="avatar" src={firstFriend.avatar_url} alt="friend avatar" />
         <p> {firstFriend.initials}#{firstFriend.user_id}</p>
-        {turnsWin ? <button onClick={() => { challengeMe(challengeId) }} className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
+        {turnsWin ? <button  className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
       </div>
     )
 
   })
-
-
-  const challengeMe = (user_game_id) => {
-    setVsUgid(user_game_id);
-    console.log("challenge accepted", user_game_id)
-  }
 
 
   return (

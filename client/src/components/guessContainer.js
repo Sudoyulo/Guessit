@@ -10,12 +10,10 @@ import { checkWord } from "../words/wordList";
 const GuessContainer = (props) => {
 
 
-  
 
-  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames, boardCSS, vsUgid } = props;
-  // console.log("USER++++++: ", user)
 
-  // console.log('NEW USER: ', newUser)
+  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames} = props;
+ 
 
   const [message, setMessage] = useState("");
   const [userGame, setUserGame] = useState([]);
@@ -63,7 +61,7 @@ const GuessContainer = (props) => {
           checkSolution = checkSolution.replace(guess.lett, '')
         }
       })
-      
+
       console.log("solution: ", solution)
       if (userGuess.join('') === solution) {
         setTimeout(() => {
@@ -268,20 +266,14 @@ const GuessContainer = (props) => {
   return (
     <div className="tile-keyboard" >
       <div >
-
         <div className="message">
           {message}
           <p>&nbsp;</p>
         </div>
-
         <div className="middles">
-          <BlankReplay />
           <div className="tile-container">
             {guessRows}
           </div>
-
-          <ReplayContainer timestamp={props.timestamp} guessList={props.guessList} board={board} solution={solution} flipTiles={flipTile} vsUgid={vsUgid} />
-
         </div>
 
         <Keyboard onKeypress={handleKeypress} />
