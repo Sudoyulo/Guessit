@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import './gameTitle.css'
 import friendIcon from '../images/friendIcon.png'
 import help from '../images/help.png'
-import stats from '../images/graph.png' 
+import stats from '../images/graph.png'
 import settings from '../images/settings.png'
 import axios from 'axios';
 
@@ -167,7 +167,7 @@ const GameTitle = (props) => {
   useEffect(() => {
     getGames();
     getGame();
-   
+
   }, [newUserData]);
 
   useEffect(() => {
@@ -188,7 +188,7 @@ const GameTitle = (props) => {
       setLeftSidebar(<Blank />)
     } else {
 
-      setLeftSidebar(<Followers user_id={newUserData[0].user_id} userinfo={newUserData} userAvatar={newUserData[0].avatar_url} userInitials={newUserData[0].initials} gameid={game.id} setVsUgid={setVsUgid}/>)
+      setLeftSidebar(<Followers user_id={newUserData[0].user_id} userinfo={newUserData} userAvatar={newUserData[0].avatar_url} userInitials={newUserData[0].initials} gameid={game.id} setVsUgid={setVsUgid} />)
 
     }
   }

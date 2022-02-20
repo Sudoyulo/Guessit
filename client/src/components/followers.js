@@ -93,7 +93,7 @@ const Followers = (props) => {
         console.log(res)
       })
       .catch(err => {
-        console.log("ERROR MESSAGE: ",err.message)
+        console.log("ERROR MESSAGE: ", err.message)
       })
 
     setFriendInput("")
@@ -110,7 +110,7 @@ const Followers = (props) => {
   useEffect(() => {
     getUser();
     getMyFollowers();
-  }, [])
+  }, [userinfo])
 
   useEffect(() => {
     getAvatars();
