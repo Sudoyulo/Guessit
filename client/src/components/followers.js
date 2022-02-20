@@ -4,14 +4,15 @@ import axios from "axios";
 
 const Followers = (props) => {
 
-  const { userAvatar, userInitials, userinfo, user_id, gameid } = props;
+
+  const { userAvatar, userInitials, user_id, userinfo, gameid, setVsUgid } = props;
+
 
   const [allAvatars, setAllAvatars] = useState([]);
   const [user, setUser] = useState(userinfo)
   const [myAvatar, setMyAvatar] = useState(userAvatar);
   const [myInitials, setInitials] = useState(userInitials);
   const [followsList, setFollowsList] = useState([]);
-  const [friendInput, setFriendInput] = useState("");
 
 
   const getAvatars = () => {
@@ -82,6 +83,7 @@ const Followers = (props) => {
       })
   }
 
+
   const addFriend = (friendId) => {
 
     // console.log("adding friend", user_id, friendId)
@@ -95,6 +97,7 @@ const Followers = (props) => {
 
     setFriendInput("")
   }
+
 
 
   useEffect(() => {
@@ -127,28 +130,40 @@ const Followers = (props) => {
     }
   }
 
-  const followers = followsList.map((friendsGames, index) => {
-    console.log("fl friend", friendsGames)
-    const firstFriend = friendsGames[0];
+
+  const followers = followsList.map((friend, index) => {
+    // console.log("fl friend", friend)
+    const firstFriend = friend[0];
     if (!firstFriend) { //vertify that is it not undefined
       return ""
     }
 
     let turnsWin = 0;
-    const friendPlayed = friendsGames.find(game => game.id === gameid)
-
-    turnsWin = friendPlayed ? friendPlayed.turns_taken : 0
+    let challengeId = 0;
+    friend.forEach(gamedata => {
+      if (gamedata.id === gameid) {
+        challengeId = gamedata.ugid
+        turnsWin = gamedata.turns_taken
+      }
+    })
 
     return (
       <div key={index} className="friend-info" >
 
         <img className="avatar" src={firstFriend.avatar_url} alt="friend avatar" />
         <p> {firstFriend.initials}#{firstFriend.user_id}</p>
-        {turnsWin ? <button className="complete">See my {turnsWin} turn replay</button> : <button className="complete"> #{gameid} incomplete</button>}
+        {turnsWin ? <button onClick={() => { challengeMe(challengeId) }} className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
       </div>
     )
 
   })
+
+
+  const challengeMe = (user_game_id) => {
+    setVsUgid(user_game_id);
+    console.log("challenge accepted", user_game_id)
+  }
+
 
   return (
 
@@ -175,9 +190,8 @@ const Followers = (props) => {
 
             Set Initials: &nbsp;
             <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
-
           </div>
-          <div> Your id: {user_id} </div>
+          <div>I am: {user_id}</div>
         </div>
       </div>
 
@@ -186,8 +200,8 @@ const Followers = (props) => {
       </div>
 
       <div className="add-a-friend" >
-        <input className="add-input" placeholder="Enter follower id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input>
-        <button className="add-button" onClick={() => { addFriend(friendInput) }}> Add friend </button>
+        <input className="add-input" placeholder="Enter follower id:" ></input>
+        <button className="add-button"> Add friend </button>
       </div>
 
     </div >

@@ -114,11 +114,13 @@ const setInitials = (uid, key) => {
 }
 
 const createUserGame = (uid, gid, guess, time) => {
+
   let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
   return pool.query("INSERT INTO user_game (user_id, game_id, started_on) VALUES ($1,$2, NOW()) RETURNING *;", [uid, gid])
     .then(results => {
       console.log("results 2: ", results.rows[0])
         return pool.query("INSERT INTO guesses (user_game_id, guess, guessTimestamp) VALUES ($1, $2, $3)", [results.rows[0].id, guess, date])
+
       // .then(results => {
       //   console.log("results 1: ", results)
       //   return results;
@@ -137,6 +139,7 @@ const getUserStats = (uid, gid) => {
 }
 
 const saveOneWin = (uid, gid, guess) => {
+
   let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
   return pool.query("INSERT INTO user_game (user_id, game_id, turns_taken, won_on, started_on) VALUES ($1,$2,1, NOW(), NOW()) returning *;", [uid, gid])
     .then(results => {
@@ -145,6 +148,8 @@ const saveOneWin = (uid, gid, guess) => {
         // .then(results => {
         //   return results;
         // })
+
+
 
     })
 
