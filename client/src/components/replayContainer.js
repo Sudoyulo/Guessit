@@ -52,6 +52,12 @@ const ReplayContainer = (props) => {
     let msTime = []
     let zeroTime = 0;
     let splitGuess = []
+    let turnOfGuesses = [[" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "],
+    [" ", " ", " ", " ", " "]];
 
     time.forEach((record) => {
       const minute = Number(record.slice(0, 2)) * 60000
@@ -68,23 +74,18 @@ const ReplayContainer = (props) => {
 
     msTime.forEach((time, index) => {
       setTimeout(() => {
-        console.log(guessList[index])
+        turnOfGuesses[index] = splitGuess[index]
+        console.log(guessList[index], turnOfGuesses)
+        setBoard(turnOfGuesses)
       }, [time])
 
     })
-
-    setBoard(splitGuess)
 
 
 
   }
 
-
-
-
-
-
-  const guessRows = board.map((row, rowIndex) => {
+  let guessRows = board.map((row, rowIndex) => {
     return (
       <div key={row + rowIndex} className={"row row-" + rowIndex}> {
         row.map((col, colIndex) => {
@@ -95,6 +96,7 @@ const ReplayContainer = (props) => {
       }</div>
     );
   })
+
 
 
 
