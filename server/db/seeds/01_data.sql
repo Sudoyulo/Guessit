@@ -54,14 +54,14 @@ INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (1, 'ABBEY', '
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (1, 'LIGHT', '12:15');
 
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (2, 'HOUSE', '12:00');
-INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (2, 'LIGHT', '12:05');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (2, 'ADORE', '12:05');
 
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'HOUSE', '12:00');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'LAKES', '12:05');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'ABBEY', '12:10');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'SEVEN', '12:15');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'EIGHT', '12:20');
-INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'LIGHT', '12:25');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (3, 'HONOR', '12:25');
 
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (4, 'LAKES', '12:00');
 
@@ -69,13 +69,13 @@ INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'LAKES', '
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'ABBEY', '12:10');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'SEVEN', '12:15');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'EIGHT', '12:20');
-INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'LIGHT', '12:25');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (5, 'DRESS', '12:25');
 
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'LAKES', '12:00');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'ABBEY', '12:05');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'SEVEN', '12:10');
 INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'EIGHT', '12:15');
-INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'LIGHT', '12:20');
+INSERT INTO guesses (user_game_id, guess, guessTimestamp ) VALUES (6, 'WATER', '12:20');
 
 INSERT INTO follows (i_am, you_are) VALUES (1,2); --1,2
 INSERT INTO follows (i_am, you_are) VALUES (1,3); --1,3

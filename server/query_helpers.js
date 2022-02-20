@@ -205,11 +205,11 @@ const getMyFriends = (myid) => {
 const addFollower = (me, you) => {
   //check if you is an invalid users
   if (me !== you) {
-    pool.query("SELECT * FROM follows WHERE i_am= $1 AND you_are=$2;", [me, you])
+   return pool.query("SELECT * FROM follows WHERE i_am= $1 AND you_are=$2;", [me, you])
       .then(results => {
 
         if (results.rows.length === 0) {
-          pool.query("INSERT INTO follows (i_am, you_are) VALUES ($1,$2)", [me, you])
+          return pool.query("INSERT INTO follows (i_am, you_are) VALUES ($1,$2)", [me, you])
 
         }
 

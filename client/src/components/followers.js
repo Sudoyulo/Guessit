@@ -13,6 +13,7 @@ const Followers = (props) => {
   const [myAvatar, setMyAvatar] = useState(userAvatar);
   const [myInitials, setInitials] = useState(userInitials);
   const [followsList, setFollowsList] = useState([]);
+  const [friendInput, setFriendInput] = useState("");
 
 
   const getAvatars = () => {
@@ -200,8 +201,8 @@ const Followers = (props) => {
       </div>
 
       <div className="add-a-friend" >
-        <input className="add-input" placeholder="Enter follower id:" ></input>
-        <button className="add-button"> Add friend </button>
+        <input className="add-input" placeholder="Enter follower id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input>
+        <button className="add-button" onClick={() => { addFriend(friendInput) }}> Add friend </button>
       </div>
 
     </div >

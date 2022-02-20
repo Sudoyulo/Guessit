@@ -18,17 +18,17 @@ export default function Landing({addNewUser}) {
   // }, [navigate])
   return (
     <div className='landing'>
-      <div class="bouncing-text">
-        <div class="b">m</div>
-        <div class="o">i</div>
-        <div class="u">n</div>
-        <div class="n">i</div>
-        <div class="c">W</div>
-        <div class="e">O</div>
-        <div class="r">R</div>
-        <div class="d">D</div>
-        <div class="shadow"></div>
-        <div class="shadow-two"></div>
+      <div className="bouncing-text">
+        <div className="b">m</div>
+        <div className="o">i</div>
+        <div className="u">n</div>
+        <div className="n">i</div>
+        <div className="c">W</div>
+        <div className="e">O</div>
+        <div className="r">R</div>
+        <div className="d">D</div>
+        <div className="shadow"></div>
+        <div className="shadow-two"></div>
       </div>
       <div>
         <img className="howto" src={howto2} alt="How to play" />
