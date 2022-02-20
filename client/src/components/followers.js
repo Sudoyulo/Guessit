@@ -4,9 +4,7 @@ import axios from "axios";
 
 const Followers = (props) => {
 
-
-  const { userAvatar, userInitials, user_id, userinfo, gameid} = props;
-
+  const { userAvatar, userInitials, user_id, userinfo, gameid } = props;
 
   const [allAvatars, setAllAvatars] = useState([]);
   const [user, setUser] = useState(userinfo)
@@ -15,7 +13,7 @@ const Followers = (props) => {
   const [followsList, setFollowsList] = useState([]);
   const [friendInput, setFriendInput] = useState("");
 
-
+  //grabs all avatar sources from the database
   const getAvatars = () => {
     axios('http://localhost:5001/avatars')
       .then(res => {
@@ -28,7 +26,7 @@ const Followers = (props) => {
       })
   }
 
- 
+  //get singlular user from the database with id
   const getUser = () => {
     axios('http://localhost:5001/users/' + user[0].user_id)
       .then(res => {
@@ -38,6 +36,7 @@ const Followers = (props) => {
       })
   }
 
+  //writes to users database the avatar number
   const setUserAvatar = (uid, aid, avatar) => {
     axios.put('http://localhost:5001/users/' + uid + '/avatar/' + (aid + 1))
       .then(res => {
@@ -46,6 +45,7 @@ const Followers = (props) => {
       })
   }
 
+  //writes to users database the initials of the user
   const setUserInitials = (uid, str) => {
     axios.put('http://localhost:5001/users/' + uid + '/initials/' + str)
       .then(res => {
@@ -54,118 +54,87 @@ const Followers = (props) => {
       })
   }
 
+  // grabs all followers of user_id. Promise sets follow list after all followers are loaded.
   const getMyFollowers = () => {
     const followerData = [];
     const followerIds = [];
 
-    // console.log("getting my friends myid:", user_id, "game #:", gameid)
     axios('http://localhost:5001/getmyfriends/' + user_id)
       .then(res => {
-        // console.log("client, get my friends", res.data.rows)
         res.data.rows.forEach(entry => { followerIds.push(entry.friendid) })
-        // console.log("fd", followerIds)
         const promises = [];
         followerIds.forEach(person => {
-
           const p = axios('http://localhost:5001/users/' + person)
-            .then(res => {
-              // console.log("each friend data", res.data)
-              followerData.push(res.data)
-            })
+            .then(res => { followerData.push(res.data) })
           promises.push(p)
         })
-
-        // console.log("all friend data", followerData)
         Promise.all(promises)
-          .then(
-            () => setFollowsList(followerData)
-
-          )
-
+          .then(() => { setFollowsList(followerData) })
       })
   }
 
+  //adds friend id to your friends list
   const addFriend = (friendId) => {
 
-    // console.log("adding friend", user_id, friendId)
     axios.put('http://localhost:5001/newfollow/' + user_id + '/' + friendId)
       .then(res => {
         console.log(res)
+        setFriendInput("")
+        getMyFollowers();
       })
       .catch(err => {
         console.log("ERROR MESSAGE: ", err.message)
       })
-
-    setFriendInput("")
   }
 
-
-  useEffect(() => {
-
-    // console.log("fl", followsList)
-  }, [followsList])
-
-  // called here because of reload issues
   useEffect(() => {
     getUser();
     getMyFollowers();
-  }, [userinfo])
-
-  useEffect(() => {
     getAvatars();
-  }, [myAvatar])
+  }, [])
 
-  //this is a list of all avatars source code
-  //setMyAvatar(avatar)
+
+  //this is a list of all avatars source code. Sets avatar when clicked
   const selectAvatar = allAvatars.map((avatar, index) => {
     return (<button key={index} onClick={() => { setUserAvatar(user[0].user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
   })
 
-  //max three
+  // Change initials but only to a maximum character count of 3
   const changeInitials = (value) => {
-
     if (myInitials.length < 4) {
       setUserInitials(user_id, value.slice(0, 3).toUpperCase());
       setInitials(value.slice(0, 3).toUpperCase())
     }
   }
 
+  //loads a list of friends with completed in number lists
   const followers = followsList.map((friend, index) => {
-    // console.log("fl friend", friend)
     const firstFriend = friend[0];
-    if (!firstFriend) { //vertify that is it not undefined
-      return ""
-    }
+
+    //vertify that is it not undefined
+    if (!firstFriend) { return "" }
 
     let turnsWin = 0;
-    
+
     friend.forEach(gamedata => {
-      if (gamedata.id === gameid) {
-       
-        turnsWin = gamedata.turns_taken
-      }
+      if (gamedata.id === gameid) { turnsWin = gamedata.turns_taken }
     })
 
     return (
       <div key={index} className="friend-info" >
-
         <img className="avatar" src={firstFriend.avatar_url} alt="friend avatar" />
         <p> {firstFriend.initials}#{firstFriend.user_id}</p>
-        {turnsWin ? <button  className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
+        {turnsWin ? <button className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
       </div>
     )
-
   })
-
 
   return (
 
     <div className="left-sidebar">
-
       <div className="side-title">
         Social
       </div>
-
       <div className="user-data">
         <p><img className="avatar" src={myAvatar} alt="Avatar" />  </p>
         <p>{myInitials} </p>
@@ -179,24 +148,17 @@ const Followers = (props) => {
         </div>
         <br />
         <div className="initial-container" >
-          <div>
-
-            Set Initials: &nbsp;
-            <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
-          </div>
-          <div>I am: {user_id}</div>
+          Set Initials: &nbsp;
+          <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
         </div>
       </div>
-
       <div className="following-list">
         {followers}
       </div>
-
       <div className="add-a-friend" >
-        <input className="add-input" placeholder="Enter follower id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input>
+        <input className="add-input" placeholder="Enter follower id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input> &nbsp;
         <button className="add-button" onClick={() => { addFriend(friendInput) }}> Add friend </button>
       </div>
-
     </div >
 
   );

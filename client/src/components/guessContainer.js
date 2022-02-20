@@ -2,18 +2,11 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './guessContainer.css'
 import Keyboard from "./keyboard";
-import ReplayContainer from "./replayContainer";
-import BlankReplay from "./blankReplay";
 import { checkWord } from "../words/wordList";
-
 
 const GuessContainer = (props) => {
 
-
-
-
-  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames} = props;
- 
+  const { board, setBoard, solution, pos, setPos, user, gameId, completedGames } = props;
 
   const [message, setMessage] = useState("");
   const [userGame, setUserGame] = useState([]);
@@ -42,7 +35,6 @@ const GuessContainer = (props) => {
     let answer = solution
     let checkSolution = answer
     let guess = []
-
 
     userGuess.forEach((tile, index) => {
       tile = document.getElementById(pos.row.toString() + index.toString())
@@ -92,7 +84,6 @@ const GuessContainer = (props) => {
           setUserGame(res.data.rows)
         })
     }
-
   }
 
   const makeUserGame = (user, gid, guess) => {
@@ -126,7 +117,6 @@ const GuessContainer = (props) => {
         })
     }
   }
-
 
   const saveGuess = (guess) => {
     // console.log("guess, row num, ugid", guess, userGame[0].id)
@@ -192,6 +182,7 @@ const GuessContainer = (props) => {
                 //correct on first guess still buggy
                 winOneTurn(user, gameId, userGuess)
                 setMessage("Perfect")
+                setTimeout(() => { setMessage("") }, 5000)
 
                 //setTimeout(() => { setMessage("") }, 2000)
               } else { //not one turn win
@@ -205,6 +196,7 @@ const GuessContainer = (props) => {
               if (solution === userGuess) {
                 //correct
                 setMessage("Perfect")
+                setTimeout(() => { setMessage("") }, 5000)
                 saveGuess(userGuess)
                 saveWin(pos.row + 1)
 
@@ -219,7 +211,8 @@ const GuessContainer = (props) => {
                   //update guesses
                   setTimeout(() => { setMessage("") }, 2000)
                 } else {
-                  setMessage("Game over")
+                  setMessage("Game over 1")
+                  setTimeout(() => { setMessage("") }, 5000)
                 } //end row < 5
               }
             }
@@ -241,7 +234,8 @@ const GuessContainer = (props) => {
       // console.log("pos", pos)
       //pointer is in bounds < 5 meaning 0-4 is not filled up
       if (pos.row > 5) {
-        setMessage("Game over")
+        setMessage("Game over 2")
+        setTimeout(() => { setMessage("") }, 5000)
       } else if (pos.col < 5) {
         copyBoard[pos.row][pos.col] = letter
         setBoard(copyBoard)

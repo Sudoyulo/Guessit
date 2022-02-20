@@ -9,9 +9,11 @@ import { getRandomWord } from "../words/wordList";
 
 const Settings = (props) => {
 
+  const { user, getGame, resetBoard, loadBoard, completedGames, hangingGames } = props;
+
   const [gameAmount, setGameAmount] = useState([]);
   const [search, setSearch] = useState(1);
-  const { user, getGame, resetBoard, loadBoard, completedGames, hangingGames } = props;
+  const [settingMessage, setSettingMessage] = useState("");
 
   const resetKeyboard = () => {
     const keys = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -33,7 +35,6 @@ const Settings = (props) => {
           list.push(id.id)
         })
         setGameAmount(list);
-
       })
   }
 
@@ -41,6 +42,8 @@ const Settings = (props) => {
     axios.put('http://localhost:5001/games/' + word)
       .then(res => {
         console.log("inserted new game", res)
+        setSettingMessage("New game created. It's ready to be loaded.")
+        setTimeout(() => { setSettingMessage("") }, 2000)
         getGames();
       })
   }
@@ -50,17 +53,23 @@ const Settings = (props) => {
 
     if (completedGames.includes(search)) {
       console.log("completed game")
+      setSettingMessage("You have already completed this game.")
+      setTimeout(() => { setSettingMessage("") }, 2000)
       getGuesses();
       // loadBoard();
     } else if (hangingGames.includes(search)) {
       getGuesses();
       console.log("hanging game")
+      setSettingMessage("Previous game loaded.")
+      setTimeout(() => { setSettingMessage("") }, 2000)
       // loadBoard();
     } else {
       console.log("new game")
+      setSettingMessage("New game Loaded.")
+      setTimeout(() => { setSettingMessage("") }, 2000)
       resetBoard();
     }
-
+    getGames();
   }
 
   const getGuesses = () => {
@@ -81,11 +90,9 @@ const Settings = (props) => {
     }
   }
 
-
   useEffect(() => {
-    // readCompletedgames(user);
     getGames();
-  }, [resetBoard])
+  }, [])
 
   const gameLinks = gameAmount.map((gameid) => {
     let icon = "❎ Un-Played";
@@ -96,17 +103,18 @@ const Settings = (props) => {
       icon = "⌛ Ongoing";
     }
 
-    return (
-
-      <option key={gameid} value={gameid}>{`GAME #${gameid}`} {icon} </option>
-    )
+    return (<option key={gameid} value={gameid}>{`GAME #${gameid}`} {icon} </option>)
   })
 
   return (
 
     <div className="right-sidebar">
+      <div className="message">
+        {settingMessage}
+        <p>&nbsp;</p>
+      </div>
       <p className="game-title">GAME SETTINGS </p>
-      <p className="choose-game">Load previous game <br/> - or - <br/> Create a new one!</p>
+      <p className="choose-game">Load previous game <br /> - or - <br /> Create a new one!</p>
       <div className="setting-container">
         <select className="games-list" value={search} onChange={(e) => { setSearch(Number(e.target.value)) }}>
           {gameLinks}
@@ -117,7 +125,6 @@ const Settings = (props) => {
       {/* <div className="setting-container">
         <p className="make-game">MAKE A GAME!</p>
       </div> */}
-
 
     </div >
   );

@@ -36,7 +36,7 @@ function App() {
 
   const addNewUser = () => {
 
-    const generateRandomString = function() {
+    const generateRandomString = function () {
       return Math.random().toString(20).substring(2, 8)
     }
 
@@ -53,7 +53,6 @@ function App() {
       })
 
   }
-
 
   return (
     <Fragment>
