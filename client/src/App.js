@@ -48,7 +48,8 @@ function App() {
         setAuth(true)
       })
       .catch(err => {
-        console.log(err.message)
+        console.log("ERRORS HERE")
+        // console.log(err.message)
       })
 
   }

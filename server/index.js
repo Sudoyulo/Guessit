@@ -149,10 +149,12 @@ app.put('/new_user_game/:uid/:gid/:guess/:time', (req, res) => {
 
   const { uid, gid, guess, time } = req.params;
 
-  // console.log("new ug", time)
+  console.log("+++++++REQ.PARAMS++++++++", req.params)
 
+  console.log("CREATE USER GAME++++++++",createUserGame(uid, gid, guess, time))
   createUserGame(uid, gid, guess, time)
     .then(response => {
+      console.log("+++++++++++RESPONSE+++++++++", response)
       res.status(200).send(response);
 
     })

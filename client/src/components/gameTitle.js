@@ -18,7 +18,7 @@ const GameTitle = (props) => {
 
   const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, newUserData } = props;
   const [allGames, setAllGames] = useState([])
-  const [user, setUser] = useState(newUserData);
+  // const [user, setUser] = useState(newUserData);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
@@ -164,12 +164,12 @@ const GameTitle = (props) => {
     getGames();
     getGame();
    
-  }, [user]);
+  }, [newUserData]);
 
   useEffect(() => {
 
-    readCompletedgames(user);
-  }, [user]);
+    readCompletedgames(newUserData);
+  }, [newUserData]);
 
   const helpOnOff = () => {
     if (rightSidebar.type.name === "Help") {
@@ -178,12 +178,12 @@ const GameTitle = (props) => {
       setRightSidebar(<Help />)
     }
   }
-
+  console.log("USER: ", newUserData)
   const followerOnOff = () => {
     if (leftSidebar.type.name === "Followers") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Followers user_id={user[0].user_id} userinfo={user} userAvatar={user[0].avatar_url} userInitials={user[0].initials} gameid={game.id} />)
+      setLeftSidebar(<Followers user_id={newUserData[0].user_id} userinfo={newUserData} userAvatar={newUserData[0].avatar_url} userInitials={newUserData[0].initials} gameid={game.id} />)
     }
   }
 
@@ -191,7 +191,7 @@ const GameTitle = (props) => {
     if (leftSidebar.type.name === "Stats") {
       setLeftSidebar(<Blank />)
     } else {
-      setLeftSidebar(<Stats user={user} completedGames={completedGames} gameCount={gameCount} />)
+      setLeftSidebar(<Stats user={newUserData} completedGames={completedGames} gameCount={gameCount} />)
     }
   }
 
@@ -199,7 +199,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings user={user} resetBoard={resetBoard} loadBoard={loadBoard} setCSS={boardCSS} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} board={board} />)
+      setRightSidebar(<Settings user={newUserData} resetBoard={resetBoard} loadBoard={loadBoard} setCSS={boardCSS} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} board={board} />)
     }
   }
  
@@ -217,7 +217,7 @@ const GameTitle = (props) => {
           <button onClick={() => { followerOnOff() }} >
             <img className="nav-icon" src={friendIcon} alt="follower" />
           </button>
-          <div className="game-info"> You: <br /> <div>{user[0] ? user[0].initials : ""}</div> </div>
+          <div className="game-info"> Your ID: <br /> <div>{newUserData[0] ? newUserData[0].user_id : ""}</div> </div>
         </div>
 
 
@@ -237,7 +237,7 @@ const GameTitle = (props) => {
       <div className="middle-containers">
 
 
-        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={user} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} boardCSS={boardCSS}/>
+        <GuessContainer completedGames={completedGames} board={board} setBoard={setBoard} pos={pos} setPos={setPos} solution={game.solution} user={newUserData} game={game} gameId={game.id} timestamp={timestamp} guessList={guessList} boardCSS={boardCSS}/>
 
       </div>
     </div>
