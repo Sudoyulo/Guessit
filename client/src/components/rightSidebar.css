@@ -6,13 +6,13 @@
 }
 
 .right-sidebar{
-  
   width: 22vw;
   height: 90vh;
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: center;
+  padding-top: 70px
 }
 
 .stat-title {
@@ -30,7 +30,6 @@
 .stats-container {
   display: flex;
   flex-direction: column;
-  
 }
 
 .games-played {
@@ -82,7 +81,13 @@
   animation: gradient 15s ease infinite;
   border-radius: 10px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
+  margin-bottom: 100px;
 }
+
+.message {
+  padding-bottom: 10px;
+}
+
 
 .play-button {
   margin-top: 20px;

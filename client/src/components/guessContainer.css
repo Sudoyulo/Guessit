@@ -9,9 +9,6 @@
   align-items: center;
   justify-content: center;
   font-weight: 900;
-  
-
-  
 }
 
 .tile-container .row {
@@ -21,8 +18,8 @@
 
 .tile-container .col {
   background-color: rgb(18, 18, 19);
-  width: 4em;
-  height: 4em;
+  width: 3em;
+  height: 3em;
   border: 3px solid rgb(58, 58, 60);
   box-sizing: border-box;
   display: flex;
@@ -101,7 +98,7 @@
   justify-content: center;
   align-items: baseline; */
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: stretch;
   flex-direction: row;
   align-content: stretch;
