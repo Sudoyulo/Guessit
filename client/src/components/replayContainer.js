@@ -5,7 +5,9 @@ import './replayContainer.css'
 
 const ReplayContainer = (props) => {
 
+
   const { solution, flipTiles, vsUgid } = props;
+
   const [timestamp, setTimestamp] = useState([])
   const [guessList, setGuessList] = useState([])
 
@@ -44,6 +46,7 @@ const ReplayContainer = (props) => {
   }, [vsUgid])
 
 
+
   const convertIntoMiliseconds = (time) => {
 
     let msTime = []
@@ -75,6 +78,7 @@ const ReplayContainer = (props) => {
 
 
   }
+
 
 
 

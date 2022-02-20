@@ -3,12 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import howto2 from '../images/howto2.png'
 import './Landing.css'
 
-export default function Landing({ authenticate, addUser }) {
+
+export default function Landing({addNewUser}) {
+
+
   const navigate = useNavigate();
   const onClick = () => {
-    authenticate();
-    addUser();
-    navigate('/')
+  
+    addNewUser();
+    navigate('/');
   }
   // useEffect(()=>{
   //   navigate('/')

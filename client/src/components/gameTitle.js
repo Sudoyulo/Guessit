@@ -16,9 +16,9 @@ import GuessContainer from './guessContainer';
 
 const GameTitle = (props) => {
 
-  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar } = props;
+  const { leftSidebar, setLeftSidebar, rightSidebar, setRightSidebar, newUserData } = props;
   const [allGames, setAllGames] = useState([])
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState(newUserData);
   const [game, setGame] = useState([]);
   const [completedGames, setCompletedGames] = useState([]);
   const [hangingGames, setHangingGames] = useState([]);
@@ -50,6 +50,7 @@ const GameTitle = (props) => {
     ])
     setPos({ row: 0, col: 0 })
   };
+
   const changeKeyColour = (key, colour) => {
     const button = document.getElementById(key)
     button.classList.add(colour)
@@ -122,12 +123,8 @@ const GameTitle = (props) => {
   };
 
 
-  const getUser = () => {
-    axios('http://localhost:5001/users/2')
-      .then(res => {
-        setUser(res.data)
-      })
-  }
+
+
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
@@ -168,13 +165,9 @@ const GameTitle = (props) => {
   }
 
   useEffect(() => {
-    getUser();
-  }, []);
-
-
-  useEffect(() => {
     getGames();
     getGame();
+   
   }, [user]);
 
   useEffect(() => {

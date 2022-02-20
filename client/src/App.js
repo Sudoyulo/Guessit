@@ -11,50 +11,48 @@ import axios from "axios";
 
 function App() {
 
-
-  const authenticate = () => {
-    setAuth(true)
-    Cookies.set("user", "authTrue")
-  }
-
-
   const readCookie = () => {
-    const user = Cookies.get('user')
+    const user = Cookies.get('cookie')
+    console.log("COOKIE USER: ", user)
     if (user) {
-      setAuth(true)
+      axios(`http://localhost:5001/users/${user}`)
+        .then(res => {
+          setNewUser(res.data)
+          setAuth(true)
+        })
     }
   }
+
 
   useEffect(() => {
     readCookie()
   }, [])
 
   const [auth, setAuth] = useState(false)
-  const [user, setUser] = useState([]);
+  const [newUser, setNewUser] = useState([]);
   const [leftSidebar, setLeftSidebar] = useState(<Blank />)
   const [rightSidebar, setRightSidebar] = useState(<Blank />)
 
 
-  const newUser = () => {
+  const addNewUser = () => {
 
-    axios.put('http://localhost:5001/new_users/BRENON')
+    const generateRandomString = function() {
+      return Math.random().toString(20).substring(2, 8)
+    }
+
+    axios.put(`http://localhost:5001/new_users/${generateRandomString()}`)
       .then(res => {
+        Cookies.set("cookie", res.data[0].id)
         console.log("PUT RES USER: ", res.data)
-        console.log("I am user", res.data)
-        setUser(res.data)
-
+        setNewUser(res.data)
+        setAuth(true)
+      })
+      .catch(err => {
+        console.log(err.message)
       })
 
   }
 
-  // const getUser = () => {
-  //   axios.get('http://localhost:5001/users/LLOYD')
-  //     .then(res => {
-  //       console.log("GET RES USER: ", res.data)
-  //       setUser(res.data)
-  //     })
-  // }
-  // console.log("APP USER: ", user)
 
   return (
     <Fragment>
@@ -66,8 +64,8 @@ function App() {
         <div className='main-view' >
 
           <Routes>
-            {!auth && (<Route path='/landing' element={<Landing authenticate={authenticate} addUser={newUser} />} />)}
-            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={user} />} />)}
+            {!auth && (<Route path='/landing' element={<Landing addNewUser={addNewUser} />} />)}
+            {auth && (<Route path='/' element={<GameTitle rightSidebar={rightSidebar} setRightSidebar={setRightSidebar} leftSidebar={leftSidebar} setLeftSidebar={setLeftSidebar} newUserData={newUser} />} />)}
             <Route path='*' element={<Navigate to={auth ? '/' : 'landing'} />} />
           </Routes>
 
