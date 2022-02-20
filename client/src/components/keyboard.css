@@ -2,29 +2,35 @@
   /* width: 510px;
   display: flex;
   flex-wrap: wrap; */
-  width: 510px;
+  width: 675px;
   display: flex;
   flex-wrap: wrap;
-  margin-left: 60px !important;
+  justify-content: center;
+ 
 }
 
+.tile-keyboard {
+  height: 100%;
+}
 .key-container button {
-  width: 43px;
-  height: 45px;
+  width: 59px;
+  height: 78px;
   border: none;
-  border-radius: 4px;
-  background-color: gray;
+  border-radius: 6px;
+  background-color: rgb(128, 131, 132);
   color: white;
   margin: 4px;
+  font-weight: bolder;
+  font-size: large;
 }
 
 .key-container button:nth-child(11) {
-  margin-left: 30px
+  
 }
 
 .key-container button:nth-child(20),
 .key-container button:nth-child(28) {
-  width: 65px;
+  width: 95px;
 }
 
 .key-container button:hover {

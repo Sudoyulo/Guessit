@@ -227,21 +227,21 @@ const GameTitle = (props) => {
         </div>
 
 
-        <div class="bouncing-text">
-          <div class="b">m</div>
-          <div class="o">i</div>
-          <div class="u">n</div>
-          <div class="n">i</div>
-          <div class="c">W</div>
-          <div class="e">O</div>
-          <div class="r">R</div>
-          <div class="d">D</div>
-          <div class="shadow"></div>
-          <div class="shadow-two"></div>
+        <div className="nav-bouncing-text">
+          <div className="nav-b">m</div>
+          <div className="nav-o">i</div>
+          <div className="nav-u">n</div>
+          <div className="nav-n">i</div>
+          <div className="nav-c">W</div>
+          <div className="nav-e">O</div>
+          <div className="nav-r">R</div>
+          <div className="nav-d">D</div>
+          <div className="nav-shadow"></div>
+          <div className="nav-shadow-two"></div>
         </div>
 
         <div className="right-icons">
-          <div className="game-info"> Game id: <br /> <div>#{game.id}</div> </div>
+          <div className="game-info"> Game: <br /> <div>#{game.id}</div> </div>
           <button onClick={() => { helpOnOff() }} >
             <img className="nav-icon" src={help} alt="help" />
           </button>
