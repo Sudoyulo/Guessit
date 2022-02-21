@@ -27,9 +27,9 @@
   font-size: 1em;
   font-weight: bolder;
   border: 1px solid white;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite; */
   border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
 }
@@ -46,25 +46,25 @@
   display: flex;
 
   height: 30vh;
-  border: 2px solid white;
-  border-radius: 10px;
+  /* border: 2px solid white;
+  border-radius: 10px; */
   padding: 10px;
 }
 
 .rules {
-  border: 2px solid white;
-  border-radius: 9px;
+  /* border: 2px solid white;
+  border-radius: 9px; */
   display: flex;
-  padding: 10px;
+  /* padding: 10px; */
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
 }
 
 .user-data {
-  border: 2px solid white;
-  border-radius: 10px;
-  display: flex;
+  /* border: 2px solid white; */
+  /* border-radius: 10px; */
+  /* display: flex; */
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -80,17 +80,17 @@
 }
 
 .each-avatar {
-   border-image: linear-gradient(var(--angle), #ee7752, #e73c7e, #23a6d5, #23d5ab) 1;
-  animation: 10s rotate linear infinite;
+   /* border-image: linear-gradient(var(--angle), #ee7752, #e73c7e, #23a6d5, #23d5ab) 1;
+  animation: 10s rotate linear infinite; */
   /* animation: gradient 15s ease infinite; */
 }
-
+/* 
 .avatar-initials {
   border-radius: 10px;
   border: 2px solid white;
   padding: 10px;
   width: 250px;
-}
+} */
 
 .avatar-container {
   display: flex;
@@ -132,6 +132,12 @@
   border: 1px solid white;
   border-radius: 7px;
   width:35px;
+}
+
+.user-stuff{
+  display: flex;
+  flex-direction: row;
+  align-items: flex-end;
 }
 
 
@@ -226,9 +232,41 @@
   font-size: 1em;
   font-weight: bolder;
   border: 1px solid white;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-color: rgb(18, 18, 19);
+  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
-  animation: gradient 15s ease infinite;
+  animation: gradient 15s ease infinite; */
   border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
+}
+
+@media only screen and (max-height: 800px) and (max-width: 1400px) {
+
+  .left-sidebar{
+    /* background-color: rgb(18, 18, 19); */
+    display: flex;
+    /* height: 90vh; */
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 22vw;
+    padding-top: 80px;
+  }
+  .social-left-sidebar{
+    /* background-color: rgb(18, 18, 19); */
+    display: flex;
+    /* height: 90vh; */
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 22vw;
+    padding-top: 25px;
+
+    
+  }
+  .add-a-friend {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
 }
