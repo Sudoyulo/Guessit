@@ -9,6 +9,7 @@ const Stats = (props) => {
   let calcTimes = [0, 0, 0, 0, 0, 0, 0]; // 1 to 6 
   let totalGames = user.length;
 
+  //calculates the turns completed in
   const calculateWinTimes = (userData) => {
     userData.forEach((game) => {
       calcTimes[game.turns_taken - 1]++;
@@ -20,9 +21,7 @@ const Stats = (props) => {
     calculateWinTimes(user);
   }, [])
 
-  // console.log("gc", gameCount)
 
-  // let totalWins = winTimes.reduce((sum, i) => sum + i, 0);
   let totalWinPercent = Math.round((completedGames.length / gameCount) * 100); //minimum 30 to fill bar
   let maxWin = Math.max(...winTimes) //highest to get percentage of max
   let winPercent = winTimes.map((x) => (x / maxWin * 100) + 15) //min 15 to show 0
