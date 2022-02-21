@@ -31,6 +31,7 @@ app.get("/users/:id", (req, res) => {
 
 //insert new user
 app.put("/new_users/:id", (req, res) => {
+  const { id } = req.params;
   newUser(id)
     .then(response => { res.status(200).send(response); })
     .catch(error => { res.status(500).send("Not created"); })
