@@ -68,8 +68,8 @@ button:hover {
 
 .nav-b, .nav-o, .nav-u, .nav-n, .nav-c, .nav-e, .nav-r, .nav-d {
   position: relative;
-  color: #538d4e;
-  text-shadow: 0 3px #b59f3a, 0 5px #b59f3a, 0 7px #b59f3a;
+  color: #ffffff;
+  text-shadow: 0 3px #538d4e, 0 5px #538d4e, 0 7px #538d4e;
 }
 
 /* .nav-b {

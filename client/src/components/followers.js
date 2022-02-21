@@ -135,9 +135,15 @@ const Followers = (props) => {
       <div className="side-title">
         SOCIAL
       </div>
+      <div className="user-stuff">
       <div className="user-data">
         <p><img className="avatar" src={myAvatar} alt="Avatar" />  </p>
         <p>{myInitials} </p>
+      </div>
+      <div className="initial-container" >
+          <p className="set-initials">Set your initials: &nbsp;</p>
+          <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
+        </div>
       </div>
       <div className="avatar-initials">
         <div className="avatar-container">
@@ -147,10 +153,7 @@ const Followers = (props) => {
           </div>
         </div>
         <br />
-        <div className="initial-container" >
-          <p className="set-initials">Set your initials: &nbsp;</p>
-          <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
-        </div>
+ 
       </div>
       <div className="following-list">
         {followers}

@@ -132,3 +132,16 @@
     height: 3.5em;
   }
 } */
+
+@media only screen and (max-height: 800px) and (max-width: 1400px) {
+  .tile-container .col {
+    width: 3em;
+    height: 3em;
+    margin: 3px;
+    border: 2px solid rgb(58, 58, 60);
+  }
+  
+  .tile-container {
+    margin-bottom: 5px;
+  }
+}
