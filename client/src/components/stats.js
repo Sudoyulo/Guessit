@@ -37,7 +37,7 @@ const Stats = (props) => {
         <div className="games-played">Games played: {totalGames}</div>
       </div>
 
-      <div>Win %
+      <div className="stats-box">Win %
         <div className="progress-bar" >
           <div className="win-percent" style={{ width: Math.max(totalWinPercent, 30) + "%" }} > {totalWinPercent}% </div>
         </div>

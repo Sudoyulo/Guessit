@@ -124,14 +124,14 @@ const Followers = (props) => {
       <div key={index} className="friend-info" >
         <img className="avatar" src={firstFriend.avatar_url} alt="friend avatar" />
         <p> {firstFriend.initials}#{firstFriend.user_id}</p>
-        {turnsWin ? <button className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
+        {turnsWin ? <button className="complete">Finished in {turnsWin}!</button> : <button className="not-complete">Not finished!!</button>}
       </div>
     )
   })
 
   return (
 
-    <div className="left-sidebar">
+    <div className="social-left-sidebar">
       <div className="side-title">
         SOCIAL
       </div>
@@ -156,7 +156,7 @@ const Followers = (props) => {
         {followers}
       </div>
       <div className="add-a-friend" >
-        <input className="add-input" placeholder="Enter follower id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input> &nbsp;
+        <input className="add-input" placeholder="Enter friend's id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input> &nbsp;
         <button className="add-button" onClick={() => { addFriend(friendInput) }}> Add friend </button>
       </div>
     </div >

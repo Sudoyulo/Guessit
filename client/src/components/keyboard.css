@@ -6,15 +6,18 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
+  margin-bottom: 10px;
  
 }
 
 .tile-keyboard {
-  /* height: 100%; */
+  height: 100%;
+  width: 900px;
   display: flex;
-    flex-direction: column;
-    align-items: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  
 }
 .key-container button {
   width: 59px;
@@ -28,9 +31,6 @@
   font-size: large;
 }
 
-.key-container button:nth-child(11) {
-  
-}
 
 .key-container button:nth-child(20),
 .key-container button:nth-child(28) {
@@ -44,3 +44,16 @@
 .key-container button:hover {
   background-color: lightgray;
 }
+
+/* @media only screen and (max-height: 720px) {
+
+  .key-container {
+   
+    width: 375px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin-bottom: 10px;
+   
+  }
+} */

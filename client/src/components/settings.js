@@ -114,7 +114,7 @@ const Settings = (props) => {
         {settingMessage}
         <p>&nbsp;</p>
       </div>
-      <p className="choose-game"><p>Load previous game</p><p>- or -</p><p>Create a new one!</p></p>
+      <div className="choose-game"><p>Load previous game</p><p>- or -</p><p>Create a new one!</p></div>
       <div className="setting-container">
         <select className="games-list" value={search} onChange={(e) => { setSearch(Number(e.target.value)) }}>
           {gameLinks}
