@@ -19,8 +19,8 @@
 .tile-container .col {
   background-color: rgb(18, 18, 19);
 
-  width: 3.5em;
-  height: 3.5em;
+  width: 3em;
+  height: 3em;
 
   border: 3px solid rgb(58, 58, 60);
   box-sizing: border-box;

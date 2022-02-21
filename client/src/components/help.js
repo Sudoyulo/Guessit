@@ -3,8 +3,6 @@ import './leftSidebar.css'
 import howTo from '../images/howTo.png'
 import examples from '../images/examples.png'
 
-
-
 const Help = () => {
 
   return (
@@ -18,9 +16,9 @@ const Help = () => {
           Each guess must be a valid five-letter word <br />
           Hit the 'ENTER' button to submit your guess!
         </div>
-        <img className="help" src={examples} alt="How to play"/>
+        <img className="help" src={examples} alt="How to play" />
         <div>
-       
+
         </div>
       </div>
     </div >

@@ -2,9 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import './replayContainer.css'
 
-
 const ReplayContainer = (props) => {
-
 
   const { solution, flipTiles, vsUgid } = props;
 
@@ -50,12 +48,13 @@ const ReplayContainer = (props) => {
     let msTime = []
     let zeroTime = 0;
     let splitGuess = []
-    let turnOfGuesses = [[" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "],
-    [" ", " ", " ", " ", " "]];
+    let turnOfGuesses = [
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "],
+      [" ", " ", " ", " ", " "]];
 
     time.forEach((record) => {
       const minute = Number(record.slice(0, 2)) * 60000
