@@ -192,7 +192,9 @@ const GameTitle = (props) => {
           <button onClick={() => { followerOnOff() }} >
             <img className="nav-icon" src={friendIcon} alt="follower" />
           </button>
-          <div className="game-info"> Your ID: <br /> <div>{newUserData[0] ? newUserData[0].user_id : ""}</div> </div>
+          <div className="game-info"> Your ID: <br />
+            <div>{newUserData[0] ? newUserData[0].user_id : ""}</div>
+          </div>
         </div>
 
 
@@ -206,13 +208,12 @@ const GameTitle = (props) => {
           <div className="nav-e">O</div>
           <div className="nav-r">R</div>
           <div className="nav-d">D</div>
-          <div className="nav-shadow"></div>
-          <div className="nav-shadow-two"></div>
-
         </div>
 
         <div className="right-icons">
-          <div className="game-info"> Game: <br /> <div>#{game.id}</div> </div>
+          <div className="game-info"> Game: <br />
+            <div>#{game.id}</div>
+          </div>
           <button onClick={() => { helpOnOff() }} >
             <img className="nav-icon" src={help} alt="help" />
           </button>

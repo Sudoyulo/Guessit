@@ -247,7 +247,7 @@ const GuessContainer = (props) => {
     }
 
     //handlers start here
-    if (key === "<<") {
+    if (key === "⌫") {
       handleDelete();
     } else if (key === "ENTER") {
       handleEnter();
@@ -259,20 +259,14 @@ const GuessContainer = (props) => {
 
   return (
     <div className="tile-keyboard" >
-      <div >
         <div className="message">
           {message}
           <p>&nbsp;</p>
         </div>
-        <div className="middles">
           <div className="tile-container">
             {guessRows}
           </div>
-        </div>
-
         <Keyboard onKeypress={handleKeypress} />
-
-      </div>
     </div >
   );
 

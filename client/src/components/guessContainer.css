@@ -102,7 +102,7 @@
   /* display: flex;
   justify-content: center;
   align-items: baseline; */
-  display: flex;
+  /* display: flex;
 
   justify-content :center;
 
@@ -110,5 +110,5 @@
   flex-direction: row;
   align-content: stretch;
   font-weight: 900 !important;
-  font-size: large;
+  font-size: large; */
 }

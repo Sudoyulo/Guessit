@@ -96,7 +96,7 @@ const Followers = (props) => {
 
   //this is a list of all avatars source code. Sets avatar when clicked
   const selectAvatar = allAvatars.map((avatar, index) => {
-    return (<button key={index} onClick={() => { setUserAvatar(user[0].user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
+    return (<button className='each-avatar' key={index} onClick={() => { setUserAvatar(user[0].user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
   })
 
   // Change initials but only to a maximum character count of 3
@@ -133,7 +133,7 @@ const Followers = (props) => {
 
     <div className="left-sidebar">
       <div className="side-title">
-        Social
+        SOCIAL
       </div>
       <div className="user-data">
         <p><img className="avatar" src={myAvatar} alt="Avatar" />  </p>
@@ -141,14 +141,14 @@ const Followers = (props) => {
       </div>
       <div className="avatar-initials">
         <div className="avatar-container">
-          Choose an avatar:
+          <p className="choose">Choose your avatar:</p>
           <div className="avatar-list">
             {selectAvatar}
           </div>
         </div>
         <br />
         <div className="initial-container" >
-          Set Initials: &nbsp;
+          <p className="set-initials">Set your initials: &nbsp;</p>
           <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
         </div>
       </div>

@@ -5,14 +5,16 @@
   width: 675px;
   display: flex;
   flex-wrap: wrap;
-
   justify-content: center;
 
  
 }
 
 .tile-keyboard {
-  height: 100%;
+  /* height: 100%; */
+  display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 .key-container button {
   width: 59px;
@@ -33,6 +35,10 @@
 .key-container button:nth-child(20),
 .key-container button:nth-child(28) {
   width: 95px;
+}
+
+.key-container button:nth-child(28) {
+  font-size: x-large;
 }
 
 .key-container button:hover {
