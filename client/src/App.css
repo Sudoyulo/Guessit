@@ -33,8 +33,8 @@ body {
   color: white;
   position: relative;
   font-family: Helvetica;
-  margin: none !important;
-  margin-top: none;
+  margin: 0;
+ 
 }
 
 .main-view{
@@ -59,3 +59,7 @@ body {
   justify-content: center
 }
 
+@media only screen and (min-width: 1024px) {
+
+  
+}

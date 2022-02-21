@@ -2,7 +2,7 @@
 
 .tile-container {
   background-color: rgb(18, 18, 19);
-  width: 330px;
+  max-width: 330px;
   margin-bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -19,8 +19,11 @@
 .tile-container .col {
   background-color: rgb(18, 18, 19);
 
-  width: 3em;
-  height: 3em;
+
+  width: 4.5em;
+  height: 4.5em;
+
+
 
   border: 3px solid rgb(58, 58, 60);
   box-sizing: border-box;
@@ -102,7 +105,7 @@
   /* display: flex;
   justify-content: center;
   align-items: baseline; */
-  display: flex;
+  /* display: flex;
 
   justify-content :center;
 
@@ -110,5 +113,22 @@
   flex-direction: row;
   align-content: stretch;
   font-weight: 900 !important;
-  font-size: large;
+  font-size: large; */
 }
+/* 
+@media only screen and (max-height: 720px) {
+  .tile-container {
+    background-color: rgb(18, 18, 19);
+    width: 130px;
+    margin-bottom: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-weight: 900;
+  }
+  .tile-container .col {
+    width: 3.5em;
+    height: 3.5em;
+  }
+} */

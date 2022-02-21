@@ -6,14 +6,15 @@
 }
 
 .right-sidebar{
-  width: 22vw;
-  height: 90vh;
   display: flex;
-  align-items: center;
+  height: 90vh;
   flex-direction: column;
-  justify-content: center;
-  padding-top: 70px
+  justify-content: flex-start;
+  align-items: center;
+  width: 22vw;
+  padding-top: 80px;
 }
+
 
 .stat-title {
   padding: 10px;
@@ -23,7 +24,7 @@
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  border-radius: 10px;
+  border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
 }
 
@@ -81,7 +82,7 @@
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 400%;
   animation: gradient 15s ease infinite;
-  border-radius: 10px;
+  border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
   margin-bottom: 100px;
 }
@@ -93,7 +94,7 @@
 
 .play-button {
   margin-top: 20px;
-  font-weight: 700;
+  /* font-weight: 700;
   background-color: #538d4e;
   border: none;
   border-radius: 7px;
@@ -103,11 +104,23 @@
   width: 10vw;
   font-size: larger;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900;
+  font-weight: 900; */
+
+  padding: 10px;
+  font-size: 1em;
+  font-weight: bolder;
+  border: 1px solid white;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  border-radius: 7px;
+  box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
+  color: white;
 }
 
 .create-button {
   margin-top: 20px;
+  /* margin-top: 20px;
   font-weight: 700;
   background-color: #538d4e;
   border: none;
@@ -118,13 +131,24 @@
   width: 10vw;
   font-size: larger;
   font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900;
+  font-weight: 900; */
+
+  padding: 10px;
+  font-size: 1em;
+  font-weight: bolder;
+  border: 1px solid white;
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  border-radius: 7px;
+  box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
+  color: white;
 }
 
 .games-list {
   font-weight: 700;
-  background-color: #538d4e;
-  border: none;
+  background-color: rgb(18, 18, 19);
+  border: 1px solid white;
   border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
   color: white;
@@ -132,5 +156,23 @@
   width: 10vw;
   /* font-size: larger; */
   font-family: Arial, Helvetica, sans-serif;
+  padding-left: 3px;
+}
+
+.choose-game {
+  
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 10px;
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.stats-box {
+  border: 2px solid white;
+  border-radius: 10px;
+  padding: 30px;
 
 }

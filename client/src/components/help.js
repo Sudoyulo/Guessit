@@ -9,12 +9,11 @@ const Help = () => {
 
     <div className="left-sidebar">
       <div className="side-title">
-        Help
+        HOW TO PLAY
       </div>
       <div className="help-container" >
-        <div>
-          Each guess must be a valid five-letter word <br />
-          Hit the 'ENTER' button to submit your guess!
+        <div className="rules">
+        ⚠️ Must guess a valid word ⚠️ 
         </div>
         <img className="help" src={examples} alt="How to play" />
         <div>

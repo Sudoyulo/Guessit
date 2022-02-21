@@ -96,7 +96,7 @@ const Followers = (props) => {
 
   //this is a list of all avatars source code. Sets avatar when clicked
   const selectAvatar = allAvatars.map((avatar, index) => {
-    return (<button key={index} onClick={() => { setUserAvatar(user[0].user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
+    return (<button className='each-avatar' key={index} onClick={() => { setUserAvatar(user[0].user_id, index, avatar) }}><img className="avatar" alt="avatar-icon" src={avatar} /></button>)
   })
 
   // Change initials but only to a maximum character count of 3
@@ -124,16 +124,16 @@ const Followers = (props) => {
       <div key={index} className="friend-info" >
         <img className="avatar" src={firstFriend.avatar_url} alt="friend avatar" />
         <p> {firstFriend.initials}#{firstFriend.user_id}</p>
-        {turnsWin ? <button className="complete">Completed in {turnsWin}</button> : <button className="complete">Not yet complete</button>}
+        {turnsWin ? <button className="complete">Finished in {turnsWin}!</button> : <button className="not-complete">Not finished!!</button>}
       </div>
     )
   })
 
   return (
 
-    <div className="left-sidebar">
+    <div className="social-left-sidebar">
       <div className="side-title">
-        Social
+        SOCIAL
       </div>
       <div className="user-data">
         <p><img className="avatar" src={myAvatar} alt="Avatar" />  </p>
@@ -141,14 +141,14 @@ const Followers = (props) => {
       </div>
       <div className="avatar-initials">
         <div className="avatar-container">
-          Choose an avatar:
+          <p className="choose">Choose your avatar:</p>
           <div className="avatar-list">
             {selectAvatar}
           </div>
         </div>
         <br />
         <div className="initial-container" >
-          Set Initials: &nbsp;
+          <p className="set-initials">Set your initials: &nbsp;</p>
           <input className="initials-box" placeholder="LHL" value={myInitials} onChange={(e) => { changeInitials(e.target.value) }}></input>
         </div>
       </div>
@@ -156,7 +156,7 @@ const Followers = (props) => {
         {followers}
       </div>
       <div className="add-a-friend" >
-        <input className="add-input" placeholder="Enter follower id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input> &nbsp;
+        <input className="add-input" placeholder="Enter friend's id:" value={friendInput} onChange={(e) => { setFriendInput(e.target.value) }} ></input> &nbsp;
         <button className="add-button" onClick={() => { addFriend(friendInput) }}> Add friend </button>
       </div>
     </div >
