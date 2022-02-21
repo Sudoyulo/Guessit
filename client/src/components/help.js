@@ -3,8 +3,6 @@ import './leftSidebar.css'
 import howTo from '../images/howTo.png'
 import examples from '../images/examples.png'
 
-
-
 const Help = () => {
 
   return (
@@ -17,9 +15,9 @@ const Help = () => {
         <div className="rules">
         ⚠️ Must guess a valid word ⚠️ 
         </div>
-        <img className="help" src={examples} alt="How to play"/>
+        <img className="help" src={examples} alt="How to play" />
         <div>
-       
+
         </div>
       </div>
     </div >

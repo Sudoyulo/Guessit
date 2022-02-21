@@ -3,19 +3,15 @@ import { useNavigate } from 'react-router-dom'
 import howto2 from '../images/howto2.png'
 import './Landing.css'
 
-
-export default function Landing({addNewUser}) {
-
+export default function Landing({ addNewUser }) {
 
   const navigate = useNavigate();
   const onClick = () => {
-  
+
     addNewUser();
     navigate('/');
   }
-  // useEffect(()=>{
-  //   navigate('/')
-  // }, [navigate])
+
   return (
     <div className='landing'>
       <div className="bouncing-text">

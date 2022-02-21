@@ -10,20 +10,16 @@ const Keyboard = (props) => {
   ])
 
   const allKeys = keys.map((key) => {
-   
     return (
       <button id={key} key={key} className={"key-" + key} onClick={
         () => props.onKeypress(key)} > {key} </ button >
     );
   })
 
-
   return (
-
     <div className="key-container">
       {allKeys}
     </div>
-
   );
 
 }

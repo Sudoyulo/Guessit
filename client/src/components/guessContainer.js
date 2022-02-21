@@ -15,7 +15,6 @@ const GuessContainer = (props) => {
     return (
       <div key={row + rowIndex} className={"row row-" + rowIndex}> {
         row.map((col, colIndex) => {
-          // let color = "black";
           return (
             <div id={rowIndex.toString() + colIndex.toString()} key={col + colIndex} className={"col col-" + colIndex}>{col}</div>
           )
@@ -29,6 +28,7 @@ const GuessContainer = (props) => {
     button.classList.add(colour)
   }
 
+  //changes css of tiles when a valid word is entered
   const flipTile = () => {
 
     let userGuess = board[pos.row]
@@ -54,7 +54,6 @@ const GuessContainer = (props) => {
         }
       })
 
-      console.log("solution: ", solution)
       if (userGuess.join('') === solution) {
         setTimeout(() => {
           tile.classList.add('green-overlay')
@@ -73,85 +72,54 @@ const GuessContainer = (props) => {
     })
   };
 
+  //grabs user game id. This is the record with wins and turns taken
   const getUserGame = (user, gid) => {
-    // console.log("getting game", user, gid) //causses memory leak
-    console.log("USER++++++: ", user)
     if (user[0] && gid) {
-      // console.log("fetching", user[0].user_id, gameId)
-      axios('http://localhost:5001/user_game/' + user[0].user_id + "/" + gid)
-        .then(res => {
-          // console.log("usergame", res.data.rows)
-          setUserGame(res.data.rows)
-        })
+      axios(`http://localhost:5001/user_game/${user[0].user_id}/${gid}`)
+        .then(res => { setUserGame(res.data.rows) })
     }
   }
 
+  //creates an entry in the user_game table and in the guesses table
   const makeUserGame = (user, gid, guess) => {
-    // console.log("making game", user, gid, guess)
-
     let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
-    console.log("date", date)
-
     if (user[0] && gid && guess) {
-      // console.log("making", user[0].user_id, gameId, guess)
-      axios.put('http://localhost:5001/new_user_game/' + user[0].user_id + "/" + gid + "/" + guess + "/" + date)
-        .then(res => {
-          console.log("res.data.rows: ", res.data.rows)
-          setUserGame(res.data.rows)
-        })
-        .catch(error => {
-          console.log("NEW USERGAME ERROR HERE", error)
-        })
+      axios.put(`http://localhost:5001/new_user_game/${user[0].user_id}/${gid}/${guess}/${date}`)
+        .then(res => { setUserGame(res.data.rows) })
+        .catch(error => { console.log("NEW USERGAME ERROR", error) })
     }
   }
 
+  //special case where solved date is added to the same at the same time it is created
   const winOneTurn = (user, gid, guess) => {
-    // console.log("making one turn win game", user, gid, guess)
-
     if (user[0] && gid && guess) {
-      // console.log("won in one turn", user[0].user_id, gameId, guess)
-      axios.put('http://localhost:5001/win_one_turn/' + user[0].user_id + "/" + gid + "/" + guess)
-        .then(res => {
-          // console.log("make", res.data.rows)
-          setUserGame(res.data.rows)
-        })
+      axios.put(`http://localhost:5001/win_one_turn/${user[0].user_id}/${gid}/${guess}`)
+        .then(res => { setUserGame(res.data.rows) })
     }
   }
 
+  //save guess into guesses table if user exists
   const saveGuess = (guess) => {
-    // console.log("guess, row num, ugid", guess, userGame[0].id)
-
     let date = new Date().toLocaleTimeString([], { minute: "2-digit", second: "2-digit", })
-    console.log("date", date)
-
-    if (userGame[0]) {
-      axios.put('http://localhost:5001/guesses/' + userGame[0].id + "/" + guess + "/" + date)
-        .then(res => {
-          // console.log("inserted new guess")
-        })
-    }
+    if (userGame[0]) { axios.put(`http://localhost:5001/guesses/${userGame[0].id}/${guess}/${date}`) }
   };
 
+  //enter date won into the table
   const saveWin = (turns) => {
-    // console.log("saving won game", turns);
-
-    axios.put('http://localhost:5001/win_user_game/' + turns + "/" + userGame[0].id)
-      .then(res => {
-        // console.log("inserted new win")
-      })
+    axios.put(`http://localhost:5001/win_user_game/${turns}/${userGame[0].id}`)
   };
 
   useEffect(() => {
     getUserGame(user, gameId);
   }, [pos])
 
+  //cases for when each key is pressed. Enter, delete and backspace
   const handleKeypress = (key) => {
-    // console.log("KEY: ", key)
     const copyBoard = [...board];
 
+    //on delete, remove one solumn unless you are at the first column
     const handleDelete = () => {
       if (pos.col > 0) {
-        // console.log("backspace")
         setPos({ ...pos, col: pos.col - 1 })
         copyBoard[pos.row][pos.col - 1] = " "
         setBoard(copyBoard)
@@ -161,66 +129,64 @@ const GuessContainer = (props) => {
       }
     }
 
+    //on enter, check word validity and save to the database
     const handleEnter = () => {
-      //saveGuess(userGuess, pos.row + 1)
 
+      //if the word contains five letters
       if (pos.col === 5) {
         let userGuess = board[pos.row].join('')
 
+        //if the word is in the word database
         if (checkWord(userGuess)) {
           flipTile()
 
-          if (!completedGames.includes(gameId)) { //not completed game
+          //if the user has not already completed the game
+          if (!completedGames.includes(gameId)) {
 
-            if (userGame.length === 0) { // user_game doesnt exist
-              // console.log("create new user_game and guesses", user[0].user_id, gameId)
-              // console.log("new first guess")
+            //if the game is not a completed game
+            if (userGame.length === 0) {
 
               setPos({ ...pos, row: pos.row + 1, col: 0 })
 
-              if (solution === userGuess) {
-                //correct on first guess still buggy
+              if (solution === userGuess) { //correct on first guess
                 winOneTurn(user, gameId, userGuess)
-                setMessage("Perfect")
-                setTimeout(() => { setMessage("") }, 5000)
 
-                //setTimeout(() => { setMessage("") }, 2000)
-              } else { //not one turn win
+              } else { //not one turn win, make a table entry
                 makeUserGame(user, gameId, userGuess)
                 getUserGame(user, gameId)
                 saveGuess(userGuess)
+
               }
 
             } else { //continuing a game
-              // console.log("continuing")
               if (solution === userGuess) {
-                //correct
-                setMessage("Perfect")
-                setTimeout(() => { setMessage("") }, 5000)
+
                 saveGuess(userGuess)
                 saveWin(pos.row + 1)
 
-              } else { // move on
+              } else { // 2nd+ round and guess is incorrect
+
                 setPos({ ...pos, row: pos.row + 1, col: 0 })
+
                 if (pos.row < 6) {
-                  // console.log("more guesses left ugid row", userGame, pos.row + 1)
-                  //move on
-                  setMessage(userGuess + " is incorrect. Try again.") // 6-row tries left
+
                   saveGuess(userGuess)
-                  // console.log("saved guess to existing guesses row")
-                  //update guesses
+                  setMessage(userGuess + " is incorrect. Try again.")
                   setTimeout(() => { setMessage("") }, 2000)
+
                 } else {
-                  setMessage("Game over 1")
-                  setTimeout(() => { setMessage("") }, 5000)
-                } //end row < 5
+
+                  // setMessage("Game over")
+                  // setTimeout(() => { setMessage("") }, 5000)
+
+                }
               }
             }
-          } else {
+          } else { //game has been completed before
             setMessage("You have completed this game already")
             setTimeout(() => { setMessage("") }, 2000)
           }
-        } else {
+        } else {//not a valid word
           setMessage("Not a word in our dictionary")
           setTimeout(() => { setMessage("") }, 2000)
         }
@@ -230,12 +196,11 @@ const GuessContainer = (props) => {
       }
     }
 
+    //user clicks a letter
     const addLetter = (letter) => {
-      // console.log("pos", pos)
-      //pointer is in bounds < 5 meaning 0-4 is not filled up
       if (pos.row > 5) {
-        setMessage("Game over 2")
-        setTimeout(() => { setMessage("") }, 5000)
+        // setMessage("Game over 2")
+        // setTimeout(() => { setMessage("") }, 5000)
       } else if (pos.col < 5) {
         copyBoard[pos.row][pos.col] = letter
         setBoard(copyBoard)
@@ -246,8 +211,10 @@ const GuessContainer = (props) => {
       }
     }
 
-    //handlers start here
+
+    //handlers start here for key, backspace and enter
     if (key === "⌫") {
+
       handleDelete();
     } else if (key === "ENTER") {
       handleEnter();
@@ -266,7 +233,9 @@ const GuessContainer = (props) => {
           <div className="tile-container">
             {guessRows}
           </div>
+
         <Keyboard onKeypress={handleKeypress} />
+
     </div >
   );
 
