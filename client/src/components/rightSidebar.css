@@ -1,6 +1,4 @@
-
 .blank-sidebar{
-  
   width: 22vw;
   height: 100%;
 }
@@ -21,9 +19,6 @@
   font-size: 1em;
   font-weight: bolder;
   border: 1px solid white;
-  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite; */
   border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
 }
@@ -79,9 +74,6 @@
   font-size: 1em;
   font-weight: bolder;
   border: 1px solid white;
-  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite; */
   border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
   margin-bottom: 100px;
@@ -94,18 +86,6 @@
 
 .play-button {
   margin-top: 20px;
-  /* font-weight: 700;
-  background-color: #538d4e;
-  border: none;
-  border-radius: 7px;
-  box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
-  color: white;
-  height: 3em;
-  width: 10vw;
-  font-size: larger;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900; */
-
   padding: 10px;
   font-size: 1em;
   font-weight: bolder;
@@ -120,19 +100,6 @@
 
 .create-button {
   margin-top: 20px;
-  /* margin-top: 20px;
-  font-weight: 700;
-  background-color: #538d4e;
-  border: none;
-  border-radius: 7px;
-  box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
-  color: white;
-  height: 3em;
-  width: 10vw;
-  font-size: larger;
-  font-family: Arial, Helvetica, sans-serif;
-  font-weight: 900; */
-
   padding: 10px;
   font-size: 1em;
   font-weight: bolder;
@@ -154,27 +121,19 @@
   color: white;
   height: 3em;
   width: 10vw;
-  /* font-size: larger; */
   font-family: Arial, Helvetica, sans-serif;
   padding-left: 3px;
 }
 
 .choose-game {
-  
-  /* border: 2px solid white;
-  border-radius: 10px; */
   padding: 10px;
-  /* font-weight: bold; */
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
 .stats-box {
-  /* border: 2px solid white;
-  border-radius: 10px; */
   padding: 30px;
-
 }
 
 @media only screen and (max-height: 800px) and (max-width: 1400px) {
@@ -188,5 +147,18 @@
     width: 22vw;
     padding-top: 80px;
   }
-  
+
+  .games-list {
+    font-weight: 700;
+    background-color: rgb(18, 18, 19);
+    border: 1px solid white;
+    border-radius: 7px;
+    box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
+    color: white;
+    height: 3em;
+    width: 13vw;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-left: 3px;
+  }
+
 }

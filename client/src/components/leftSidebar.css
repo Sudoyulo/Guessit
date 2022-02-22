@@ -1,7 +1,4 @@
-
-
 .left-sidebar{
-  /* background-color: rgb(18, 18, 19); */
   display: flex;
   height: 90vh;
   flex-direction: column;
@@ -12,7 +9,6 @@
 }
 
 .social-left-sidebar{
-  /* background-color: rgb(18, 18, 19); */
   display: flex;
   height: 90vh;
   flex-direction: column;
@@ -27,9 +23,6 @@
   font-size: 1em;
   font-weight: bolder;
   border: 1px solid white;
-  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite; */
   border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
 }
@@ -44,27 +37,18 @@
 
 .help {
   display: flex;
-
   height: 30vh;
-  /* border: 2px solid white;
-  border-radius: 10px; */
   padding: 10px;
 }
 
 .rules {
-  /* border: 2px solid white;
-  border-radius: 9px; */
   display: flex;
-  /* padding: 10px; */
   flex-direction: column;
   align-items: center;
   margin-bottom: 30px;
 }
 
 .user-data {
-  /* border: 2px solid white; */
-  /* border-radius: 10px; */
-  /* display: flex; */
   justify-content: center;
   align-items: center;
   flex-direction: column;
@@ -73,24 +57,11 @@
 }
 
 .avatar {
-  width: 20px;
+  width: 30px;
   height: auto;
-  margin: 5px;
+  margin: 2px;
    
 }
-
-.each-avatar {
-   /* border-image: linear-gradient(var(--angle), #ee7752, #e73c7e, #23a6d5, #23d5ab) 1;
-  animation: 10s rotate linear infinite; */
-  /* animation: gradient 15s ease infinite; */
-}
-/* 
-.avatar-initials {
-  border-radius: 10px;
-  border: 2px solid white;
-  padding: 10px;
-  width: 250px;
-} */
 
 .avatar-container {
   display: flex;
@@ -110,11 +81,6 @@
 
 .choose {
   margin-bottom: 10px;
-  /* border-radius: 6px;
-  border: 2px solid white;
-  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite; */
 }
 
 .initial-container {
@@ -124,11 +90,8 @@
 }
 .initials-box {
   margin-top: 5px;
-  background-color: rgb(18, 18, 19);
-  color: white;
   padding: 6px;
   font-size: 1em;
-  /* font-weight: bolder; */
   border: 1px solid white;
   border-radius: 7px;
   width:35px;
@@ -145,21 +108,12 @@
   background: rgba(128, 128, 128, 0);
 }
 
-.left-sidebar .avatar-list button:hover{
-  background-color: white;
-}
-
 .following-list {
   border: 2px solid;
   border-radius: 10px;
-  /* border-image: linear-gradient(var(--angle), #ee7752, #e73c7e, #23a6d5, #23d5ab) 1; */
-  /* animation: 10s rotate linear infinite; */
-  /* animation: gradient 15s ease infinite; */
-  /* background-size: 400% 400%; */
-  /* background-color: gray; */
   padding: 10px;
   height: 200px;
-  width: 250px;
+  width: 225px;
   display: inline-block;
   white-space: nowrap;
   overflow: hidden;
@@ -188,7 +142,6 @@
   color: white;
   padding: 6px;
   font-size: 1em;
-  /* font-weight: bolder; */
   border: 1px solid white;
   border-radius: 7px;
 }
@@ -199,28 +152,21 @@
   color: white;
   padding: 6px;
   font-size: 1em;
-  /* font-weight: bolder; */
   border: 1px solid white;
   border-radius: 7px;
 }
 
 .add-a-friend{
-  /* background-color: rgb(18, 18, 19); */
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* width: 180px; */
 }
 
 .add-input {
   
   width: 100px; 
   margin-top: 5px;
-  background-color: rgb(18, 18, 19);
-  color: white;
   padding: 6px;
-  /* font-size: 1em; */
-  /* font-weight: bolder; */
   border: 1px solid white;
   border-radius: 7px;
   
@@ -228,14 +174,10 @@
 
 .add-button {
   color: white;
-  padding: 10px;
-  font-size: 1em;
+  padding: 6px;
   font-weight: bolder;
   border: 1px solid white;
   background-color: rgb(18, 18, 19);
-  /* background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-  background-size: 400% 400%;
-  animation: gradient 15s ease infinite; */
   border-radius: 7px;
   box-shadow: 3px 6px rgba(48, 47, 47, 0.3);
 }
@@ -243,27 +185,23 @@
 @media only screen and (max-height: 800px) and (max-width: 1400px) {
 
   .left-sidebar{
-    /* background-color: rgb(18, 18, 19); */
     display: flex;
-    /* height: 90vh; */
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     width: 22vw;
     padding-top: 80px;
   }
+  
   .social-left-sidebar{
-    /* background-color: rgb(18, 18, 19); */
     display: flex;
-    /* height: 90vh; */
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     width: 22vw;
     padding-top: 25px;
-
-    
   }
+
   .add-a-friend {
     display: flex;
     flex-direction: row;

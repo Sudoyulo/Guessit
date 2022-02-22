@@ -124,7 +124,7 @@ const GuessContainer = (props) => {
         copyBoard[pos.row][pos.col - 1] = " "
         setBoard(copyBoard)
       } else {
-        setMessage("cant go back any further")
+        setMessage("Can't go back any further")
         setTimeout(() => { setMessage("") }, 2000)
       }
     }
@@ -171,7 +171,7 @@ const GuessContainer = (props) => {
                 if (pos.row < 6) {
 
                   saveGuess(userGuess)
-                  setMessage(userGuess + " is incorrect. Try again.")
+                  setMessage(userGuess + " is incorrect!")
                   setTimeout(() => { setMessage("") }, 2000)
 
                 } else {
@@ -191,7 +191,7 @@ const GuessContainer = (props) => {
           setTimeout(() => { setMessage("") }, 2000)
         }
       } else { //reject the enter button
-        setMessage("need a 5 letter word")
+        setMessage("Need a 5 letter word")
         setTimeout(() => { setMessage("") }, 2000)
       }
     }
@@ -206,7 +206,7 @@ const GuessContainer = (props) => {
         setBoard(copyBoard)
         setPos({ ...pos, col: pos.col + 1 })
       } else {
-        setMessage('no space to enter letter ' + letter)
+        setMessage('No space to enter letter ' + letter)
         setTimeout(() => { setMessage("") }, 2000)
       }
     }
