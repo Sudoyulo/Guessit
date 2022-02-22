@@ -200,14 +200,14 @@ const GameTitle = (props) => {
 
 
         <div className="nav-bouncing-text">
-          <div className="nav-b">m</div>
-          <div className="nav-o">i</div>
-          <div className="nav-u">n</div>
-          <div className="nav-n">i</div>
-          <div className="nav-c">W</div>
-          <div className="nav-e">O</div>
-          <div className="nav-r">R</div>
-          <div className="nav-d">D</div>
+          <div className="nav-b">G</div>
+          <div className="nav-o">u</div>
+          <div className="nav-u">e</div>
+          <div className="nav-n">s</div>
+          <div className="nav-c">s</div>
+          <div className="nav-e">i</div>
+          <div className="nav-r">t</div>
+          {/* <div className="nav-d">D</div> */}
         </div>
 
         <div className="right-icons">

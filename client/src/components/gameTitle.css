@@ -1,5 +1,4 @@
 .gameNav {
-  
   display: flex;
   background-color: rgb(18, 18, 19);
   justify-content: space-between;
@@ -72,45 +71,6 @@ button:hover {
   text-shadow: 0 3px #538d4e, 0 5px #538d4e, 0 7px #538d4e;
 }
 
-/* .nav-b {
-  animation: bounce 1s ease infinite;
-  -webkit-animation: bounce 1s ease infinite;
-}
-
-.nav-o {
-  animation: bounce 1s ease infinite .1s;
-  -webkit-animation: bounce 1s ease infinite .1s;
-}
-
-.nav-u {
-  animation: bounce 1s ease infinite .2s;
-  -webkit-animation: bounce 1s ease infinite .2s;
-}
-
-.nav-n {
-  animation: bounce 1s ease infinite .3s;
-  -webkit-animation: bounce 1s ease infinite .3s;
-}
-
-.nav-c {
-  animation: bounce 1s ease infinite .4s;
-  -webkit-animation: bounce 1s ease infinite .4s;
-}
-
-.nav-e {
-  animation: bounce 1s ease infinite .5s;
- -webkit-animation: bounce 1s ease infinite .5s;
-}
-
-.nav-r {
-  animation: bounce 1s ease infinite .5s;
- -webkit-animation: bounce 1s ease infinite .6s;
-}
-.nav-d {
-  animation: bounce 1s ease infinite .5s;
- -webkit-animation: bounce 1s ease infinite .7s;
-} */
-
  @keyframes bounce {
         0%   { transform: scale(1,1) translateY(0); }
         10%  { transform: scale(1.1,.9) translateY(0); }
@@ -132,39 +92,6 @@ button:hover {
 }
 
 
-/* .nav-bouncing-text:before, .nav-bouncing-text:after {
-  content:"";
-  position: absolute;
-  background-color: rgba(0,0,0,0.4);
-  width: 50px;
-  height:5px;
-  border-radius:50%;
-  top:82px;
-  z-index:-1;
-} */
-
-/* .nav-shadow, .nav-shadow-two {
-  position: absolute;
-  top:82px;
-  z-index: -1;
-} */
-
-/* .nav-shadow:before, .nav-shadow:after, .nav-shadow-two:before, .nav-shadow-two:after {
-  content:"";
-  position: absolute;
-  background-color: rgba(0,0,0,0.4);
-  width: 50px;
-  height:5px;
-  border-radius:50%;
-  top:0;  
-} */
-
-/* .nav-bouncing-text:before {
-  left:0;
-  animation: scale 1s linear infinite;
-  -webkit-animation: scale 1s linear infinite;
-} */
-
 @keyframes scale {
   0% {transform: scaleX(1);}
   25% {transform: scaleX(0.4);}
@@ -180,33 +107,3 @@ button:hover {
   75% {transform: scaleX(0.9);}
   100% {transform: scaleX(1);}
 }
-
-/* .nav-bouncing-text:after {
-  left: 57px;
-  animation: scale 1s linear infinite .1s;
-  -webkit-animation: scale 1s linear infinite .1s;
-} */
-
-/* .nav-shadow:before {
-  left: 116px;
-  animation: scale 1s linear infinite .2s;
-  -webkit-animation: scale 1s linear infinite .2s;
-} */
-
-/* .nav-shadow:after {
-  left:175px;
-  animation: scale 1s linear infinite .3s;
-  -webkit-animation: scale 1s linear infinite .3s;
-} */
-
-/* .nav-shadow-two:before {
-  left:232px;
-  animation: scale 1s linear infinite .4s;
-  -webkit-animation: scale 1s linear infinite .4s;
-}
-
-.nav-shadow-two:after {
-  left: 285px;
-  animation: scale 1s linear infinite .5s;
-  -webkit-animation: scale 1s linear infinite .5s;
-} */

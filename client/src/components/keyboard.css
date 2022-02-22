@@ -1,13 +1,9 @@
 .key-container {
-  /* width: 510px;
-  display: flex;
-  flex-wrap: wrap; */
   width: 675px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   margin-bottom: 10px;
- 
 }
 
 .tile-keyboard {
@@ -46,7 +42,7 @@
   background-color: lightgray;
 }
 
-@media only screen and (max-height: 800px) and (max-width: 1400px) {
+@media only screen and (max-height: 800px) and (max-width: 1500px) {
   .key-container button {
     width: 50px;
     height: 65px;
@@ -79,7 +75,4 @@
     width: 55vw;
   }
 
-  
-
-  
 }

@@ -15,14 +15,14 @@ export default function Landing({ addNewUser }) {
   return (
     <div className='landing'>
       <div className="bouncing-text">
-        <div className="b">m</div>
-        <div className="o">i</div>
-        <div className="u">n</div>
-        <div className="n">i</div>
-        <div className="c">W</div>
-        <div className="e">O</div>
-        <div className="r">R</div>
-        <div className="d">D</div>
+        <div className="b">G</div>
+        <div className="o">u</div>
+        <div className="u">e</div>
+        <div className="n">s</div>
+        <div className="c">s</div>
+        <div className="e">i</div>
+        <div className="r">t</div>
+        {/* <div className="d">D</div> */}
         <div className="shadow"></div>
         <div className="shadow-two"></div>
       </div>

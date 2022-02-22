@@ -18,27 +18,24 @@
 
 .tile-container .col {
   background-color: rgb(18, 18, 19);
-
-
-  width: 4.5em;
-  height: 4.5em;
-
-
-
+  width: 81px;
+  height: 81px;
   border: 3px solid rgb(58, 58, 60);
   box-sizing: border-box;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 4px;
-  font-size: large;
+  font-size: xx-large;
   font-weight: bolder;
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: Helvetica;
 }
 
 .message {
   display: flex;
   justify-content: center;
+  font-weight: bold;
+  margin-top: 20px;
 }
 
 @keyframes bounce {
@@ -74,8 +71,8 @@
 .grey-overlay {
   background-color: #3a3a3c !important;
   border: none !important;
-  /* animation: 0.5s linear flipping; */
 }
+
 .key-grey-overlay {
   background-color: #3a3a3c !important;
   border: none !important;
@@ -84,8 +81,8 @@
 .yellow-overlay {
   background-color: #b59f3a !important;
   border: none !important;
-  /* animation: 0.5s linear flipping; */
 }
+
 .key-yellow-overlay {
   background-color: #b59f3a !important;
   border: none !important;
@@ -94,49 +91,18 @@
 .green-overlay {
   background-color: #538d4e !important;
   border: none !important;
-  /* animation: 0.5s linear flipping; */
 }
+
 .key-green-overlay {
   background-color: #538d4e !important;
   border: none !important;
 }
 
-.middles {
-  /* display: flex;
-  justify-content: center;
-  align-items: baseline; */
-  /* display: flex;
-
-  justify-content :center;
-
-  align-items: stretch;
-  flex-direction: row;
-  align-content: stretch;
-  font-weight: 900 !important;
-  font-size: large; */
-}
-/* 
-@media only screen and (max-height: 720px) {
-  .tile-container {
-    background-color: rgb(18, 18, 19);
-    width: 130px;
-    margin-bottom: 30px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: 900;
-  }
-  .tile-container .col {
-    width: 3.5em;
-    height: 3.5em;
-  }
-} */
-
-@media only screen and (max-height: 800px) and (max-width: 1400px) {
+@media only screen and (max-height: 800px) and (max-width: 1500px) {
   .tile-container .col {
     width: 3em;
     height: 3em;
+    font-size: large;
     margin: 3px;
     border: 2px solid rgb(58, 58, 60);
   }
