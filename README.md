@@ -1,10 +1,10 @@
 # Guessit
 Lighthouse Labs Final Project
-```
+`
 Guessit is a clone of Wordle, a word guessing game. The user has up to six guesses to solve the secret word. Additional features includes a settings sidebar where the user can load and create games and a social tab where users can follow other players. Two other tabs, the help and statistics page, are in the original game.
 
 This game is for fans of the original game Wordle who would like some more social aspects added. Users can now replay past games and compare with friends.
-```
+`
 **Contributors:**
 [Kevin Yulo](https://github.com/Sudoyulo) and 
 [Brenon Perry](https://github.com/)
@@ -14,7 +14,9 @@ npm 7.24.2
 PostgreSQL, Express, React, Node
 
 # Screenshots
-
+[Main](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS-main.png?raw=true)
+[Social](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS-social.png?raw=true)
+[Stats](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS%20-stats.png?raw=true)
 
 # Scripts and Setup
 npm install to install packages
