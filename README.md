@@ -10,7 +10,9 @@ This game is for fans of the original game Wordle who would like some more socia
 [Brenon Perry](https://github.com/brenonparry)
 
 Node v15.14.0
+
 npm 7.24.2
+
 PostgreSQL, Express, React, Node
 
 # Screenshots
