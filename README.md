@@ -14,9 +14,10 @@ npm 7.24.2
 PostgreSQL, Express, React, Node
 
 # Screenshots
-[Main](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS-main.png?raw=true)
-[Social](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS-social.png?raw=true)
-[Stats](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS%20-stats.png?raw=true)
+Main
+!["Main"](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS-main.png?raw=true)
+!["Social"](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS-social.png?raw=true)
+!["Stats"](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS%20-stats.png?raw=true)
 
 # Scripts and Setup
 npm install to install packages
