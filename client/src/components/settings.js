@@ -8,12 +8,15 @@ import { getRandomWord } from "../words/wordList";
 
 const Settings = (props) => {
 
-  const { user, getGame, resetBoard, loadBoard, completedGames, hangingGames } = props;
+  const { user, resetBoard, loadBoard, completedGames, hangingGames, getCurrentGame } = props;
 
+  
   const [gameAmount, setGameAmount] = useState([]);
-  const [search, setSearch] = useState(1);
+  const [search, setSearch] = useState();
   const [settingMessage, setSettingMessage] = useState("");
-
+  const [game, setGame] = useState([]);
+  
+  
   //remove colors from keyboard
   const resetKeyboard = () => {
     const keys = ['Q', 'W', 'E', 'R', 'T', 'Y', 'U', 'I', 'O', 'P',
@@ -75,15 +78,24 @@ const Settings = (props) => {
         .then(res => {
           axios('http://localhost:5001/guesslog/' + res.data.rows[0].id)
             .then(res => {
-              loadBoard(res.data.rows);
+              loadBoard(res.data.rows, game.solution);
             })
         })
     }
   }
 
+  const getGame = (id) => {
+    axios('http://localhost:5001/game/' + id)
+      .then(res => {
+        setGame(res.data)
+      })
+  }
+
   useEffect(() => {
     getGames();
-  }, [])
+    getGame(search);
+    
+  }, [search])
 
   const gameLinks = gameAmount.map((gameid) => {
     let icon = "❎ Un-Played";
@@ -112,7 +124,7 @@ const Settings = (props) => {
         <select className="games-list" value={search} onChange={(e) => { setSearch(Number(e.target.value)) }}>
           {gameLinks}
         </select>
-        <button className='play-button' onClick={() => { getGame(search); loadOrReset(); resetKeyboard(); }}>Load Game</button>
+        <button className='play-button' onClick={() => { getCurrentGame(search); getGame(search); loadOrReset(); resetKeyboard(); }}>Load Game</button>
         <button className='create-button' onClick={() => makeGame(getRandomWord())}>Create!</button>
       </div>
     </div >

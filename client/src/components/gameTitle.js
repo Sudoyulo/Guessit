@@ -53,7 +53,7 @@ const GameTitle = (props) => {
   }
 
   //if continuing or loading a previous game, set board with guesses
-  const loadBoard = (stats) => {
+  const loadBoard = (stats, solution) => {
 
     let guesses = [];
     stats.forEach((entry) => { guesses.push(entry.guess.split('')) })
@@ -64,7 +64,7 @@ const GameTitle = (props) => {
     }
 
     setBoard(guesses)
-    boardCSS(board, "LIGHT")
+    boardCSS(board, solution)
   };
 
   const boardCSS = (guesses, solution) => {
@@ -90,7 +90,7 @@ const GameTitle = (props) => {
             checkSolution = checkSolution.replace(guess.letter, '')
           }
 
-          if (checkSolution.includes(guess.letter)) {
+          if (checkSolution.includes(guess.letter) && guess.colour !== 'green-overlay') {
             guess.colour = 'yellow-overlay'
             checkSolution = checkSolution.replace(guess.letter, '')
           }
@@ -117,7 +117,7 @@ const GameTitle = (props) => {
   }
 
   //get game with id
-  const getGame = (id) => {
+  const getCurrentGame = (id) => {
     axios('http://localhost:5001/game/' + id)
       .then(res => {
         setGame(res.data)
@@ -145,7 +145,7 @@ const GameTitle = (props) => {
 
   useEffect(() => {
     getGames();
-    getGame();
+    getCurrentGame();
     readCompletedgames(newUserData);
   }, [newUserData]);
 
@@ -177,7 +177,7 @@ const GameTitle = (props) => {
     if (rightSidebar.type.name === "Settings") {
       setRightSidebar(<Blank />)
     } else {
-      setRightSidebar(<Settings user={newUserData} resetBoard={resetBoard} loadBoard={loadBoard} setCSS={boardCSS} getGame={getGame} completedGames={completedGames} hangingGames={hangingGames} board={board} />)
+      setRightSidebar(<Settings user={newUserData} resetBoard={resetBoard} loadBoard={loadBoard} setCSS={boardCSS} completedGames={completedGames} hangingGames={hangingGames} board={board} solution={game.solution} game={game} getCurrentGame={getCurrentGame} />)
     }
   }
 
