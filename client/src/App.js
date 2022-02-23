@@ -15,7 +15,7 @@ function App() {
     const user = Cookies.get('cookie')
     console.log("COOKIE USER: ", user)
     if (user) {
-      axios(`http://localhost:5001/users/${user}`)
+      axios(`http://localhost:5001/users/1`)
         .then(res => {
           setNewUser(res.data)
           setAuth(true)
