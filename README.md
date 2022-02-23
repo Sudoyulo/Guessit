@@ -7,14 +7,19 @@ This game is for fans of the original game Wordle who would like some more socia
 ```
 **Contributors:**
 [Kevin Yulo](https://github.com/Sudoyulo) and 
-[Brenon Perry](https://github.com/)
+[Brenon Perry](https://github.com/brenonparry)
 
+Versions:
 Node v15.14.0
 npm 7.24.2
+
+Stack:
 PostgreSQL, Express, React, Node
 
 # Screenshots
-
+[Main](https://github.com/Sudoyulo)
+[Social](https://github.com/Sudoyulo)
+[Stats](https://github.com/Sudoyulo)
 
 # Scripts and Setup
 npm install to install packages
