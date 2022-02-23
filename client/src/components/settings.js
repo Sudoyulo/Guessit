@@ -12,7 +12,7 @@ const Settings = (props) => {
 
   
   const [gameAmount, setGameAmount] = useState([]);
-  const [search, setSearch] = useState();
+  const [search, setSearch] = useState(1);
   const [settingMessage, setSettingMessage] = useState("");
   const [game, setGame] = useState([]);
   
