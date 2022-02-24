@@ -111,7 +111,7 @@ const GameTitle = (props) => {
   const getGames = () => {
     axios('http://localhost:5001/games')
       .then(res => {
-        setAllGames(res.data)
+        setAllGames(res.data.reverse())
         setGame(res.data[0])
       })
   }
