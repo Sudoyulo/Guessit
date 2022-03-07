@@ -9,11 +9,13 @@ This game is for fans of the original game Wordle who would like some more socia
 [Kevin Yulo](https://github.com/Sudoyulo) and 
 [Brenon Perry](https://github.com/brenonparry)
 
+```
 Node v15.14.0
 
 npm 7.24.2
 
 PostgreSQL, Express, React, Node
+```
 
 # Screenshots
 Main
@@ -22,10 +24,10 @@ Main
 !["Stats"](https://github.com/Sudoyulo/miniWord/blob/master/client/src/images/SS%20-stats.png?raw=true)
 
 # Scripts and Setup
-## npm install to install packages
-## `/client npm start` to run client
-## `/server npm start` to run server
-## `/server npm run db:reset` to breaksdown and rebuilds the database
+# npm install to install packages
+# `/client npm start` to run client
+# `/server npm start` to run server
+# `/server npm run db:reset` to drop and rebuild the database
 
 # Project Workflow
 Spent the first day discussing which stack we should use, the MVD of the project and stretch goals we would like to work on. Planned the ERD and wireframe to get a clear visual of how to start coding.
